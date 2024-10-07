@@ -1,0 +1,66 @@
+# Backend (Django)
+
+# Virtual environment folder
+/backend/.venv/
+
+# Django database files
+/backend/db.sqlite3
+
+# Django logs
+/backend/*.log
+
+# Static and media files
+/backend/staticfiles/
+/backend/media/
+
+# Backend environment variables and configuration
+/backend/.env
+/backend/.env.local
+/backend/.env.production
+/backend/.env.*.example
+/backend/.DS_Store
+
+# Frontend (React)
+
+# Node modules (dependencies)
+/frontend/node_modules/
+
+# Yarn Plug'n'Play
+/frontend/.pnp/
+/frontend/.pnp.js
+
+# Build output
+/frontend/build/
+/frontend/dist/
+
+# Testing-related
+/frontend/coverage/
+/frontend/.nyc_output/
+/frontend/junit.xml
+/frontend/report.html
+
+# Local environment settings
+/frontend/.env
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+
+# Miscellaneous system files
+/frontend/.DS_Store
+/frontend/.npmrc
+/frontend/.yarnrc
+/frontend/.eslintcache
+/frontend/.parcel-cache
+
+# Log files
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+
+# Editor-specific files
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
