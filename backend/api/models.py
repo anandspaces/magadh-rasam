@@ -53,9 +53,9 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     # Fields related to individual items in the order
-    menu_item = models.ForeignKey(MenuItem, related_name='order_items', on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
-    total_price = models.DecimalField(max_digits=6, decimal_places=2)
+    menu_item = models.ForeignKey(MenuItem, related_name='order_items', on_delete=models.CASCADE, null=True)
+    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)], null=True)
+    total_price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
 
     def __str__(self):
         return f"Order #{self.id} for {self.customer}"
