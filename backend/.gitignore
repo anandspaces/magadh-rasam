@@ -1,28 +1,34 @@
-# Backend (Django)
+# Python compiled files
+__pycache__/
+*.pyc
+*.pyo
 
-# Virtual environment folder
+# Virtual environments
 .venv/
+env/
+venv/
 
-# Django database files
+# Django files
 db.sqlite3
-
-# Django logs
 *.log
-
-# Static and media files
-staticfiles/
+*.pid
+*.bak
+*.swp
 media/
+staticfiles/
 
-# Backend environment variables and configuration
+# Local environment files
 .env
-.env.local
-.env.production
-.env.*.example
-.DS_Store
+.env.*
 
-# Editor-specific files
+# Migrations
+migrations/
+
+# IDE files
 .vscode/
+.idea/
+*.iml
 
-# OS-specific files
+# OS files
 .DS_Store
 Thumbs.db
