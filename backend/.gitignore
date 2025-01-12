@@ -1,0 +1,28 @@
+# Backend (Django)
+
+# Virtual environment folder
+.venv/
+
+# Django database files
+db.sqlite3
+
+# Django logs
+*.log
+
+# Static and media files
+staticfiles/
+media/
+
+# Backend environment variables and configuration
+.env
+.env.local
+.env.production
+.env.*.example
+.DS_Store
+
+# Editor-specific files
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
