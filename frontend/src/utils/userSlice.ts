@@ -1,22 +1,32 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAddress } from "../../services/apiGeocoding";
+// import { getAddress } from "../../services/apiGeocoding";
 
-function getPosition() {
-  return new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
-}
+// function getPosition() {
+//   return new Promise(function (resolve, reject) {
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// }
 
 export const fetchAddress = createAsyncThunk(
   "user/fetchAddress",
   async function () {
-    const positionObj = await getPosition();
+    // const positionObj = await getPosition();
+    // const position = {
+    //   latitude: positionObj.coords.latitude,
+    //   longitude: positionObj.coords.longitude,
+    // };
     const position = {
-      latitude: positionObj.coords.latitude,
-      longitude: positionObj.coords.longitude,
+      latitude: 37.7749,
+      longitude: -122.4194,
     };
 
-    const addressObj = await getAddress(position);
+    // const addressObj = await getAddress(position);
+    const addressObj = {
+      locality: "San Francisco",
+      city: "California",
+      postcode: "94105",
+      countryName: "United States",
+    };
     const address = `${addressObj?.locality}, ${addressObj?.city} ${addressObj?.postcode}, ${addressObj?.countryName}`;
 
     return { position, address };
