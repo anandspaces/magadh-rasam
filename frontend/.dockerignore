@@ -20,6 +20,6 @@ dist
 .DS_Store
 Thumbs.db
 
-# git fikes
+# git files
 .git
 .gitignore
