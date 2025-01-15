@@ -29,7 +29,7 @@ const CartItem = ({ item }: CartItemProps) => {
       <div className="flex items-center justify-between sm:gap-6">
         <p className="text-sm font-bold">{formatCurrency(totalPrice)}</p>
         <div className="rounded-lg bg-gray-200 p-1">
-          <UpdateItemQuantity pizzaId={pizzaId} quantity={undefined} />
+          <UpdateItemQuantity pizzaId={pizzaId} quantity={quantity} />
         </div>
         <button
           onClick={() => dispatch(removeItem(pizzaId))}

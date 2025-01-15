@@ -1,4 +1,4 @@
-import { formatCurrency } from "../../utils/helpers";
+import { formatCurrency } from "../utils/helper";
 
 const OrderItem = ({item}) => {
   const { quantity, name, totalPrice } = item;
