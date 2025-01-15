@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { getTotalCartPrice, getTotalCartQuantity } from "./cartSlice";
+import { getTotalCartPrice, getTotalCartQuantity } from "../utils/cartSlice";
 import { LuShoppingBag } from "react-icons/lu";
 import { Link } from "react-router-dom";
-import { formatCurrency } from "../../utils/helpers";
+import { formatCurrency } from "../utils/helper";
 
 const CartOverview = () => {
   const total = useSelector(getTotalCartPrice);

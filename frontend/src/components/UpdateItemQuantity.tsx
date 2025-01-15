@@ -1,7 +1,12 @@
 import { useDispatch } from "react-redux";
-import { increaseItem, decreaseItem } from "../utils/cartSlice.js";
+import { increaseItem, decreaseItem } from "../utils/cartSlice";
 
-const UpdateItemQuantity = ({ pizzaId, quantity }) => {
+interface UpdateItemQuantityProps {
+  pizzaId: number;
+  quantity: number;
+}
+
+const UpdateItemQuantity = ({ pizzaId, quantity }: UpdateItemQuantityProps) => {
   const dispatch = useDispatch();
 
   return (
