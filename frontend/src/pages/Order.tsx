@@ -19,10 +19,6 @@ const Order = () => {
     id,
     status,
     priority,
-    priorityPrice,
-    orderPrice,
-    estimatedDelivery,
-    cart,
   } = order;
 
 
