@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { updateName } from "../utils/userSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("");
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function handleSubmit(e:any) {
     e.preventDefault();
     if (!username) return;
 
-    dispatch(updateName(username));
     navigate('/menu')
   }
 

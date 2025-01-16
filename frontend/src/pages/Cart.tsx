@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../utils/cartSlice";
 import { Link } from "react-router-dom";
-import EmptyCart from "../pages/EmptyCart";
-import CartItem from "./CartItem";
+import EmptyCart from "../components/EmptyCart";
+import CartItem from "../components/CartItem";
 import { RootState } from "../store/store";
 
 const Cart = () => {

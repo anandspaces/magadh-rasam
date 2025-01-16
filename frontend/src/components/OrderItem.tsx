@@ -1,6 +1,7 @@
 import { formatCurrency } from "../utils/helper";
+import item from "../type";
 
-const OrderItem = ({item}) => {
+const OrderItem = ({item}:{item:item}) => {
   const { quantity, name, totalPrice } = item;
 
   return (

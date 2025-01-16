@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import Login from "./Login";
 import { Link } from "react-router-dom";
-import { RootState } from "..//store/store"; // Assuming you have a RootState type defined in your store
+import { RootState } from "../store/store";
 
 const Home = () => {
   const username = useSelector((state: RootState) => state.user.name);

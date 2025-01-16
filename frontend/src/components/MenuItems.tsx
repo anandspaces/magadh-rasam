@@ -1,27 +1,20 @@
 import { formatCurrency } from "../utils/helper";
-import { useSelector, useDispatch } from "react-redux";
-import { addItem, getCurrentQuantityById } from "../utils/cartSlice.ts";
-import UpdateItemQuantity from "./UpdateItemQuantity";
 
-export const MenuItem = ({ pizza }) => {
-  const dispatch = useDispatch();
+interface pizzaType {
+  pizza: {
+    id: number,
+    name: string,
+    unitPrice: number,
+    ingredients: string[],
+    soldOut: boolean,
+    imageUrl: string,
+  }
+}
+export const MenuItem = ({ pizza }:pizzaType) => {
 
-  const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+  const { name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
-  const currentQuantity = useSelector(getCurrentQuantityById(id));
-  const isInCart = currentQuantity > 0;
 
-  const addToCart = () => {
-    const newItem = {
-      pizzaId: id,
-      name,
-      quantity: 1,
-      unitPrice,
-      totalPrice: unitPrice * 1,
-    };
-    dispatch(addItem(newItem));
-  };
-  
   return (
     <div className="rounded-lg bg-white p-2 text-center shadow transition-all hover:shadow-lg">
       <img
@@ -43,18 +36,12 @@ export const MenuItem = ({ pizza }) => {
         </p>
       </div>
 
-      {isInCart && (
-        <UpdateItemQuantity pizzaId={id} quantity={currentQuantity} />
-      )}
 
-      {!soldOut && !isInCart && (
         <button
           className="mt-2 w-full rounded bg-gray-50 py-1 text-gray-600 transition-all hover:bg-gray-100"
-          onClick={addToCart}
         >
           Add to Cart
         </button>
-      )}
     </div>
   );
 };
