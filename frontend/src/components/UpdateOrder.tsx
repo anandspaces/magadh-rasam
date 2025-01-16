@@ -22,7 +22,7 @@ function UpdateOrder() {
 
 export default UpdateOrder;
 
-export async function action({ request, params }:ActionParams) {
+export async function action({ params }:ActionParams) {
   const data = { priority: true };
   await updateOrder(params.orderId, data);
   return null;
