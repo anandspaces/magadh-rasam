@@ -3,21 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   function handleSubmit(e:any) {
     e.preventDefault();
-    if (!username) return;
+    if (!username && !email) return;
 
     navigate('/menu')
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <p className="mb-4 text-stone-600 md:text-base">
-        👋 Welcome! Please start by telling us your name:
-      </p>
-
+    <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Your full name"
@@ -25,14 +22,16 @@ const Login = () => {
         onChange={(e) => setUsername(e.target.value)}
         className="mb-4 w-2/3 sm:w-1/2 rounded-md border border-stone-200 p-2 focus:outline-none focus:ring focus:ring-orange-500"
       />
-
-      {username !== "" && (
-        <div>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="mb-4 w-2/3 sm:w-1/2 rounded-md border border-stone-200 p-2 focus:outline-none focus:ring focus:ring-orange-500"
+      />
           <button className="rounded bg-orange-600 px-4 py-2 font-medium text-white">
-            Start ordering
+            sign up
           </button>
-        </div>
-      )}
     </form>
   );
 };
