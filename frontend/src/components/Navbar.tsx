@@ -12,7 +12,7 @@ export default function Navbar() {
       </button>
       <button
         className="rounded bg-orange-600 px-4 py-2 font-medium text-white"
-        onClick={() => navigate('/signup')}
+        onClick={() => navigate('/register')}
       >
         Sign up
       </button>
