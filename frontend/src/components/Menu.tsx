@@ -233,14 +233,7 @@ function Menu() {
       className="w-full h-48 object-cover rounded-lg"
       />
     </div>
-    <div>
-      <p className="text-3xl font-semibold">
-        avocado salad
-      </p>
-      <p className="text-lg">
-        Avocado Salad is a healthy and delicious salad made with avocado, tomatoes, onions, and cilantro. It is a refreshing and nutritious option for breakfast or lunch.
-      </p>
-    </div>
+  
     <div>
       <p className="text-3xl font-semibold">
         Mix Veg Biryani
