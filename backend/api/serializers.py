@@ -23,6 +23,11 @@ class CategorySerializer(serializers.ModelSerializer):
             'name': {'validators': [UniqueValidator(queryset=Category.objects.all())]},  # Ensure unique category name
         }
 
+# Serializer for the Menu model (for listing menu items)
+class MenuItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MenuItem
+        fields = ['id', 'name', 'description', 'image_url']
 
 # Serializer for the MenuItem model (for listing menu items)
 class MenuItemSerializer(serializers.ModelSerializer):
