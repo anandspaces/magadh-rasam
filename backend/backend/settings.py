@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig', # new
     'rest_framework', # new
     'corsheaders', # new
-    'django_filters' # new
+    'django_filters', # new
     'django_extensions', # new
 ]
 
