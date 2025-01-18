@@ -32,3 +32,6 @@ migrations/
 # OS files
 .DS_Store
 Thumbs.db
+
+# dummy data
+data/
