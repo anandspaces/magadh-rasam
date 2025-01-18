@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import image from "../assets/wallpaper1.jpg";
 import Navbar from "../components/Navbar";
 import { FaArrowDown } from "react-icons/fa";
-import Menu from "./Menu";
+import Menu from "../components/Menu";
 
 const Home = () => {
   const [fadeIn, setFadeIn] = useState(false); // State to trigger fade-in effect
