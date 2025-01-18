@@ -37,18 +37,23 @@ function Menu() {
 
   return (
     <div className="grid grid-cols-3 gap-4">
-      {menuItems.map((item, index) => (
-        <div key={index} className={index % 2 === 0 ? "col-span-2" : ""}>
-          <p className="text-3xl font-semibold">{item.name}</p>
-          <p className="text-lg">{item.description}</p>
-          <img
-            src={item.imageUrl}
-            alt={item.name}
-            className="w-full h-48 object-cover rounded-lg"
-          />
-        </div>
-      ))}
-    </div>
+  {menuItems.length === 0 ? (
+    <p>No menu items available.</p>
+  ) : (
+    menuItems.map((item, index) => (
+      <div key={index} className={index % 2 === 0 ? "col-span-2" : ""}>
+        <p className="text-3xl font-semibold">{item.name}</p>
+        <p className="text-lg">{item.description}</p>
+        <img
+          src={item.imageUrl}
+          alt={item.name}
+          className="w-full h-48 object-cover rounded-lg"
+        />
+      </div>
+    ))
+  )}
+</div>
+
   );
 };
 
