@@ -6,10 +6,10 @@ function Menu() {
     <div className="grid grid-cols-3 gap-4">
   <div className="...">
     <p className="text-3xl font-semibold">
-      Poha
+      Savory Rice Flakes Medley
     </p> 
     <p className="text-lg">
-      Poha is a popular breakfast dish made with flattened rice, spices, herbs and peanuts. It is a quick, easy and healthy option for breakfast or brunch.
+      Savory Rice Flakes Medley is a popular breakfast dish made with flattened rice, spices, herbs and peanuts. It is a quick, easy and healthy option for breakfast or brunch.
     </p>
     <img 
       src=""
@@ -20,10 +20,10 @@ function Menu() {
 
   <div className="...">
     <p className="text-3xl font-semibold">
-      Litti Chokha
+      Baked Wheat Dumplings with Roasted Potato Mash
     </p>
     <p className="text-lg">
-      Litti Chokha is a traditional East India dish that is quite similar to Rajasthani Baati but still very different in taste. It is a dough ball made up of whole wheat flour and stuffed with
+      Baked Wheat Dumplings with Roasted Potato Mash is a traditional East India dish that is quite similar to Rajasthani Baati but still very different in taste. It is a dough ball made up of whole wheat flour and stuffed with
     </p>
     <img 
       src=""
@@ -102,7 +102,7 @@ function Menu() {
       Chana Ghugni
     </p>
     <p className="text-lg">
-      Chana Ghugni is a traditional Indian snack made with yellow peas, spices, herbs, and peanuts. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.
+      Made with yellow peas, spices, herbs, and peanuts. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.
     </p>
     <img 
       src=""
@@ -112,11 +112,11 @@ function Menu() {
   </div>
   <div>
     <p className="text-3xl font-semibold">
-      dhokla
+    Steamed Chickpea Flour Cake
 
     </p>
     <p className="text-lg">
-      Dhokla is a popular Indian snack made with fermented rice and chickpea flour. It is a healthy and delicious option for breakfast or snack.
+      Made with fermented rice and chickpea flour. It is a healthy and delicious option for breakfast or snack.
     </p>
     <img 
       src=""
@@ -156,7 +156,7 @@ function Menu() {
       Lassi
     </p>
     <p className="text-lg">
-      Lassi is a drink made with yogurt, water, and spices. It is a refreshing and healthy option for breakfast or snack.
+      Made with yogurt, water, and spices. It is a refreshing and healthy option for breakfast or snack.
     </p>
     <img 
       src=""
@@ -167,10 +167,10 @@ function Menu() {
     </div>
     <div>
     <p className="text-3xl font-semibold">
-      pitha
+      Sweet Rice Flour Dumplings with Coconut Fillin
     </p>
     <p className="text-lg">
-      Pitha is a traditional Indian sweet snack made with rice flour, jaggery, and coconut. It is a popular snack in Bihar, Jharkhand, and West Bengal.
+      Made with rice flour, jaggery, and coconut. It is a popular snack in Bihar, Jharkhand, and West Bengal.
     </p>
     <img 
       src=""
@@ -181,10 +181,10 @@ function Menu() {
     </div>
     <div>
     <p className="text-3xl font-semibold">
-      Dhuska
+      Crispy Grain Fritters with Spiced Dip
     </p>
     <p className="text-lg">
-      Dhuska is a traditional Indian snack made with rice flour, spices, herbs, and lentils. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.
+      Made with rice flour, spices, herbs, and lentils. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.
     </p>
     <img 
       src=""
@@ -193,19 +193,24 @@ function Menu() {
     />
     <div>
       <p className="text-3xl font-semibold">
-        daal Baati
+        Lentil Stew with Herb-infused  baked Wheet Dumplings
       </p>
       <p className="text-lg">
-        Daal Baati is a traditional Indian dish made with whole wheat flour, lentils, and spices. It is a popular dish in Rajasthan, Madhya Pradesh, and Uttar Pradesh.
+        Made with whole wheat flour, lentils, and spices. It is a popular dish in Rajasthan, Madhya Pradesh, and Uttar Pradesh.
       </p>
+      <img 
+      src="" 
+      alt=""
+      className="w-full h-48 object-cover rounded-lg" 
+       />
     </div>
     <div>
       
         <p className="text-3xl font-semibold">
-          Chole Bhature
+          Spiced Chickpea Stew with Fried Bread Pockets
         </p>
         <p className="text-lg">
-          Chole Bhature is a popular Indian dish made with chickpeas, spices, herbs, and fried bread. It is a delicious and filling option for breakfast or lunch.
+          Made with chickpeas, spices, herbs, and fried bread. It is a delicious and filling option for breakfast or lunch.
         </p>
       <img 
       src="" 
@@ -256,6 +261,19 @@ function Menu() {
         </p>
         <img 
         src="" alt="" 
+        className="w-full h-48 object-cover rounded-lg"
+        />
+      </div>
+      <div>
+        <p className="text-3xl font-semibold">
+          momos
+        </p>
+        <p className="text-lg">
+          Momos are a popular Indian snack made with all-purpose flour, vegetables, and spices. They are a delicious and filling option for breakfast or snack.
+        </p>
+        <img 
+        src="" 
+        alt="" 
         className="w-full h-48 object-cover rounded-lg"
         />
       </div>
