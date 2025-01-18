@@ -3,10 +3,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Customer, Reservation, Feedback, Order, MenuItem, Table, Category
+from .models import Customer, Reservation, Feedback, Order, Menu, MenuItem, Table, Category
 from .serializers import (
-    CustomerSerializer, ReservationSerializer, FeedbackSerializer, OrderSerializer,
-    MenuItemSerializer, TableSerializer, CategorySerializer
+    CustomerSerializer, ReservationSerializer, FeedbackSerializer, OrderSerializer, MenuSerializer,MenuItemSerializer, TableSerializer, CategorySerializer
 )
 
 # Customer API Views
@@ -30,6 +29,12 @@ class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+# Menu API Views
+class MenuListView(generics.GenericAPIView):
+    def get(self, request):
+        menu_items = Menu.objects.all()
+        serializer = MenuSerializer(menu_items, many=True)
+        return Response(serializer.data)
 
 # MenuItem API Views
 class MenuItemListCreateView(generics.ListCreateAPIView):
