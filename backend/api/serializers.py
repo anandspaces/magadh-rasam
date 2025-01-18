@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.core.validators import MinValueValidator
-from .models import Customer, Reservation, Feedback, Order, MenuItem, Table, Category
+from .models import Customer, Reservation, Feedback, Order, Menu, MenuItem, Table, Category
 
 # Serializer for the Customer model
 class CustomerSerializer(serializers.ModelSerializer):
@@ -25,8 +25,9 @@ class CategorySerializer(serializers.ModelSerializer):
 
 # Serializer for the Menu model (for listing menu items)
 class MenuSerializer(serializers.ModelSerializer):
+    image_url = serializers.URLField(required=False, allow_null=True)
     class Meta:
-        model = MenuItem
+        model = Menu
         fields = ['id', 'name', 'description', 'category','image_url']
 
 # Serializer for the MenuItem model (for listing menu items)

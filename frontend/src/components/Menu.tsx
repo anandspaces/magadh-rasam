@@ -11,7 +11,7 @@ function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
   useEffect(() => {
-    // Fetch the menu items from the backend
+    // Fetch the menu items from the backend using axios
     axios.get('http://localhost:8000/menu/')  // Adjust the URL if necessary
       .then((response) => {
         setMenuItems(response.data);
@@ -20,7 +20,8 @@ function Menu() {
         console.error('There was an error fetching the menu items!', error);
       });
   }, []);
-  //  Fetch data from the backend when the component mounts
+
+  //  Fetch data from the backend when the component mounts fetch function
   //  useEffect(() => {
   //   const fetchMenuItems = async () => {
   //     try {
