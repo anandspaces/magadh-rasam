@@ -16,19 +16,22 @@ const Home = () => {
     navigate('/menu')
   }
   return (
-    <div className="relative">
+    <>
+    
       <Navbar />
+    <div className="relative">
       <img src={image} alt="wallpaper" className="w-full h-auto" />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
         <h1 className="mb-4 text-3xl sm:text-6xl font-semibold md:text-6xl">
           Magadh Rasam
           <br />
-            <span className="text-yellow-600 text-2xl sm:text-4xl md:text-4xl">
+            <span className="text-2xl sm:text-4xl md:text-4xl animate__animated animate__fadeIn">
             Experience the authentic taste of Magadh with every bite.
             </span>
         </h1>
       </div>
     </div>
+    </>
   );
 };
 
