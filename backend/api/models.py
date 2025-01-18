@@ -22,7 +22,7 @@ class Category(models.Model):
 class Menu(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
-    category = models.ForeignKey(Category, related_name='menu_items', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='menu', on_delete=models.CASCADE)
     # image = models.ImageField(upload_to='menu_images/', null=True, blank=True)
     image_url = models.URLField(blank=True, null=True)
     def __str__(self):
