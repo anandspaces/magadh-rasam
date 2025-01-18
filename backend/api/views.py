@@ -30,11 +30,14 @@ class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CategorySerializer
 
 # Menu API Views
-class MenuListView(generics.GenericAPIView):
-    def get(self, request):
-        menu_items = Menu.objects.all()
-        serializer = MenuSerializer(menu_items, many=True)
-        return Response(serializer.data)
+class MenuListView(generics.ListCreateAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+
+
+class MenuDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
 
 # MenuItem API Views
 class MenuItemListCreateView(generics.ListCreateAPIView):
