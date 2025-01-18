@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface MenuItem {
@@ -9,30 +10,30 @@ interface MenuItem {
 function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
-  // useEffect(() => {
-  //   // Fetch the menu items from the backend
-  //   axios.get('http://localhost:8000/api/menu/')  // Adjust the URL if necessary
-  //     .then((response) => {
-  //       setMenuItems(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('There was an error fetching the menu items!', error);
-  //     });
-  // }, []);
-   // Fetch data from the backend when the component mounts
-   useEffect(() => {
-    const fetchMenuItems = async () => {
-      try {
-        const response = await fetch("/api/menu"); // Replace with actual API endpoint
-        const data = await response.json();
-        setMenuItems(data); // Assume the data is an array of menu items
-      } catch (error) {
-        console.error("Error fetching menu items:", error);
-      }
-    };
-
-    fetchMenuItems();
+  useEffect(() => {
+    // Fetch the menu items from the backend
+    axios.get('http://localhost:8000/api/menu/')  // Adjust the URL if necessary
+      .then((response) => {
+        setMenuItems(response.data);
+      })
+      .catch((error) => {
+        console.error('There was an error fetching the menu items!', error);
+      });
   }, []);
+  //  Fetch data from the backend when the component mounts
+  //  useEffect(() => {
+  //   const fetchMenuItems = async () => {
+  //     try {
+  //       const response = await fetch("/api/menu"); // Replace with actual API endpoint
+  //       const data = await response.json();
+  //       setMenuItems(data); // Assume the data is an array of menu items
+  //     } catch (error) {
+  //       console.error("Error fetching menu items:", error);
+  //     }
+  //   };
+
+  //   fetchMenuItems();
+  // }, []);
 
   return (
     <div className="grid grid-cols-3 gap-4">
