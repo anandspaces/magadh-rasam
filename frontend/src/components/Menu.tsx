@@ -12,7 +12,7 @@ function Menu() {
 
   useEffect(() => {
     // Fetch the menu items from the backend
-    axios.get('http://localhost:8000/api/menu/')  // Adjust the URL if necessary
+    axios.get('http://localhost:8000/menu/')  // Adjust the URL if necessary
       .then((response) => {
         setMenuItems(response.data);
       })
