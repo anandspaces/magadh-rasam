@@ -18,6 +18,16 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+# Menu model for storing menu details
+class Menu(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField()
+    category = models.ForeignKey(Category, related_name='menu_items', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='menu_images/', null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+    
 # MenuItem model for storing menu item details
 class MenuItem(models.Model):
     name = models.CharField(max_length=255)
