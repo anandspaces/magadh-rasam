@@ -9,51 +9,52 @@ interface MenuItem {
 
 function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     // Fetch the menu items from the backend using axios
     axios.get('http://localhost:8000/menu/')  // Adjust the URL if necessary
       .then((response) => {
         setMenuItems(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('There was an error fetching the menu items!', error);
+        setLoading(false);
       });
   }, []);
 
-  //  Fetch data from the backend when the component mounts fetch function
-  //  useEffect(() => {
-  //   const fetchMenuItems = async () => {
-  //     try {
-  //       const response = await fetch("/api/menu"); // Replace with actual API endpoint
-  //       const data = await response.json();
-  //       setMenuItems(data); // Assume the data is an array of menu items
-  //     } catch (error) {
-  //       console.error("Error fetching menu items:", error);
-  //     }
-  //   };
-
-  //   fetchMenuItems();
-  // }, []);
 
   return (
-    <div className="grid grid-cols-3 gap-4">
-  {menuItems.length === 0 ? (
-    <p>No menu items available.</p>
-  ) : (
-    menuItems.map((item, index) => (
-      <div key={index} className={index % 2 === 0 ? "col-span-2" : ""}>
-        <p className="text-3xl font-semibold">{item.name}</p>
-        <p className="text-lg">{item.description}</p>
-        <img
-          src={item.imageUrl}
-          alt={item.name}
-          className="w-full h-48 object-cover rounded-lg"
-        />
-      </div>
-    ))
-  )}
-</div>
+    <div className="grid grid-cols-3 gap-4 p-6">
+      {loading ? (
+        Array.from({ length: 6 }).map((_, index) => (
+          <div key={index} className="animate-pulse bg-gray-300 rounded-lg p-4">
+            <div className="h-8 bg-gray-400 mb-4 rounded"></div>
+            <div className="h-6 bg-gray-400 mb-2 rounded"></div>
+            <div className="h-48 bg-gray-400 rounded-lg"></div>
+          </div>
+        ))
+      ) : menuItems.length === 0 ? (
+        <p className="text-center text-xl">No menu items available.</p>
+      ) : (
+        menuItems.map((item, index) => (
+          <div
+            key={index}
+            className={`${
+              index % 2 === 0 ? "col-span-2" : ""
+            } transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-xl rounded-lg p-4 bg-gradient-to-r from-blue-500 to-teal-400`}
+          >
+            <p className="text-3xl font-semibold text-white">{item.name}</p>
+            <p className="text-lg text-white mt-2">{item.description}</p>
+            <img
+              src={item.imageUrl}
+              alt={item.name}
+              className="w-full h-48 object-cover rounded-lg mt-4 transform transition duration-500 ease-in-out hover:scale-110"
+            />
+          </div>
+        ))
+      )}
+    </div>
 
   );
 };
