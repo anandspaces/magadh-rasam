@@ -2,6 +2,7 @@ from django.urls import path
 from .views import (
     CustomerListCreateView, CustomerDetailView,
     CategoryListCreateView, CategoryDetailView,
+    MenuListView, MenuDetailView,
     MenuItemListCreateView, MenuItemDetailView,
     TableListCreateView, TableDetailView,
     OrderListCreateView, OrderDetailView,
@@ -17,6 +18,10 @@ urlpatterns = [
     # Category API URLs
     path('categories/', CategoryListCreateView.as_view(), name='category-list'),
     path('categories/<int:pk>/', CategoryDetailView.as_view(), name='category-detail'),
+
+    # Menu API URLs
+    path('menu/', MenuListView.as_view(), name='menu-list'),  # List and Create Menu Items
+    path('menu/<int:pk>/', MenuDetailView.as_view(), name='menu-detail'),  # Retrieve, Update, Delete Menu Items
 
     # MenuItem API URLs
     path('menu-items/', MenuItemListCreateView.as_view(), name='menu-item-list'),
