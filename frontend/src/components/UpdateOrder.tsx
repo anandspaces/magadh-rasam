@@ -1,12 +1,5 @@
 import { useFetcher } from "react-router-dom";
-import { updateOrder } from "../services/apiOrder";
 
-interface ActionParams {
-  request: Request;
-  params: {
-    orderId: string;
-  };
-}
 
 function UpdateOrder() {
   const fetcher = useFetcher();
@@ -22,8 +15,3 @@ function UpdateOrder() {
 
 export default UpdateOrder;
 
-export async function action({ params }:ActionParams) {
-  const data = { priority: true };
-  await updateOrder(params.orderId, data);
-  return null;
-}

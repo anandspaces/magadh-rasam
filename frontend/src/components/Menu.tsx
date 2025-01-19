@@ -42,7 +42,7 @@ function Menu() {
             key={index}
             className={`${
               index % 2 === 0 ? "col-span-2" : ""
-            } transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-xl rounded-lg p-4 bg-gradient-to-r from-blue-500 to-teal-400`}
+            } transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-xl rounded-lg p-4 bg-gradient-to-r from-yellow-600 to-yellow-200`}
           >
             <p className="text-3xl font-semibold text-white">{item.name}</p>
             <p className="text-lg text-white mt-2">{item.description}</p>
