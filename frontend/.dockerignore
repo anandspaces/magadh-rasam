@@ -10,12 +10,6 @@ dist
 *.log
 .cache
 
-# Local environment files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
 # OS-generated files
 .DS_Store
 Thumbs.db

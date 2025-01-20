@@ -1,75 +1,57 @@
-# # docker-compose.yml
-
-# version: '3'
-
-# services:
-#   backend:
-#     build:
-#       context: ./backend
-#     container_name: django-backend
-#     command: python manage.py runserver 0.0.0.0:8000
-#     volumes:
-#       - ./backend:/app
-#     ports:
-#       - "8000:8000"
-#     environment:
-#       - DB_ENGINE=sqlite3
-#       - DB_NAME=db.sqlite3
-#     depends_on:
-#       - frontend
-
-#   frontend:
-#     build:
-#       context: ./frontend
-#     container_name: react-frontend
-#     volumes:
-#       - ./frontend:/app
-#     ports:
-#       - "3000:3000"
-#     environment:
-#       - REACT_APP_BACKEND_URL=http://localhost:8000/api
-#     command: npm start
-version: "3.9"
-
 services:
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+  db:
+    restart: always
+    image: mariadb:11.6.2
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_DATABASE=restaurant_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=<password>
+      - MYSQL_ROOT_PASSWORD=<root_password>
     ports:
-      - "3000:3000"
+      - "3306:3306"
     networks:
-      - app-network
+      - db-net
+    volumes:
+      - db_data:/var/lib/mysql
 
   backend:
+    restart: always
+    container_name: backend
+    command : sh -c "python manage.py makemigrations &&
+                      python manage.py migrate &&
+                      python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - ./backend/.env
     build:
-      context: ./backend
+      context: ./backend/
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
-    networks:
-      - app-network
     depends_on:
       - db
-
-  db:
-    image: mysql:8.0
-    container_name: mysql_db
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: adminpassword
-      MYSQL_DATABASE: restaurant
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
     networks:
-      - app-network
+      - db-net
+
+  frontend:
+    restart: always
+    command : http-server dist -p 3000
+    container_name: frontend
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - db-net
 
 networks:
-  app-network:
+  db-net:
+    driver: bridge
 
 volumes:
-  mysql_data:
-
+  db_data:

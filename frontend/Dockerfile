@@ -1,26 +1,26 @@
-# Use official node image as the base
-FROM node:18-alpine
+# Stage 1: Build the frontend
+FROM node:18-alpine AS build-stage
 
-# Set working directory
-WORKDIR /app
+WORKDIR /app/frontend
 
-# Copy package.json and package-lock.json
+# Copy package files and install dependencies
 COPY package.json package-lock.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the rest of the app's source code
-COPY . .
-
-# Build the app
+# Copy source files and build the frontend
+COPY . ./
 RUN npm run build
 
-# Set the environment to production
-ENV NODE_ENV=production
+# Stage 2: Serve the build with a lightweight HTTP server
+FROM node:18-alpine
 
-# Expose the port the app runs on
+WORKDIR /app/frontend
+
+# Install http-server (for serving the static build)
+RUN npm install -g http-server
+
+# Copy the build from the previous stage
+COPY --from=build-stage /app/frontend/dist /app/frontend/dist
+
 EXPOSE 3000
-
-# Command to run the app
-CMD ["npm", "start"]
+CMD ["http-server", "dist", "-p", "3000"]

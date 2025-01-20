@@ -1,25 +1,43 @@
-# Use official Python image as the base
-FROM python:3.11-slim
+# Stage 1: Install dependencies and prepare the environment
+FROM python:3.11-alpine AS build-stage
 
-# Set environment variables
+# Set environment variables for Python
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Set working directory
-WORKDIR /app
+# Install system dependencies
+RUN apk update && apk add --no-cache \
+    gcc \
+    musl-dev \
+    mariadb-dev \
+    libffi-dev \
+    libmagic \
+    && pip install --upgrade pip setuptools wheel
 
-# Install dependencies
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+WORKDIR /app/backend
 
-# Copy the rest of the app's source code
-COPY . /app/
+# Copy the requirements file and install Python dependencies
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
 
-# Collect static files
-# RUN python manage.py collectstatic --noinput
+# Stage 2: Copy the backend application and run the app
+FROM python:3.11-alpine
 
-# Expose the port the app runs on
+# Set environment variables for Python
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Install system dependencies (needed to run the app)
+RUN apk update && apk add --no-cache \
+    libmagic \
+    mariadb-dev
+
+WORKDIR /app/backend
+
+# Copy installed dependencies from the build stage
+COPY --from=build-stage /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+
+# Copy the backend code into the container
+COPY . ./
+
 EXPOSE 8000
-
-# Command to run the Django app
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
