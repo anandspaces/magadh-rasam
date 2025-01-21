@@ -25,7 +25,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 # Serializer for the Menu model (for listing menu items)
 class MenuSerializer(serializers.ModelSerializer):
-    image_url = serializers.URLField(required=False, allow_null=True)
+    # image_url = serializers.URLField(required=False, allow_null=True)
     class Meta:
         model = Menu
         fields = ['id', 'name', 'description', 'category','image_url']
