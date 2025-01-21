@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 interface MenuItem {
   name: string;
   description: string;
-  imageUrl: string;
+  image: string;
 }
 
 function Menu() {
@@ -47,7 +47,7 @@ function Menu() {
             <p className="text-3xl font-semibold text-white">{item.name}</p>
             <p className="text-lg text-white mt-2">{item.description}</p>
             <img
-              src={item.imageUrl}
+              src={item.image}
               alt={item.name}
               className="w-full h-48 object-cover rounded-lg mt-4 transform transition duration-500 ease-in-out hover:scale-110"
             />
