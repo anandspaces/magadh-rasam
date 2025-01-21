@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from .views import (
     CustomerListCreateView, CustomerDetailView,
@@ -43,3 +45,6 @@ urlpatterns = [
     path('feedbacks/', FeedbackListCreateView.as_view(), name='feedback-list'),
     path('feedbacks/<int:pk>/', FeedbackDetailView.as_view(), name='feedback-detail'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
