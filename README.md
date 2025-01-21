@@ -96,13 +96,22 @@ A full-stack restaurant management application built using **React** (with **Vit
 ## Environment Variables
 
 ### Backend
-- `DB_HOST`: Database host (e.g., `db` for Docker container)
 - `DB_NAME`: Database name (e.g., `restaurant_db`)
 - `DB_USER`: Database username
 - `DB_PASSWORD`: Database password
+- `DB_HOST`: Database host (e.g., `db` for Docker container, `localhost` for running locally)
+- `DB_PORT`: Database port
 
 ### Frontend
 - `REACT_APP_API_URL`: URL to the backend API (e.g., `http://localhost:8000`)
+
+### Root
+- `MYSQL_PORT`=
+- `MYSQL_HOST`=db
+- `MYSQL_ROOT_HOST`=%
+- `MYSQL_DATABASE`=restaurant_db
+- `MYSQL_PASSWORD`=Anand@2001
+- `MYSQL_ROOT_PASSWORD`=Anand@2001
 
 ## Contributing
 
