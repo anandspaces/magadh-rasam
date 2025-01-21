@@ -6,9 +6,9 @@ services:
       - MYSQL_PORT=3306
       - MYSQL_HOST=db
       - MYSQL_ROOT_HOST=%
-      - MYSQL_DATABASE=<database_name>
-      - MYSQL_PASSWORD=<password>
-      - MYSQL_ROOT_PASSWORD=<root_password>
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     env_file:
       - .env
     ports:

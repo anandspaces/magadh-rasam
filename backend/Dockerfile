@@ -14,7 +14,7 @@ RUN apk update && apk add --no-cache \
     libmagic \
     && pip install --upgrade pip setuptools wheel
 
-WORKDIR /app/backend
+WORKDIR /app
 
 # Copy the requirements file and install Python dependencies
 COPY requirements.txt ./
@@ -32,7 +32,7 @@ RUN apk update && apk add --no-cache \
     libmagic \
     mariadb-dev
 
-WORKDIR /app/backend
+WORKDIR /app
 
 # Copy installed dependencies from the build stage
 COPY --from=build-stage /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
@@ -41,3 +41,6 @@ COPY --from=build-stage /usr/local/lib/python3.11/site-packages /usr/local/lib/p
 COPY . ./
 
 EXPOSE 8000
+CMD ["sh", "-c", "python manage.py makemigrations && \
+                  python manage.py migrate && \
+                  python manage.py runserver 0.0.0.0:8000"]
