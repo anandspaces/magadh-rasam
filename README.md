@@ -23,7 +23,7 @@ A full-stack restaurant management application built using **React** (with **Vit
 
 ### Optional
 - **Docker** for containerization
-- **Redis/RabbitMQ/Kafka** for message queueing (if applicable)
+<!-- - **Redis/RabbitMQ/Kafka** for message queueing (if applicable) -->
 
 ## Project Structure
 
@@ -96,10 +96,14 @@ A full-stack restaurant management application built using **React** (with **Vit
 ## Environment Variables
 
 ### Backend
+- `Django_Secret_Key`: Secret Key
+   ```bash
+   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+   ```
 - `DB_NAME`: Database name (e.g., `restaurant_db`)
 - `DB_USER`: Database username
 - `DB_PASSWORD`: Database password
-- `DB_HOST`: Database host (e.g., `db` for Docker container, `localhost` for running locally)
+- `DB_HOST`: Database host (e.g., `db` for docker container, `localhost` for running locally)
 - `DB_PORT`: Database port
 
 ### Frontend
