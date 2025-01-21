@@ -1,21 +1,27 @@
 services:
   db:
     restart: always
-    image: mariadb:11.6.2
+    image: mysql:8.0
     environment:
-      - MYSQL_HOST=db
       - MYSQL_PORT=3306
+      - MYSQL_HOST=db
       - MYSQL_ROOT_HOST=%
-      - MYSQL_DATABASE=restaurant_db
-      - MYSQL_USER=root
+      - MYSQL_DATABASE=<database_name>
       - MYSQL_PASSWORD=<password>
       - MYSQL_ROOT_PASSWORD=<root_password>
+    env_file:
+      - .env
     ports:
       - "3306:3306"
     networks:
       - db-net
     volumes:
       - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   backend:
     restart: always
