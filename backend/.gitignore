@@ -17,13 +17,11 @@ db.sqlite3
 *.swp
 media/
 staticfiles/
+static/
 
 # Local environment files
 .env
 .env.*
-
-# Migrations
-migrations/
 
 # IDE files
 .vscode/
@@ -35,5 +33,4 @@ migrations/
 Thumbs.db
 
 # dummy data
-data/
-static/
+seed/*.json
