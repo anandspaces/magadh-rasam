@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import image from "../assets/wallpaper1.jpg";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Header";
 import { FaArrowDown } from "react-icons/fa";
 import Menu from "../components/Menu";
 import Footer from "../components/Footer";

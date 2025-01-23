@@ -60,19 +60,19 @@ function Menu() {
           <button
             key={id}
             onClick={() => toggleCategory(Number(id))}
-            className={`px-4 py-2 rounded ${
+            className={`px-4 py-2 rounded font-semibold ${
               selectedCategory === Number(id)
-                ? "bg-yellow-600 text-white"
+                ? "bg-yellow-600 text-white scale-110 shadow-lg"
                 : "bg-gray-200 text-gray-800"
-            } hover:bg-yellow-500 transition`}
+            } hover:bg-yellow-500 transition-transform`}
           >
             {name}
           </button>
         ))}
       </div>
-
+  
       {/* Menu Items Grid */}
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {loading ? (
           Array.from({ length: 4 }).map((_, index) => (
             <div
@@ -85,8 +85,9 @@ function Menu() {
             </div>
           ))
         ) : menuItems.length === 0 ? (
-          <p className="text-center text-xl col-span-4">
-            No menu items available.
+          <p className="text-center text-xl col-span-4 text-gray-500">
+            No menu items available in this category. Please select a different
+            category.
           </p>
         ) : (
           menuItems
@@ -97,15 +98,13 @@ function Menu() {
                 className="transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-xl rounded-lg p-4 bg-white"
               >
                 <div className="border-b-2 border-gray-200 pb-2">
-                <p className="text-xl font-semibold">{item.name}</p>
+                  <p className="text-xl font-semibold">{item.name}</p>
                 </div>
-                <p className="text-sm text-gray-700 mt-2">
-                  {item.description}
-                </p>
+                <p className="text-sm text-gray-700 mt-2">{item.description}</p>
                 <img
                   src={item.image || image}
                   alt={item.name}
-                  className="w-full h-48 object-cover rounded-lg mt-4 shadow-md"
+                  className="w-full h-48 object-contain rounded-lg mt-4 shadow-md"
                 />
               </div>
             ))
@@ -113,6 +112,7 @@ function Menu() {
       </div>
     </div>
   );
+  
 }
 
 export default Menu;
