@@ -3,120 +3,120 @@
       "name": "Savory Rice Flakes Medley",
       "description": "Savory Rice Flakes Medley is a popular breakfast dish made with flattened rice, spices, herbs and peanuts. It is a quick, easy and healthy option for breakfast or brunch.",
       "image_url": "poha.jpg",
-      "category_id": 1
+      "category": 1
   },
   {
       "name": "Baked Wheat Dumplings with Roasted Potato Mash",
       "description": "Baked Wheat Dumplings with Roasted Potato Mash is a traditional East India dish that is quite similar to Rajasthani Baati but still very different in taste. It is a dough ball made up of whole wheat flour and stuffed with.",
       "image_url": "litti_chokha.jpg",
-      "category_id": 1
+      "category": 1
   },
   {
       "name": "Thekua",
       "description": "Thekua is a traditional Indian sweet snack made with whole wheat flour, jaggery, and ghee. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
       "image_url": "thekua.jpg",
-      "category_id": 2
+      "category": 2
   },
   {
       "name": "Sattu Paratha",
       "description": "Sattu Paratha is a traditional Indian flatbread made with whole wheat flour and stuffed with a spicy and tangy mixture of roasted gram flour, spices, herbs, and onions.",
       "image_url": "sattu_paratha.jpg",
-      "category_id": 1
+      "category": 1
   },
   {
       "name": "Khaja",
       "description": "Khaja is a traditional Indian sweet snack made with all-purpose flour, sugar, and ghee. It is a popular snack in Bihar, Odisha, and Uttar Pradesh.",
       "image_url": "khaja.jpg",
-      "category_id": 2
+      "category": 2
   },
   {
       "name": "Laiya Chana",
       "description": "Laiya Chana is a traditional Indian snack made with black chickpeas, spices, herbs, and peanuts. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
       "image_url": "laiya_chana.jpg",
-      "category_id": 2
+      "category": 2
   },
   {
       "name": "Malpua",
       "description": "Malpua is a traditional Indian sweet pancake made with all-purpose flour, sugar, and milk. It is a popular dessert in Bihar, Odisha, and Uttar Pradesh.",
       "image_url": "malpua.jpg",
-      "category_id": 2
+      "category": 2
   },
   {
       "name": "Chana Ghugni",
       "description": "Made with yellow peas, spices, herbs, and peanuts. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
       "image_url": "chana_ghugni.jpg",
-      "category_id": 2
+      "category": 2
   },
   {
       "name": "Steamed Chickpea Flour Cake",
       "description": "Made with fermented rice and chickpea flour. It is a healthy and delicious option for breakfast or snack.",
       "image_url": "dhokla.jpg",
-      "category_id": 1
+      "category": 1
   },
   {
       "name": "Kachori",
       "description": "Kachori is a popular Indian snack made with all-purpose flour, spices, herbs, and lentils. It is a delicious and crispy option for breakfast or snack.",
       "image_url": "dal_kachori.jpg",
-      "category_id": 2
+      "category": 2
   },
   {
       "name": "Samosa",
       "description": "Samosa is a popular Indian snack made with all-purpose flour, spices, herbs, and potatoes. It is a delicious and crispy option for breakfast or snack.",
       "image_url": "samosa.jpg",
-      "category_id": 2
+      "category": 2
   },
   {
       "name": "Lassi",
       "description": "Made with yogurt, water, and spices. It is a refreshing and healthy option for breakfast or snack.",
       "image_url": "lassi.jpg",
-      "category_id": 4
+      "category": 4
   },
   {
       "name": "Sweet Rice Flour Dumplings with Coconut Filling",
       "description": "Made with rice flour, jaggery, and coconut. It is a popular snack in Bihar, Jharkhand, and West Bengal.",
       "image_url": "dumpling.jpg",
-      "category_id": 2
+      "category": 2
   },
   {
       "name": "Crispy Grain Fritters with Spiced Dip",
       "description": "Made with rice flour, spices, herbs, and lentils. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
       "image_url": "dhuska.jpg",
-      "category_id": 2
+      "category": 2
   },
   {
       "name": "Lentil Stew with Herb-infused Baked Wheat Dumplings",
       "description": "Made with whole wheat flour, lentils, and spices. It is a popular dish in Rajasthan, Madhya Pradesh, and Uttar Pradesh.",
       "image_url": "dal_bati.jpg",
-      "category_id": 3
+      "category": 3
   },
   {
       "name": "Spiced Chickpea Stew with Fried Bread Pockets",
       "description": "Made with chickpeas, spices, herbs, and fried bread. It is a delicious and filling option for breakfast or lunch.",
       "image_url": "chole_bhature.jpg",
-      "category_id": 3
+      "category": 3
   },
   {
       "name": "Aloo Paratha",
       "description": "Aloo Paratha is a popular Indian dish made with whole wheat flour, potatoes, and spices. It is a delicious and filling option for breakfast or lunch.",
       "image_url": "aloo_paratha.jpg",
-      "category_id": 1
+      "category": 1
   },
   {
       "name": "Mix Veg Biryani",
       "description": "Mix Veg Biryani is a popular Indian dish made with basmati rice, vegetables, and spices. It is a delicious and aromatic option for lunch or dinner.",
       "image_url": "biryani.jpg",
-      "category_id": 3
+      "category": 3
   },
   {
       "name": "Pulao",
       "description": "Pulao is a popular Indian dish made with basmati rice, vegetables, and spices. It is a delicious and aromatic option for lunch or dinner.",
       "image_url": "pulao.jpg",
-      "category_id": 3
+      "category": 3
   },
   {
       "name": "Momos",
       "description": "Momos are a popular Indian snack made with all-purpose flour, vegetables, and spices. They are a delicious and filling option for breakfast or snack.",
       "image_url": "momos.jpg",
-      "category_id": 2
+      "category": 2
   }
 ]
