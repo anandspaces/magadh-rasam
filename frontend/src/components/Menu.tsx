@@ -21,6 +21,25 @@ function Menu() {
       .catch((error) => {
         console.error('There was an error fetching the menu items!', error);
         setLoading(false);
+         // Fallback: Fetch from a local JSON file
+         fetch('/data/menu_data.json')
+         .then((response) => {
+           if (!response.ok) {
+             throw new Error('Failed to fetch the local JSON file');
+           }
+           return response.json();
+         })
+         .then((data) => {
+           setMenuItems(data);
+           setLoading(false);
+         })
+         .catch((fallbackError) => {
+           console.error('There was an error fetching the local JSON file!', fallbackError);
+           setLoading(false);
+         })
+         .finally(() => {
+          setLoading(false);
+        });
       });
   }, []);
 
