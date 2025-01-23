@@ -3,312 +3,312 @@
     "name": "Savory Rice Flakes Medley",
     "description": "Savory Rice Flakes Medley is a popular breakfast dish made with flattened rice, spices, herbs and peanuts. It is a quick, easy and healthy option for breakfast or brunch.",
     "image_url": "poha.jpg",
-    "category_id": 1
+    "category": 1
   },
   {
     "name": "Baked Wheat Dumplings with Roasted Potato Mash",
     "description": "Baked Wheat Dumplings with Roasted Potato Mash is a traditional East India dish that is quite similar to Rajasthani Baati but still very different in taste. It is a dough ball made up of whole wheat flour and stuffed with.",
     "image_url": "litti_chokha.jpg",
-    "category_id": 1
+    "category": 1
   },
   {
     "name": "Thekua",
     "description": "Thekua is a traditional Indian sweet snack made with whole wheat flour, jaggery, and ghee. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
     "image_url": "thekua.jpg",
-    "category_id": 1
+    "category": 1
   },
   {
     "name": "Khaja",
     "description": "Khaja is a traditional Indian sweet snack made with all-purpose flour, sugar, and ghee. It is a popular snack in Bihar, Odisha, and Uttar Pradesh.",
     "image_url": "khaja.jpg",
-    "category_id": 1
+    "category": 1
   },
   {
     "name": "Laiya Chana",
     "description": "Laiya Chana is a traditional Indian snack made with black chickpeas, spices, herbs, and peanuts. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
     "image_url": "laiya_chana.jpg",
-    "category_id": 1
+    "category": 1
   },
   {
     "name": "Steamed Chickpea Flour Cake",
     "description": "Made with fermented rice and chickpea flour. It is a healthy and delicious option for breakfast or snack.",
     "image_url": "dhokla.jpg",
-    "category_id": 1
+    "category": 1
   },
   {
     "name": "Momos",
     "description": "Momos are a popular Indian snack made with all-purpose flour, vegetables, and spices. They are a delicious and filling option for breakfast or snack.",
     "image_url": "momos.jpg",
-    "category_id": 1
+    "category": 1
   },
   {
     "name": "Kachori",
     "description": "Kachori is a popular Indian snack made with all-purpose flour, spices, herbs, and lentils. It is a delicious and crispy option for breakfast or snack.",
     "image_url": "dal_kachori.jpg",
-    "category_id": 1
+    "category": 1
   },
   {
     "name": "Samosa",
     "description": "Samosa is a popular Indian snack made with all-purpose flour, spices, herbs, and potatoes. It is a delicious and crispy option for breakfast or snack.",
     "image_url": "samosa.jpg",
-    "category_id": 1
+    "category": 1
   },
   {
     "name": "Sweet Rice Flour Dumplings with Coconut Filling",
     "description": "Made with rice flour, jaggery, and coconut. It is a popular snack in Bihar, Jharkhand, and West Bengal.",
     "image_url": "dumpling.jpg",
-    "category_id": 1
+    "category": 1
   },
   {
     "name": "Sattu Paratha",
     "description": "Sattu Paratha is a traditional Indian flatbread made with whole wheat flour and stuffed with a spicy and tangy mixture of roasted gram flour, spices, herbs, and onions.",
     "image_url": "sattu_paratha.jpg",
-    "category_id": 2
+    "category": 2
   },
   {
     "name": "Chana Ghugni",
     "description": "Made with yellow peas, spices, herbs, and peanuts. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
     "image_url": "chana_ghugni.jpg",
-    "category_id": 2
+    "category": 2
   },
   {
     "name": "Crispy Grain Fritters with Spiced Dip",
     "description": "Made with rice flour, spices, herbs, and lentils. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
     "image_url": "dhuska.jpg",
-    "category_id": 2
+    "category": 2
   },
   {
     "name": "Lentil Stew with Herb-infused Baked Wheat Dumplings",
     "description": "Made with whole wheat flour, lentils, and spices. It is a popular dish in Rajasthan, Madhya Pradesh, and Uttar Pradesh.",
     "image_url": "dal_bati.jpg",
-    "category_id": 2
+    "category": 2
   },
   {
     "name": "Spiced Chickpea Stew with Fried Bread Pockets",
     "description": "Made with chickpeas, spices, herbs, and fried bread. It is a delicious and filling option for breakfast or lunch.",
     "image_url": "chole_bhature.jpg",
-    "category_id": 2
+    "category": 2
   },
   {
     "name": "Chhola Puri",
     "description": "Chhola Puri is a popular Indian dish made with chickpeas, spices, herbs, and fried bread. It is a delicious and filling option for breakfast or lunch.",
     "image_url": "chhola_puri.jpg",
-    "category_id": 2
+    "category": 2
   },
   {
     "name": "Rajasthani Kadhi",
     "description": "Rajasthani Kadhi is a popular Indian dish made with yogurt, gram flour, and spices. It is a delicious and tangy option for lunch or dinner.",
     "image_url": "kadhi.jpg",
-    "category_id": 2
+    "category": 2
   },
   {
     "name": "Aloo Paratha",
     "description": "Aloo Paratha is a popular Indian dish made with whole wheat flour, potatoes, and spices. It is a delicious and filling option for breakfast or lunch.",
     "image_url": "aloo_paratha.jpg",
-    "category_id": 2
+    "category": 2
   },
   {
     "name": "Mix Veg Biryani",
     "description": "Mix Veg Biryani is a popular Indian dish made with basmati rice, vegetables, and spices. It is a delicious and aromatic option for lunch or dinner.",
     "image_url": "biryani.jpg",
-    "category_id": 2
+    "category": 2
   },
   {
     "name": "Pulao",
     "description": "Pulao is a popular Indian dish made with basmati rice, vegetables, and spices. It is a delicious and aromatic option for lunch or dinner.",
     "image_url": "pulao.jpg",
-    "category_id": 2
+    "category": 2
   },
   {
     "name": "Malpua",
     "description": "Malpua is a traditional Indian sweet pancake made with all-purpose flour, sugar, and milk. It is a popular dessert in Bihar, Odisha, and Uttar Pradesh.",
     "image_url": "malpua.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Gulab Jamun",
     "description": "Gulab Jamun is a traditional Indian sweet made with milk solids, sugar, and cardamom. It is a popular dessert in North India.",
     "image_url": "gulab_jamun.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Rasgulla",
     "description": "Rasgulla is a traditional Indian sweet made with chenna, sugar, and rose water. It is a popular dessert in West Bengal and Odisha.",
     "image_url": "rasgulla.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Rasmalai",
     "description": "Rasmalai is a traditional Indian sweet made with chenna, milk, and saffron. It is a popular dessert in North India.",
     "image_url": "rasmalai.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Kheer",
     "description": "Kheer is a traditional Indian sweet made with rice, milk, and sugar. It is a popular dessert in North India.",
     "image_url": "kheer.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Jalebi",
     "description": "Jalebi is a traditional Indian sweet made with all-purpose flour, sugar, and saffron. It is a popular dessert in North India.",
     "image_url": "jalebi.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Kaju Katli",
     "description": "Kaju Katli is a traditional Indian sweet made with cashews, sugar, and ghee. It is a popular dessert in North India.",
     "image_url": "kaju_katli.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Coconut Ladoo",
     "description": "Coconut Ladoo is a traditional Indian sweet made with coconut, sugar, and milk. It is a popular dessert in South India.", 
     "image_url": "coconut_ladoo.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Besan Ladoo",
     "description": "Besan Ladoo is a traditional Indian sweet made with gram flour, sugar, and ghee. It is a popular dessert in North India.",
     "image_url": "besan_ladoo.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Rice Pudding",
     "description": "Rice Pudding is a traditional Indian sweet made with rice, milk, and sugar. It is a popular dessert in North India.",
     "image_url": "rice_pudding.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Mango Ice Cream",
     "description": "Mango Ice Cream is a popular Indian dessert made with mango, milk, and sugar. It is a delicious and creamy option for dessert or snack.",
     "image_url": "mango_ice_cream.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Kulfi",
     "description": "Kulfi is a traditional Indian dessert made with milk, sugar, and saffron. It is a popular dessert in North India.",
     "image_url": "kulfi.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Falooda",
     "description": "Falooda is a traditional Indian dessert made with vermicelli, rose syrup, milk, and basil seeds. It is a popular dessert in North India.",
     "image_url": "falooda.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Rabri",
     "description": "Rabri is a traditional Indian dessert made with milk, sugar, and saffron. It is a popular dessert in North India.",
     "image_url": "rabri.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Gajar Halwa",
     "description": "Gajar Halwa is a traditional Indian dessert made with carrots, milk, and sugar. It is a popular dessert in North India.",
     "image_url": "gajar_halwa.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Kesar Peda",
     "description": "Kesar Peda is a traditional Indian sweet made with milk solids, sugar, and saffron. It is a popular dessert in North India.",
     "image_url": "kesar_peda.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Kaju Roll",
     "description": "Kaju Roll is a traditional Indian sweet made with cashews, sugar, and ghee. It is a popular dessert in North India.",
     "image_url": "kaju_roll.jpg",
-    "category_id": 3
+    "category": 3
   },
   {
     "name": "Kesar Badam Milk",
     "description": "Kesar Badam Milk is a traditional Indian drink made with milk, almonds, and saffron. It is a popular drink in North India.",
     "image_url": "kesar_badam_milk.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Lassi",
     "description": "Made with yogurt, water, and spices. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "lassi.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Masala Chai",
     "description": "Made with tea leaves, milk, and spices. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "masala_chai.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Mango Lassi",
     "description": "Made with yogurt, water, and mango. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "mango_lassi.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Mint Lemonade",
     "description": "Made with lemon, mint, and water. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "mint_lemonade.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Sweet Lassi",
     "description": "Made with yogurt, water, and sugar. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "sweet_lassi.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Mango Shake",
     "description": "Made with mango, milk, and sugar. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "mango_shake.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Banana Shake",
     "description": "Made with banana, milk, and sugar. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "banana_shake.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Cold Coffee",
     "description": "Made with coffee, milk, and sugar. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "cold_coffee.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Mango Smoothie",
     "description": "Made with mango, yogurt, and sugar. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "mango_smoothie.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Strawberry Smoothie",
     "description": "Made with strawberry, yogurt, and sugar. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "strawberry_smoothie.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Pineapple Smoothie",
     "description": "Made with pineapple, yogurt, and sugar. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "pineapple_smoothie.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Blueberry Smoothie",
     "description": "Made with blueberry, yogurt, and sugar. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "blueberry_smoothie.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Avocado Smoothie",
     "description": "Made with avocado, yogurt, and sugar. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "avocado_smoothie.jpg",
-    "category_id": 4
+    "category": 4
   },
   {
     "name": "Papaya Smoothie",
     "description": "Made with papaya, yogurt, and sugar. It is a refreshing and healthy option for breakfast or snack.",
     "image_url": "papaya_smoothie.jpg",
-    "category_id": 4
+    "category": 4
   }
 ]
