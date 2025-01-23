@@ -11,7 +11,7 @@ class Customer(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-# Category model for classifying menu items (e.g., Appetizers, Main Course, Desserts)
+# Category model for classifying menu items
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
