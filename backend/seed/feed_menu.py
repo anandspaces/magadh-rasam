@@ -2,7 +2,7 @@ import json
 from api.models import Menu, Category
 
 # Load JSON data
-file_path = 'data/menu_data.json'
+file_path = 'seed/menu_data.json'
 try:
     with open(file_path, 'r') as file:
         data = json.load(file)
