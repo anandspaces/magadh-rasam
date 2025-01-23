@@ -96,14 +96,16 @@ function Menu() {
                 key={index}
                 className="transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-xl rounded-lg p-4 bg-white"
               >
+                <div className="border-b-2 border-gray-200 pb-2">
                 <p className="text-xl font-semibold">{item.name}</p>
+                </div>
                 <p className="text-sm text-gray-700 mt-2">
                   {item.description}
                 </p>
                 <img
                   src={item.image || image}
                   alt={item.name}
-                  className="w-full h-48 object-cover rounded-lg mt-4 transform transition duration-500 ease-in-out hover:scale-110"
+                  className="w-full h-48 object-cover rounded-lg mt-4 shadow-md"
                 />
               </div>
             ))
