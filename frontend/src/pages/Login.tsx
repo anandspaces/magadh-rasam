@@ -21,9 +21,15 @@ const Login = () => {
         onChange={(e) => setEmail(e.target.value)}
         className="mb-4 w-2/3 sm:w-1/2 rounded-md border border-stone-200 p-2 focus:outline-none focus:ring focus:ring-orange-500"
       />
+      <div>
           <button className="rounded bg-orange-600 px-4 py-2 font-medium text-white">
             sign in
           </button>
+          <button onClick={() => navigate('/register')} className="rounded bg-orange-600 px-4 py-2 font-medium text-white">
+
+        create an account 
+          </button>
+      </div>
     </form>
   );
 };

@@ -14,19 +14,19 @@ function Header() {
       <nav className="hidden md:flex space-x-6">
         <button
           className="text-gray-700 font-medium hover:text-orange-600 transition"
-          onClick={() => navigate('/about')}
+          onClick={() => navigate('/')}
         >
           About Us
         </button>
         <button
           className="text-gray-700 font-medium hover:text-orange-600 transition"
-          onClick={() => navigate('/menu')}
+          onClick={() => navigate('/')}
         >
           Menu
         </button>
         <button
           className="text-gray-700 font-medium hover:text-orange-600 transition"
-          onClick={() => navigate('/contact')}
+          onClick={() => navigate('/')}
         >
           Contact
         </button>
@@ -40,12 +40,12 @@ function Header() {
         >
           Sign In
         </button>
-        <button
+        {/* <button
           className="rounded bg-orange-600 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-orange-700 hover:scale-105"
           onClick={() => navigate('/register')}
         >
           Sign Up
-        </button>
+        </button> */}
       </div>
 
       {/* Mobile Menu */}
