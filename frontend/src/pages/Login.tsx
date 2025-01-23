@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   function handleSubmit(e:any) {
     e.preventDefault();
-    if (!email) return;
-
+    if (!email || !password) return;
     navigate('/menu')
   }
 
@@ -21,13 +21,19 @@ const Login = () => {
         onChange={(e) => setEmail(e.target.value)}
         className="mb-4 w-2/3 sm:w-1/2 rounded-md border border-stone-200 p-2 focus:outline-none focus:ring focus:ring-orange-500"
       />
-      <div>
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="mb-4 w-2/3 sm:w-1/2 rounded-md border border-stone-200 p-2 focus:outline-none focus:ring focus:ring-orange-500"
+      />
+      <div className="flex space-x-4">
           <button className="rounded bg-orange-600 px-4 py-2 font-medium text-white">
             sign in
           </button>
           <button onClick={() => navigate('/register')} className="rounded bg-orange-600 px-4 py-2 font-medium text-white">
-
-        create an account 
+            create an account 
           </button>
       </div>
     </form>
