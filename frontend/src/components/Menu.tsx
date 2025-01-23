@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import image from "../assets/default.jpg";
 
 interface MenuItem {
   name: string;
@@ -12,7 +13,7 @@ function Menu() {
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     // Fetch the menu items from the backend using axios
-    axios.get('http://localhost:8000/menu/')  // Adjust the URL if necessary
+    axios.get('http://localhost:8000/menu/')
       .then((response) => {
         setMenuItems(response.data);
         setLoading(false);
@@ -47,7 +48,7 @@ function Menu() {
             <p className="text-3xl font-semibold text-white">{item.name}</p>
             <p className="text-lg text-white mt-2">{item.description}</p>
             <img
-              src={item.image}
+              src={`${item.image == null ? image : item.image}`}
               alt={item.name}
               className="w-full h-48 object-cover rounded-lg mt-4 transform transition duration-500 ease-in-out hover:scale-110"
             />
