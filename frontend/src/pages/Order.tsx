@@ -1,29 +1,34 @@
 import { useState, useEffect } from "react";
 import CreateOrder from "../components/CreateOrder";
 import OrderConfirmation from "../components/OrderConfirmation";
+import OrderSummary from "../components/OrderSummary";
 import axios from "axios";
 
-interface OrderData {
-  id: string;
-  status: string;
-  customerName: string;
-  items: { name: string; quantity: number }[];
-  totalAmount: number;
-  deliveryAddress: string;
-  estimatedTime: string;
-}
+// interface OrderData {
+//   id: string;
+//   status: string;
+//   customerName: string;
+//   items: { name: string; quantity: number }[];
+//   totalAmount: number;
+//   deliveryAddress: string;
+//   estimatedTime: string;
+// }
+
 
 const Order = () => {
-  const [orderData, setOrderData] = useState<OrderData | null>(null); // Stores fetched order details
+  // const [orderStatus, setOrderStatus] = useState<Boolean | null>(false); // Stores fetched order details
   const [loading, setLoading] = useState(true); // Loading state for API call
   const [error, setError] = useState<string | null>(null); // Error state for API call
+  const [stage, setStage] = useState<"create" | "confirm" | "summary">("create"); // Manage the stage of the process
 
   const fetchOrderDetails = async (orderId: string) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get<OrderData>(`/api/orders/${orderId}/`);
-      setOrderData(response.data);
+      const response = await axios.get(`/api/orders/${orderId}/`);
+      // Make sure the API provides a valid 'stage' value
+      const fetchedStage = response.data?.stage || "create"; // Fallback to "create" if no stage is found
+      setStage(fetchedStage); // Set the stage based on the API response
     } catch (err) {
       console.error("Error fetching order details:", err);
       setError("Failed to fetch order details. Please try again later.");
@@ -59,13 +64,19 @@ const Order = () => {
     );
   }
 
+  const handleNextStage = () => {
+    if (stage === "create") {
+      setStage("confirm");
+    } else if (stage === "confirm") {
+      setStage("summary");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center items-center p-6">
-      {orderData && orderData.status === "Confirmed" ? (
-        <OrderConfirmation/>
-      ) : (
-        <CreateOrder />
-      )}
+      {stage === "create" && <CreateOrder onSubmit={handleNextStage} />}
+      {stage === "confirm" && <OrderConfirmation onConfirm={handleNextStage} />}
+      {stage === "summary" && <OrderSummary />}
     </div>
   );
 };
