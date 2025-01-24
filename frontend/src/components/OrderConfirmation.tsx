@@ -2,8 +2,17 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+interface Order {
+  id: number;
+  customerName: string;
+  items: { name: string; quantity: number }[];
+  totalAmount: string;
+  deliveryAddress: string;
+  estimatedTime: string;
+}
+
 function OrderConfirmation(){
-  const [order, setOrder] = useState<any>(null);
+  const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -34,7 +43,15 @@ function OrderConfirmation(){
   if (!order) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-50">
-        <p className="text-lg text-red-600">Failed to load order details. Please try again later.</p>
+        <p className="text-lg text-red-600">
+          Failed to load order details. Please try again later.
+        </p>
+        <button
+          className="mt-4 rounded bg-red-500 px-4 py-2 font-medium text-white hover:bg-red-600"
+          onClick={() => window.location.reload()}
+        >
+          Retry
+        </button>
       </div>
     );
   }
