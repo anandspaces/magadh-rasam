@@ -6,7 +6,11 @@ interface OrderItem {
   quantity: number;
 }
 
-function CreateOrder (){
+interface CreateOrderProps {
+  onSubmit: () => void;
+}
+
+function CreateOrder ({ onSubmit }: CreateOrderProps){
   const [customerName, setCustomerName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -49,6 +53,7 @@ function CreateOrder (){
       setAddress("");
       setOrderItems([{ name: "", quantity: 1 }]);
       setInstructions("");
+      onSubmit(); // Move to the confirmation stage
     } catch (error) {
       console.error("Error creating order:", error);
       setSuccess(false);

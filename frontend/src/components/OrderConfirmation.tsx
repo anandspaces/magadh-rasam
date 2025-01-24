@@ -11,11 +11,18 @@ interface Order {
   estimatedTime: string;
 }
 
-function OrderConfirmation(){
+interface OrderConfirmationProps {
+  onConfirm: () => void;
+}
+
+function OrderConfirmation({ onConfirm }: OrderConfirmationProps){
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const handleConfirm = () => {
+    onConfirm(); // Move to the summary stage
+  }
   useEffect(() => {
     // Fetch order data from the backend
     const fetchOrderDetails = async () => {
@@ -107,7 +114,7 @@ function OrderConfirmation(){
           </button>
           <button
             className="w-full sm:w-auto rounded bg-gray-700 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-gray-800"
-            onClick={() => navigate("/order-summary")}
+            onClick={handleConfirm}
           >
             View Order Summary
           </button>
