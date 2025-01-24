@@ -29,10 +29,10 @@ const Login = () => {
         className="mb-4 w-2/3 sm:w-1/2 rounded-md border border-stone-200 p-2 focus:outline-none focus:ring focus:ring-yellow-600"
       />
       <div className="flex space-x-4">
-          <button className="rounded bg-yellow-500 px-4 py-2 font-medium text-white">
+          <button className="rounded bg-yellow-400 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-yellow-600 hover:scale-105">
             sign in
           </button>
-          <button onClick={() => navigate('/register')} className="rounded bg-yellow-500 px-4 py-2 font-medium text-white">
+          <button onClick={() => navigate('/register')} className="rounded bg-yellow-400 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-yellow-600 hover:scale-105">
             create an account 
           </button>
       </div>

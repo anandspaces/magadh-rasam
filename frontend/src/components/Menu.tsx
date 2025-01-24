@@ -63,7 +63,7 @@ function Menu() {
             className={`px-4 py-2 rounded font-semibold ${
               selectedCategory === Number(id)
                 ? "bg-yellow-600 text-white scale-110 shadow-lg"
-                : "bg-gray-200 text-gray-800"
+                : "bg-gray-200 text-gray-700"
             } hover:bg-yellow-500 transition-transform`}
           >
             {name}
