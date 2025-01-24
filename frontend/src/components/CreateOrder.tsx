@@ -1,12 +1,19 @@
 import { useState } from "react";
+import axios from "axios";
+
+interface OrderItem {
+  name: string;
+  quantity: number;
+}
 
 function CreateOrder (){
   const [customerName, setCustomerName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [orderItems, setOrderItems] = useState([{ name: "", quantity: 1 }]);
+  const [orderItems, setOrderItems] = useState<OrderItem[]>([{ name: "", quantity: 1 }]);
   const [instructions, setInstructions] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState<null | boolean>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleItemChange = (index: number, field: string, value: string) => {
     const updatedItems = [...orderItems];
@@ -24,18 +31,30 @@ function CreateOrder (){
     setOrderItems(updatedItems);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Mock submission success
-    setSuccess(true);
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phone)) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
 
-    // Reset form
-    setCustomerName("");
-    setPhone("");
-    setAddress("");
-    setOrderItems([{ name: "", quantity: 1 }]);
-    setInstructions("");
+    setLoading(true);
+    try {
+      await axios.post("/api/orders/", { customerName, phone, address, orderItems, instructions });
+      setSuccess(true);
+      setCustomerName("");
+      setPhone("");
+      setAddress("");
+      setOrderItems([{ name: "", quantity: 1 }]);
+      setInstructions("");
+    } catch (error) {
+      console.error("Error creating order:", error);
+      setSuccess(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -47,6 +66,11 @@ function CreateOrder (){
         {success && (
           <p className="text-green-600 text-center bg-green-100 py-2 px-4 rounded mb-6">
             Order successfully created!
+          </p>
+        )}
+  {success === false && (
+          <p className="text-red-600 text-center bg-red-100 py-2 px-4 rounded mb-6">
+            Failed to create order. Please try again.
           </p>
         )}
 
@@ -177,9 +201,12 @@ function CreateOrder (){
 
           <button
             type="submit"
-            className="w-full py-2 px-4 rounded-md bg-yellow-500 text-white font-medium hover:bg-yellow-600 transition duration-150"
+            className={`w-full py-2 px-4 rounded-md bg-yellow-500 text-white font-medium hover:bg-yellow-600 transition duration-150
+          ${loading ? "opacity-50 cursor-not-allowed" : "hover:bg-yellow-600"
+            }`}
+            disabled={loading}
           >
-            Submit Order
+            {loading ? "Submitting..." : "Submit Order"}
           </button>
         </form>
       </div>
