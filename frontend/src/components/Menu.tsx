@@ -106,6 +106,7 @@ function Menu() {
                   alt={item.name}
                   className="w-full h-48 object-contain rounded-lg mt-4 shadow-md"
                 />
+                <button className="text-white bg-red-600">Buy</button>
               </div>
             ))
         )}
