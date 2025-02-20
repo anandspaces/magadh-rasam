@@ -50,7 +50,7 @@ function Header() {
           className="rounded bg-yellow-400 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-yellow-600 hover:scale-105"
           onClick={() => navigate('/order')}
         >
-          create order
+          Create order
         </button>
       </div>
 
