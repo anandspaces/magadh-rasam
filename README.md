@@ -96,10 +96,6 @@ A full-stack restaurant management application built using **React** (with **Vit
 ## Environment Variables
 
 ### Backend
-- `Django_Secret_Key`: Secret Key
-   ```bash
-   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
-   ```
 - `DB_NAME`: Database name (e.g., `restaurant_db`)
 - `DB_USER`: Database username
 - `DB_PASSWORD`: Database password
@@ -110,12 +106,12 @@ A full-stack restaurant management application built using **React** (with **Vit
 - `REACT_APP_API_URL`: URL to the backend API (e.g., `http://localhost:8000`)
 
 ### Root
-- `MYSQL_PORT`=
-- `MYSQL_HOST`=
-- `MYSQL_ROOT_HOST`=
-- `MYSQL_DATABASE`=
-- `MYSQL_PASSWORD`=
-- `MYSQL_ROOT_PASSWORD`=
+- `MYSQL_PORT`: Database Port
+- `MYSQL_HOST`: Database Host
+- `MYSQL_ROOT_HOST`= Database Root Host
+- `MYSQL_DATABASE`= Database Name
+- `MYSQL_PASSWORD`= Database Password
+- `MYSQL_ROOT_PASSWORD`= Database Password
 
 ## Contributing
 
