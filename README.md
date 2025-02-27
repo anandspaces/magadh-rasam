@@ -111,11 +111,11 @@ A full-stack restaurant management application built using **React** (with **Vit
 
 ### Root
 - `MYSQL_PORT`=
-- `MYSQL_HOST`=db
-- `MYSQL_ROOT_HOST`=%
-- `MYSQL_DATABASE`=restaurant_db
-- `MYSQL_PASSWORD`=Anand@2001
-- `MYSQL_ROOT_PASSWORD`=Anand@2001
+- `MYSQL_HOST`=
+- `MYSQL_ROOT_HOST`=
+- `MYSQL_DATABASE`=
+- `MYSQL_PASSWORD`=
+- `MYSQL_ROOT_PASSWORD`=
 
 ## Contributing
 
