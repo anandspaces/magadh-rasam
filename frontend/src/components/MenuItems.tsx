@@ -40,7 +40,7 @@ export const MenuItem = ({ pizza }:pizzaType) => {
         <button
           className="mt-2 w-full rounded bg-gray-50 py-1 text-gray-600 transition-all hover:bg-gray-100"
         >
-          Add to Cart
+          Add to Cart +
         </button>
     </div>
   );
