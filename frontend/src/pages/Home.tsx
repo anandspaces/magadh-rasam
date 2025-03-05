@@ -56,7 +56,7 @@ const Home = () => {
         {!showMenu && (
           <div className="flex justify-center mt-8">
             <FaArrowDown
-              className="text-brown-600 animate-bounce w-8 h-8 cursor-pointer"
+              className="text-brown-500 animate-bounce w-8 h-8 cursor-pointer"
               onClick={handleArrowClick}
             />
           </div>
