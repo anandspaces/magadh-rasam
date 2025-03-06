@@ -6,9 +6,9 @@ import Menu from "../components/Menu";
 import Footer from "../components/Footer";
 
 const Home = () => {
-  const [fadeIn, setFadeIn] = useState(false); // State to trigger fade-in effect
+  const [fadeIn, setFadeIn] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const menuRef = useRef<HTMLDivElement | null>(null); // Reference to the Menu section
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   const handleArrowClick = () => {
     setShowMenu(true);
@@ -21,8 +21,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // Trigger the fade-in effect after the component mounts
-    const timer = setTimeout(() => setFadeIn(true), 500); // 500ms delay
+    const timer = setTimeout(() => setFadeIn(true), 500);
     return () => clearTimeout(timer);
   }, []);
 
