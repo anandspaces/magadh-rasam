@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.core.validators import MinValueValidator
 from .models import Customer, Reservation, Feedback, Order, Menu, MenuItem, Table, Category
+from django.contrib.auth.models import User
 
 # Serializer for the Customer model
 class CustomerSerializer(serializers.ModelSerializer):
@@ -99,3 +100,18 @@ class FeedbackSerializer(serializers.ModelSerializer):
         if value < 1 or value > 5:
             raise serializers.ValidationError("Rating must be between 1 and 5.")
         return value
+    
+# User Registration Serializer
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password']
+        )
+        return user

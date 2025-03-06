@@ -9,10 +9,14 @@ from .views import (
     TableListCreateView, TableDetailView,
     OrderListCreateView, OrderDetailView,
     ReservationListCreateView, ReservationDetailView,
-    FeedbackListCreateView, FeedbackDetailView
+    FeedbackListCreateView, FeedbackDetailView,
+    LoginView, RegisterView
 )
 
 urlpatterns = [
+    path('register/', RegisterView.as_view(), name='register'),  # Register endpoint
+    path('login/', LoginView.as_view(), name='login'),  # Login endpoint
+
     # Customer API URLs
     path('customers/', CustomerListCreateView.as_view(), name='customer-list'),
     path('customers/<int:pk>/', CustomerDetailView.as_view(), name='customer-detail'),
