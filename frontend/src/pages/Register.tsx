@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,17 +9,37 @@ const Register = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
+  //   if (!username || !email || !password) {
+  //     setError("All fields are required.");
+  //     return;
+  //   }
+
+  //   // Mock successful registration
+  //   setError("");
+  //   navigate("/menu");
+  // };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!username || !email || !password) {
       setError("All fields are required.");
       return;
+    } else {
+      setError("");
     }
-
-    // Mock successful registration
-    setError("");
-    navigate("/menu");
+    try {
+      await axios.post("http://localhost:8000/api/register/",{
+        username: username,
+        email: email,
+        password: password,
+      });
+      navigate("/");
+    } catch (err) {
+      setError("Registration failed. Try again.",);
+    }
   };
 
   return (

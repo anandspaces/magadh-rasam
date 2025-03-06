@@ -1,22 +1,45 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  // function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+  //   if (!username || !password) {
+  //     setError("Both fields are required.");
+  //     return;
+  //   }
+  //   setError("");
+  //   // Mock login success
+  //   navigate("/menu");
+  // }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
-      setError("Both fields are required.");
+    if (!username || !password) {
+      setError("All fields are required.");
       return;
+    } else {
+      setError("");
     }
-    setError("");
-    // Mock login success
-    navigate("/menu");
-  }
+
+    try {
+      const response = await axios.post("http://localhost:8000/api/login/", {
+        username: username,
+        password: password,
+      });
+      localStorage.setItem("accessToken", response.data.access);
+      localStorage.setItem("refreshToken", response.data.refresh);
+      navigate("/dashboard");
+    } catch (err) {
+      setError("Invalid username or password.");
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -34,17 +57,17 @@ const Login = () => {
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label
-              htmlFor="email"
+              htmlFor="username"
               className="block text-sm font-medium text-gray-700"
             >
-              Email Address
+              Username
             </label>
             <input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="username"
+              type="username"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
               required
             />
