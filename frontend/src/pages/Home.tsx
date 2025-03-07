@@ -4,6 +4,8 @@ import Navbar from "../components/Header";
 import { FaArrowDown } from "react-icons/fa";
 import Menu from "../components/Menu";
 import Footer from "../components/Footer";
+import SearchComponent from "../components/Search";
+import LocationFetcher from "../components/LocationFetcher";
 
 const Home = () => {
   const [fadeIn, setFadeIn] = useState(false);
@@ -48,6 +50,8 @@ const Home = () => {
                 Experience the authentic taste of Magadh with every bite.
               </span>
             </h1>
+            <SearchComponent />
+            <LocationFetcher />
           </div>
         </div>
 

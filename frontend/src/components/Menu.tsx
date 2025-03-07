@@ -31,21 +31,18 @@ function Menu() {
       .then((response) => {
         setMenuItems(response.data);
       })
-      .catch((error) => {
+      .catch(async (error) => {
         console.error("Backend fetch failed. Fetching local data.", error);
-        return fetch("/data/menu_data.json")
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Failed to fetch the local JSON file");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            setMenuItems(data);
-          })
-          .catch((fallbackError) => {
-            console.error("Error fetching the local JSON file.", fallbackError);
-          });
+        try {
+          const response = await fetch("/data/menu_data.json");
+          if (!response.ok) {
+            throw new Error("Failed to fetch the local JSON file");
+          }
+          const data_1 = await response.json();
+          setMenuItems(data_1);
+        } catch (fallbackError) {
+          console.error("Error fetching the local JSON file.", fallbackError);
+        }
       })
       .finally(() => {
         setLoading(false);

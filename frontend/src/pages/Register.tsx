@@ -38,7 +38,7 @@ const Register = () => {
       });
       navigate("/");
     } catch (err) {
-      setError("Registration failed. Try again.",);
+      setError("Registration failed. Try again.");
     }
   };
 
