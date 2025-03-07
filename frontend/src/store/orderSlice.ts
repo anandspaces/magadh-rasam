@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import CryptoJS from "crypto-js";
 
 // Interface Definitions
 interface OrderItem {
@@ -19,35 +20,75 @@ export interface OrderState {
   updatedAt: string;
 }
 
-// LocalStorage Helper with Type Safety
+// Constants
+const ENCRYPTION_KEY = import.meta.env.VITE_ENCRYPTION_KEY || "fallback_secret_key";
+const STORAGE_KEY = "encryptedOrderState";
+const EXPIRY_KEY = "orderExpiry";
+const ORDER_EXPIRY_TIME = 86400000; // 24 hours in milliseconds
+
+// Utility Functions
+const getCurrentTimestamp = () => new Date().toISOString();
+
+const encryptData = (data: OrderState): string => 
+  CryptoJS.AES.encrypt(JSON.stringify(data), ENCRYPTION_KEY).toString();
+
+const decryptData = (ciphertext: string): OrderState | null => {
+  try {
+    const bytes = CryptoJS.AES.decrypt(ciphertext, ENCRYPTION_KEY);
+    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+  } catch (error) {
+    console.error("Decryption failed:", error);
+    return null;
+  }
+};
+
+// LocalStorage Helper with Encryption
 const localStorageHelper = {
-  get: (key: string): OrderState | undefined => {
+  get: (): OrderState | undefined => {
     try {
-      const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) as OrderState : undefined;
+      const encryptedData = localStorage.getItem(STORAGE_KEY);
+      const expiry = localStorage.getItem(EXPIRY_KEY);
+      
+      if (!encryptedData || !expiry) return undefined;
+
+      const expiryTime = parseInt(expiry, 10);
+      if (isNaN(expiryTime) || Date.now() > expiryTime) {
+        localStorageHelper.remove();
+        return undefined;
+      }
+
+      return decryptData(encryptedData) || undefined;
     } catch (error) {
       console.error("LocalStorage read error:", error);
       return undefined;
     }
   },
-  set: (key: string, value: OrderState): void => {
+
+  set: (value: OrderState): void => {
     try {
-      localStorage.setItem(key, JSON.stringify(value));
+      localStorage.setItem(STORAGE_KEY, encryptData(value));
+      localStorage.setItem(EXPIRY_KEY, (Date.now() + ORDER_EXPIRY_TIME).toString());
     } catch (error) {
       console.error("LocalStorage write error:", error);
     }
   },
-  remove: (key: string): void => {
-    try {
-      localStorage.removeItem(key);
-    } catch (error) {
-      console.error("LocalStorage remove error:", error);
-    }
+
+  remove: (): void => {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(EXPIRY_KEY);
   }
 };
 
-// Initial State with Type Assertion
-const initialState: OrderState = localStorageHelper.get("orderState") || {
+// Clear expired data on load
+(() => {
+  const expiry = localStorage.getItem(EXPIRY_KEY);
+  if (expiry && Date.now() > parseInt(expiry, 10)) {
+    localStorageHelper.remove();
+  }
+})();
+
+// Initial State
+const initialState: OrderState = localStorageHelper.get() || {
   id: "",
   customerName: "",
   phone: "",
@@ -59,46 +100,43 @@ const initialState: OrderState = localStorageHelper.get("orderState") || {
   updatedAt: ""
 };
 
+// Redux Slice
 const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
     setOrder: {
       reducer: (_, action: PayloadAction<OrderState>) => {
-        localStorageHelper.set("orderState", action.payload);
+        localStorageHelper.set(action.payload);
         return action.payload;
       },
       prepare: (order: Omit<OrderState, "id" | "createdAt" | "updatedAt">) => ({
         payload: {
           ...order,
-          id: crypto.randomUUID(),
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          id: crypto.randomUUID?.() || Math.random().toString(36).substring(2),
+          createdAt: getCurrentTimestamp(),
+          updatedAt: getCurrentTimestamp(),
         }
       })
     },
+
     updateOrder: (state, action: PayloadAction<Partial<OrderState>>) => {
-      const updatedState = {
-        ...state,
-        ...action.payload,
-        updatedAt: new Date().toISOString()
-      };
-      localStorageHelper.set("orderState", updatedState);
+      const updatedState = { ...state, ...action.payload, updatedAt: getCurrentTimestamp() };
+      localStorageHelper.set(updatedState);
       return updatedState;
     },
+
     clearOrder: () => {
-      localStorageHelper.remove("orderState");
+      localStorageHelper.remove();
       return { ...initialState, id: "" };
     }
   }
 });
 
-// Selectors with RootState Type
+// Selectors
 export const selectOrder = (state: { order: OrderState }) => state.order;
-export const selectOrderItems = (state: { order: OrderState }) => 
-  state.order.orderItems;
-export const selectTotalAmount = (state: { order: OrderState }) =>
-  state.order.totalAmount;
+export const selectOrderItems = (state: { order: OrderState }) => state.order.orderItems;
+export const selectTotalAmount = (state: { order: OrderState }) => state.order.totalAmount;
 
 export const { setOrder, updateOrder, clearOrder } = orderSlice.actions;
 export default orderSlice.reducer;
