@@ -1,44 +1,46 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { OrderState } from "../store/orderSlice";
 
-interface Order {
-  id: number;
-  customerName: string;
-  items: { name: string; quantity: number }[];
-  totalAmount: string;
-  deliveryAddress: string;
-  estimatedTime: string;
-}
-
-interface OrderConfirmationProps {
-  onConfirm: () => void;
-}
-
-function OrderConfirmation({ onConfirm }: OrderConfirmationProps){
-  const [order, setOrder] = useState<Order | null>(null);
+function OrderConfirmation({ 
+  onConfirm, 
+  onBack 
+}: {
+  onConfirm: () => void; 
+  onBack: () => void 
+}) {
+  const [order, setOrder] = useState<OrderState | null>(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [usingLocalData, setUsingLocalData] = useState(false); // Track if using local data
 
+  const reduxOrder = useSelector((state: RootState) => state.order);
+
+  // Handle moving to the next stage
   const handleConfirm = () => {
     onConfirm(); // Move to the summary stage
-  }
+  };
+
+  // Fetch order details from the backend or fallback to Redux
+  const fetchOrderDetails = async () => {
+    try {
+      const response = await axios.get("/api/orders/confirmation/");
+      setOrder(response.data); // Use backend data
+    } catch (error) {
+      console.warn("Using local order data:", error);
+      setOrder(reduxOrder); // Fallback to Redux data
+      setUsingLocalData(true); // Indicate that local data is being used
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    // Fetch order data from the backend
-    const fetchOrderDetails = async () => {
-      try {
-        const response = await axios.get("/api/orders/confirmation/"); // Replace with your actual API endpoint
-        setOrder(response.data);
-      } catch (error) {
-        console.error("Error fetching order data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchOrderDetails();
-  }, []);
+  }, [reduxOrder]);
 
+  // Loading state
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-50">
@@ -47,6 +49,7 @@ function OrderConfirmation({ onConfirm }: OrderConfirmationProps){
     );
   }
 
+  // Error state
   if (!order) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-50">
@@ -66,6 +69,13 @@ function OrderConfirmation({ onConfirm }: OrderConfirmationProps){
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 sm:p-6">
       <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6 sm:p-8">
+        {/* Offline Mode Warning */}
+        {usingLocalData && (
+          <div className="bg-yellow-100 text-yellow-800 p-3 rounded mb-4">
+            You are viewing locally saved data. Some features may be limited.
+          </div>
+        )}
+
         <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
           🎉 Order Confirmed!
         </h1>
@@ -78,7 +88,7 @@ function OrderConfirmation({ onConfirm }: OrderConfirmationProps){
         <div className="bg-gray-100 rounded-lg p-4 mb-6">
           <h2 className="text-lg font-semibold text-gray-700 mb-2">Order Details:</h2>
           <ul className="space-y-2">
-            {order.items.map((item: any, index: number) => (
+            {order.orderItems.map((item, index) => (
               <li
                 key={index}
                 className="flex justify-between items-center text-gray-700"
@@ -90,17 +100,22 @@ function OrderConfirmation({ onConfirm }: OrderConfirmationProps){
           </ul>
           <div className="flex justify-between items-center border-t border-gray-300 mt-4 pt-2">
             <span className="text-gray-700 font-semibold">Total Amount:</span>
-            <span className="text-gray-900 font-bold">{order.totalAmount}</span>
+            <span className="text-gray-900 font-bold">
+              {order.totalAmount.toLocaleString("en-IN", {
+                style: "currency",
+                currency: "INR",
+              })}
+            </span>
           </div>
         </div>
 
         {/* Delivery Info */}
         <div className="bg-gray-100 rounded-lg p-4 mb-6">
           <h2 className="text-lg font-semibold text-gray-700 mb-2">Delivery Address:</h2>
-          <p className="text-gray-600">{order.deliveryAddress}</p>
+          <p className="text-gray-600">{order.address}</p>
           <p className="text-gray-600 mt-2">
             Estimated Delivery Time:{" "}
-            <span className="font-medium text-gray-700">{order.estimatedTime}</span>
+            <span className="font-medium text-gray-700">30 minutes</span>
           </p>
         </div>
 
@@ -108,7 +123,7 @@ function OrderConfirmation({ onConfirm }: OrderConfirmationProps){
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
           <button
             className="w-full sm:w-auto rounded bg-yellow-500 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-yellow-600"
-            onClick={() => navigate("/menu")}
+            onClick={onBack}
           >
             Back to Menu
           </button>
@@ -122,6 +137,6 @@ function OrderConfirmation({ onConfirm }: OrderConfirmationProps){
       </div>
     </div>
   );
-};
+}
 
 export default OrderConfirmation;
