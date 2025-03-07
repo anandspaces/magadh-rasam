@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const API_KEY = "887804b857df80c908527bf9fb877df9"; // Replace with your API key
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 const LocationFetcher: React.FC = () => {
   const [location, setLocation] = useState<{ city: string; state: string } | null>(null);
