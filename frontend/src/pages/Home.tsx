@@ -57,11 +57,11 @@ const Home = () => {
 
         {/* Scroll Down Arrow */}
         {!showMenu && (
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-8" onClick={handleArrowClick} style={{ cursor: "pointer"}}>
             <FaArrowDown
               className="text-brown-500 animate-bounce w-8 h-8 cursor-pointer"
-              onClick={handleArrowClick}
             />
+            <p><br />Explore the Menu</p>
           </div>
         )}
 
