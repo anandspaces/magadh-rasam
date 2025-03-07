@@ -1,17 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setOrder } from "../store/orderSlice";
+import { RootState } from "../store/store";
 
 function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
   const dispatch = useDispatch();
+  const existingOrder = useSelector((state: RootState) => state.order);
 
-  // State for form fields
-  const [customerName, setCustomerName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [orderItems, setOrderItems] = useState([{ name: "", quantity: 1, price: 10 }]);
-  const [instructions, setInstructions] = useState("");
+  // Initialize form state from Redux
+  const [customerName, setCustomerName] = useState(existingOrder?.customerName || "");
+  const [phone, setPhone] = useState(existingOrder?.phone || "");
+  const [address, setAddress] = useState(existingOrder?.address || "");
+  const [orderItems, setOrderItems] = useState(
+    existingOrder?.orderItems || [{ name: "", quantity: 1, price: 10 }]
+  );
+  const [instructions, setInstructions] = useState(existingOrder?.instructions || "");
+
+  // Add this useEffect to handle updates to existingOrder
+  useEffect(() => {
+    if (existingOrder) {
+      setCustomerName(existingOrder.customerName);
+      setPhone(existingOrder.phone);
+      setAddress(existingOrder.address);
+      setOrderItems(existingOrder.orderItems);
+      setInstructions(existingOrder.instructions);
+    }
+  }, [existingOrder]);
 
   // State for UI feedback
   const [success, setSuccess] = useState<null | boolean>(null);
@@ -41,10 +56,13 @@ function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
     });
   };
 
-  // Add a new order item
-  const addOrderItem = () => {
-    setOrderItems([...orderItems, { name: "", quantity: 1, price: 10 }]);
-  };
+  // addOrderItem function
+const addOrderItem = () => {
+  setOrderItems(prevItems => [
+    ...prevItems,
+    { name: "", quantity: 1, price: 10 }
+  ]);
+};
 
   // Remove an order item
   const removeOrderItem = (index: number) => {
@@ -176,7 +194,6 @@ function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
             <input
               id="phone"
               type="tel"
-              pattern="[0-9]{10,15}"
               placeholder="Enter phone number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -209,7 +226,7 @@ function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
               Order Items
             </label>
             {orderItems.map((item, index) => (
-              <div key={index} className="flex items-center space-x-4 mt-2">
+              <div key={`item-${index}`} className="flex items-center space-x-4 mt-2">
                 <input
                   type="text"
                   placeholder="Item name"

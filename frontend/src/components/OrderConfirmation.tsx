@@ -6,12 +6,13 @@ import { OrderState } from "../store/orderSlice";
 
 function OrderConfirmation({ 
   onConfirm, 
-  onBack 
+  onBack ,
+  order
 }: {
   onConfirm: () => void; 
-  onBack: () => void 
+  onBack: () => void;
+  order: OrderState; 
 }) {
-  const [order, setOrder] = useState<OrderState | null>(null);
   const [loading, setLoading] = useState(true);
   const [usingLocalData, setUsingLocalData] = useState(false); // Track if using local data
 
@@ -26,10 +27,11 @@ function OrderConfirmation({
   const fetchOrderDetails = async () => {
     try {
       const response = await axios.get("/api/orders/confirmation/");
-      setOrder(response.data); // Use backend data
+      // setOrder(response.data); // Use backend data
+      console.log(response)
     } catch (error) {
       console.warn("Using local order data:", error);
-      setOrder(reduxOrder); // Fallback to Redux data
+      // setOrder(reduxOrder); // Fallback to Redux data
       setUsingLocalData(true); // Indicate that local data is being used
     } finally {
       setLoading(false);
@@ -76,13 +78,7 @@ function OrderConfirmation({
           </div>
         )}
 
-        <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-          🎉 Order Confirmed!
-        </h1>
-        <p className="text-center text-gray-600 mb-6">
-          Thank you, <span className="font-medium">{order.customerName}</span>! Your order{" "}
-          <span className="font-medium text-yellow-500">#{order.id}</span> has been placed successfully.
-        </p>
+        
 
         {/* Order Details */}
         <div className="bg-gray-100 rounded-lg p-4 mb-6">
@@ -125,13 +121,13 @@ function OrderConfirmation({
             className="w-full sm:w-auto rounded bg-yellow-500 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-yellow-600"
             onClick={onBack}
           >
-            Back to Menu
+            Edit order
           </button>
           <button
             className="w-full sm:w-auto rounded bg-gray-700 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-gray-800"
             onClick={handleConfirm}
           >
-            View Order Summary
+            Confirm Order
           </button>
         </div>
       </div>

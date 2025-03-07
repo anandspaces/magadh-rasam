@@ -3,28 +3,33 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { OrderState } from "../store/orderSlice";
+import { useNavigate } from "react-router-dom";
 
 function OrderSummary(
   {
-    onBack 
+    order
   }: {
-    onBack: () => void 
+    order: OrderState
   }
 ) {
-  const [order, setOrder] = useState<OrderState | null>(null);
   const [loading, setLoading] = useState(true);
   const [usingLocalData, setUsingLocalData] = useState(false); // Track if using local data
 
+  const [countdown, setCountdown] = useState(30);
+  const [redirecting, setRedirecting] = useState(false);
+
   const reduxOrder = useSelector((state: RootState) => state.order);
 
+  const navigate = useNavigate();
   // Fetch order summary from the backend or fallback to Redux
   const fetchOrderSummary = async () => {
     try {
       const response = await axios.get("/api/orders/summary/");
-      setOrder(response.data); // Use backend data
+      // setOrder(response.data); // Use backend data
+      console.log(response)
     } catch (error) {
       console.warn("Using local order data:", error);
-      setOrder(reduxOrder); // Fallback to Redux data
+      // setOrder(reduxOrder); // Fallback to Redux data
       setUsingLocalData(true); // Indicate that local data is being used
     } finally {
       setLoading(false);
@@ -34,6 +39,33 @@ function OrderSummary(
   useEffect(() => {
     fetchOrderSummary();
   }, [reduxOrder]);
+
+  // Countdown timer effect
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          navigate("/");
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [navigate]);
+
+  // Immediate redirect handler
+  const handleImmediateRedirect = () => {
+    setRedirecting(true);
+    setTimeout(() => navigate("/"), 300); // Allows animation to complete
+  };
+
+  // Progress bar animation
+  const progressStyle = {
+    width: `${(countdown / 30) * 100}%`,
+    transition: 'width 1s linear',
+  };
 
   // Loading state
   if (loading) {
@@ -64,6 +96,30 @@ function OrderSummary(
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 sm:p-6">
       <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6 sm:p-8">
+
+        {/* Redirect overlay */}
+        {redirecting && (
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
+            <div className="text-white text-xl font-semibold animate-pulse">
+              Redirecting...
+            </div>
+          </div>
+        )}
+
+        {/* Progress indicator */}
+        <div className="mb-6">
+          <div className="h-2 bg-gray-200 rounded-full">
+            <div
+              className="h-full bg-yellow-500 rounded-full transition-all duration-1000"
+              style={progressStyle}
+            />
+          </div>
+          <div className="text-center mt-2 text-sm text-gray-600">
+            Redirecting to homepage in {countdown} seconds
+          </div>
+        </div>
+
+
         {/* Offline Mode Warning */}
         {usingLocalData && (
           <div className="bg-yellow-100 text-yellow-800 p-3 rounded mb-4">
@@ -71,6 +127,13 @@ function OrderSummary(
           </div>
         )}
 
+        <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+          🎉 Order Confirmed!
+        </h1>
+        <p className="text-center text-gray-600 mb-6">
+          Thank you, <span className="font-medium">{order.customerName}</span>! Your order{" "}
+          <span className="font-medium text-yellow-500">#{order.id}</span> has been placed successfully.
+        </p>
         <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
           📝 Order Summary
         </h1>
@@ -112,12 +175,34 @@ function OrderSummary(
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
-          <button
+          {/* <button
             className="w-full sm:w-auto rounded bg-yellow-500 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-yellow-600"
               onClick={onBack}
           >
             Back to Menu
-          </button>
+          </button> */}
+          {/* write function to redirect to home("/") in 30 s */}
+          {/* Immediate action button */}
+          <div className="mt-8 text-center">
+            <button
+              onClick={handleImmediateRedirect}
+              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 transition-colors duration-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              Return to Home Now
+            </button>
+          </div>
         </div>
       </div>
     </div>
