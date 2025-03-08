@@ -3,17 +3,17 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 import defaultImage from "../assets/default.jpg";
-import Cart from "./Cart";
+import SearchComponent from "./Search";
 
 export interface MenuItem {
   name: string;
   description: string;
-  image: string;
+  image?: string;
   category: number;
   price: number;
 }
 
-const categoryNames: { [key: number]: string } = {
+const categoryNames = {
   1: "Appetizers",
   2: "Main Course",
   3: "Desserts",
@@ -37,15 +37,13 @@ function Menu() {
         if (!response.ok) throw new Error("Failed to fetch local JSON");
 
         const data = await response.json();
-        const formattedData = data.map((item: any) => ({
-          name: item.name,
-          description: item.description,
-          image: defaultImage,
-          category: item.category_id,
-          price: item.price,
-        }));
-
-        setMenuItems(formattedData);
+        setMenuItems(
+          data.map((item: any) => ({
+            ...item,
+            image: item.image || defaultImage,
+            category: item.category_id,
+          }))
+        );
       } catch (fallbackError) {
         console.error("Error fetching local JSON file.", fallbackError);
       }
@@ -62,25 +60,29 @@ function Menu() {
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
-      {/* Cart Component */}
-      <Cart />
+      {/* Search Component */}
+<div className="mb-2">
+
+      <SearchComponent data = {menuItems} />
+</div>
 
       {/* Category Selector */}
-      <div className="flex justify-center space-x-4 mb-8">
-        {Object.entries(categoryNames).map(([id, name]) => (
-          <button
-            key={id}
-            onClick={() => setSelectedCategory(Number(id))}
-            className={`px-5 py-2 rounded-full font-semibold transition-all duration-300 ${
-              selectedCategory === Number(id)
-                ? "bg-yellow-600 text-white scale-105 shadow-lg"
-                : "bg-gray-200 text-gray-700 hover:bg-yellow-500 hover:text-white"
-            }`}
-          >
-            {name}
-          </button>
-        ))}
-      </div>
+<div className="flex justify-center overflow-x-auto whitespace-nowrap space-x-4 mb-8 px-4 py-2 scrollbar-hide">
+  {Object.entries(categoryNames).map(([id, name]) => (
+    <button
+      key={id}
+      onClick={() => setSelectedCategory(Number(id))}
+      className={`px-5 py-2 rounded-full font-semibold transition-all duration-300 ${
+        selectedCategory === Number(id)
+          ? "bg-yellow-600 text-white scale-105 shadow-lg"
+          : "bg-gray-200 text-gray-700 hover:bg-yellow-500 hover:text-white"
+      }`}
+    >
+      {name}
+    </button>
+  ))}
+</div>
+
 
       {/* Menu Items Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

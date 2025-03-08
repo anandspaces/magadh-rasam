@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaTimes, FaBars } from "react-icons/fa";
+import Cart from "./Cart";
 
 function Header() {
   const navigate = useNavigate();
@@ -17,32 +18,18 @@ function Header() {
           Magadh Rasam
         </div>
 
-        {/* Desktop Navigation (Now "Order" matches the other links) */}
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <button
-            className="text-gray-700 font-medium hover:text-yellow-600 hover:border-b-2 hover:border-yellow-600 transition"
-            onClick={() => navigate("/about")}
-          >
-            About Us
-          </button>
-          <button
-            className="text-gray-700 font-medium hover:text-yellow-600 hover:border-b-2 hover:border-yellow-600 transition"
-            onClick={() => navigate("/menu")}
-          >
-            Menu
-          </button>
-          <button
-            className="text-gray-700 font-medium hover:text-yellow-600 hover:border-b-2 hover:border-yellow-600 transition"
-            onClick={() => navigate("/contact")}
-          >
-            Contact
-          </button>
-          <button
-            className="text-gray-700 font-medium hover:text-yellow-600 hover:border-b-2 hover:border-yellow-600 transition"
-            onClick={() => navigate("/order")}
-          >
-            Order
-          </button>
+          {["About Us", "Contact", "Order"].map((item) => (
+            <button
+              key={item}
+              className="text-gray-700 font-medium hover:text-yellow-600 hover:border-b-2 hover:border-yellow-600 transition"
+              onClick={() => navigate(`/${item.toLowerCase().replace(" ", "")}`)}
+            >
+              {item}
+            </button>
+          ))}
+          <Cart />
         </nav>
 
         {/* Sign In Button */}
@@ -54,19 +41,17 @@ function Header() {
         </button>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <button
-            className="text-yellow-500 text-2xl focus:outline-none"
-            onClick={() => setIsMobileMenuOpen(true)}
-          >
-            <FaBars />
-          </button>
-        </div>
+        <button
+          className="md:hidden text-yellow-500 text-2xl focus:outline-none"
+          onClick={() => setIsMobileMenuOpen(true)}
+        >
+          <FaBars />
+        </button>
       </div>
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-md flex flex-col items-center justify-center space-y-6 py-8 transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/50 backdrop-blur-md flex flex-col items-center justify-center space-y-6 py-8 transition-all duration-300 ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         } md:hidden`}
       >
@@ -78,42 +63,18 @@ function Header() {
           <FaTimes />
         </button>
 
-        <button
-          className="text-white text-lg font-medium hover:text-yellow-400 transition"
-          onClick={() => {
-            navigate("/about");
-            setIsMobileMenuOpen(false);
-          }}
-        >
-          About Us
-        </button>
-        <button
-          className="text-white text-lg font-medium hover:text-yellow-400 transition"
-          onClick={() => {
-            navigate("/menu");
-            setIsMobileMenuOpen(false);
-          }}
-        >
-          Menu
-        </button>
-        <button
-          className="text-white text-lg font-medium hover:text-yellow-400 transition"
-          onClick={() => {
-            navigate("/contact");
-            setIsMobileMenuOpen(false);
-          }}
-        >
-          Contact
-        </button>
-        <button
-          className="text-white text-lg font-medium hover:text-yellow-400 transition"
-          onClick={() => {
-            navigate("/order");
-            setIsMobileMenuOpen(false);
-          }}
-        >
-          Order
-        </button>
+        {["About Us", "Contact", "Order"].map((item) => (
+          <button
+            key={item}
+            className="text-white text-lg font-medium hover:text-yellow-400 transition"
+            onClick={() => {
+              navigate(`/${item.toLowerCase().replace(" ", "")}`);
+              setIsMobileMenuOpen(false);
+            }}
+          >
+            {item}
+          </button>
+        ))}
 
         {/* Sign In Button */}
         <button

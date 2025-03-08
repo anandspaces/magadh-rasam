@@ -1,4 +1,4 @@
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaThreads } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -44,9 +44,9 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
             <p>123 Culinary Lane</p>
-            <p>Foodie City, FL 12345</p>
+            <p>Foodie City, BR 824143</p>
             <p>Email: contact@magadhrasam.com</p>
-            <p>Phone: +1 (555) 123-4567</p>
+            <p>Phone: +91 XXXXXXXXXX</p>
           </div>
 
           {/* Social Media Icons */}
@@ -62,20 +62,20 @@ export default function Footer() {
                 <FaFacebook size={24} />
               </a>
               <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-yellow-400 transition"
-              >
-                <FaTwitter size={24} />
-              </a>
-              <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-yellow-400 transition"
               >
                 <FaInstagram size={24} />
+              </a>
+              <a
+                href="https://threads.net"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-yellow-400 transition"
+              >
+                <FaThreads size={24} />
               </a>
               <a
                 href="https://linkedin.com"
