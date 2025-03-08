@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaTimes, FaBars } from "react-icons/fa";
-import Cart from "./Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import AuthModal from "./AuthModal";
@@ -12,7 +11,6 @@ function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
-  
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -32,20 +30,27 @@ function Header() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {["About Us", "Contact", "Order"].map((item) => (
-            <button
-              key={item}
-              className="text-gray-700 font-medium hover:text-yellow-600 hover:border-b-2 hover:border-yellow-600 transition"
-              onClick={() => navigate(`/${item.toLowerCase().replace(" ", "")}`)}
-            >
-              {item}
-            </button>
-          ))}
-          <div>
-          <Cart />
-          </div>
-        </nav>
+        <nav className="hidden md:flex items-center space-x-6">
+            {[
+              { name: "About Us", path: "/aboutus" },
+              { name: "Contact", path: "/contact" },
+              { name: "Order", path: "/order" },
+            ].map((item) => (
+              <button
+                key={item.name}
+                className="text-gray-700 font-medium hover:text-yellow-600 transition duration-200"
+                onClick={() => navigate(item.path)}
+              >
+                {item.name}
+              </button>
+            ))}
+          </nav>
+
+          {/* Cart in Desktop View */}
+          {/* <div className="hidden md:block">
+            <Cart />
+          </div> */}
+
 
         {/* Sign In Button */}
         {/* <button
@@ -55,18 +60,18 @@ function Header() {
           Sign In
         </button> */}
 
-        {/* Auth Button */}
-        <div>
+        {/* Desktop Auth Button */}
+        <div className="hidden md:block">
             {isAuthenticated ? (
               <button
-                className="rounded-xl bg-red-500 px-5 py-2 font-medium text-white transition duration-200 hover:bg-red-600 hover:shadow-lg hover:scale-105"
+                className="rounded-lg bg-red-500 px-5 py-2 font-medium text-white transition duration-200 hover:bg-red-600 hover:shadow-lg"
                 onClick={handleLogout}
               >
                 Sign Out
               </button>
             ) : (
               <button
-                className="rounded-xl bg-yellow-500 px-5 py-2 font-medium text-white transition duration-200 hover:bg-yellow-600 hover:shadow-lg hover:scale-105"
+                className="rounded-lg bg-yellow-500 px-5 py-2 font-medium text-white transition duration-200 hover:bg-yellow-600 hover:shadow-lg"
                 onClick={() => setIsAuthModalOpen(true)}
               >
                 Sign In
@@ -97,18 +102,28 @@ function Header() {
           <FaTimes />
         </button>
 
-        {["About Us", "Contact", "Order"].map((item) => (
+        {/* Mobile Navigation Links */}
+        <nav className="mt-10 flex flex-col space-y-6 text-lg">
+        {[
+          { name: "About Us", path: "/aboutus" },
+          { name: "Contact", path: "/contact" },
+          { name: "Order", path: "/order" },
+        ].map((item) => (
           <button
-            key={item}
+            key={item.name}
             className="text-white text-lg font-medium hover:text-yellow-400 transition"
             onClick={() => {
-              navigate(`/${item.toLowerCase().replace(" ", "")}`);
+              navigate(item.path);
               setIsMobileMenuOpen(false);
             }}
           >
-            {item}
+            {item.name}
           </button>
         ))}
+        </nav>
+
+        {/* Cart in Mobile View */}
+          {/* <Cart /> */}
 
         {/* Sign In Button */}
         {/* <button
@@ -120,17 +135,18 @@ function Header() {
         >
           Sign In
         </button> */}
+
         {/* Auth Button for Mobile */}
         {isAuthenticated ? (
               <button
-                className="rounded-xl bg-red-500 px-5 py-2 font-medium text-white transition duration-200 hover:bg-red-600 hover:shadow-lg hover:scale-105"
+                className="rounded-lg bg-red-500 px-6 py-2 font-medium text-white transition duration-200 hover:bg-red-600 hover:shadow-lg"
                 onClick={handleLogout}
               >
                 Sign Out
               </button>
             ) : (
               <button
-                className="rounded-xl bg-yellow-500 px-5 py-2 font-medium text-white transition duration-200 hover:bg-yellow-600 hover:shadow-lg hover:scale-105"
+                className="rounded-lg bg-yellow-500 px-6 py-2 font-medium text-white transition duration-200 hover:bg-yellow-600 hover:shadow-lg"
                 onClick={() => setIsAuthModalOpen(true)}
               >
                 Sign In
