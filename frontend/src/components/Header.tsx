@@ -32,7 +32,7 @@ function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
             {[
-              { name: "About Us", path: "/aboutus" },
+              { name: "About Us", path: "/about" },
               { name: "Contact", path: "/contact" },
               { name: "Order", path: "/order" },
             ].map((item) => (
@@ -105,7 +105,7 @@ function Header() {
         {/* Mobile Navigation Links */}
         <nav className="mt-10 flex flex-col space-y-6 text-lg">
         {[
-          { name: "About Us", path: "/aboutus" },
+          { name: "About Us", path: "/about" },
           { name: "Contact", path: "/contact" },
           { name: "Order", path: "/order" },
         ].map((item) => (
