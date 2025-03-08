@@ -9,19 +9,6 @@ const Register = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   if (!username || !email || !password) {
-  //     setError("All fields are required.");
-  //     return;
-  //   }
-
-  //   // Mock successful registration
-  //   setError("");
-  //   navigate("/menu");
-  // };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!username || !email || !password) {

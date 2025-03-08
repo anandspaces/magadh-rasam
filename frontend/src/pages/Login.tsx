@@ -8,17 +8,6 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-  //   e.preventDefault();
-  //   if (!username || !password) {
-  //     setError("Both fields are required.");
-  //     return;
-  //   }
-  //   setError("");
-  //   // Mock login success
-  //   navigate("/menu");
-  // }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!username || !password) {
