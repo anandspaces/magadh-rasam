@@ -2,12 +2,25 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaTimes, FaBars } from "react-icons/fa";
 import Cart from "./Cart";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import AuthModal from "./AuthModal";
+import { logout } from "../store/authSlice";
 
 function Header() {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
+  
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  }
 
   return (
+    <>
     <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
@@ -29,16 +42,37 @@ function Header() {
               {item}
             </button>
           ))}
+          <div>
           <Cart />
+          </div>
         </nav>
 
         {/* Sign In Button */}
-        <button
+        {/* <button
           className="hidden md:block rounded-xl bg-yellow-500 px-5 py-2 font-medium text-white transition duration-200 ease-in-out hover:bg-yellow-600 hover:shadow-lg hover:scale-105"
           onClick={() => navigate("/login")}
         >
           Sign In
-        </button>
+        </button> */}
+
+        {/* Auth Button */}
+        <div>
+            {isAuthenticated ? (
+              <button
+                className="rounded-xl bg-red-500 px-5 py-2 font-medium text-white transition duration-200 hover:bg-red-600 hover:shadow-lg hover:scale-105"
+                onClick={handleLogout}
+              >
+                Sign Out
+              </button>
+            ) : (
+              <button
+                className="rounded-xl bg-yellow-500 px-5 py-2 font-medium text-white transition duration-200 hover:bg-yellow-600 hover:shadow-lg hover:scale-105"
+                onClick={() => setIsAuthModalOpen(true)}
+              >
+                Sign In
+              </button>
+            )}
+          </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -77,7 +111,7 @@ function Header() {
         ))}
 
         {/* Sign In Button */}
-        <button
+        {/* <button
           className="w-40 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 rounded-xl transition"
           onClick={() => {
             navigate("/login");
@@ -85,9 +119,28 @@ function Header() {
           }}
         >
           Sign In
-        </button>
+        </button> */}
+        {/* Auth Button for Mobile */}
+        {isAuthenticated ? (
+              <button
+                className="rounded-xl bg-red-500 px-5 py-2 font-medium text-white transition duration-200 hover:bg-red-600 hover:shadow-lg hover:scale-105"
+                onClick={handleLogout}
+              >
+                Sign Out
+              </button>
+            ) : (
+              <button
+                className="rounded-xl bg-yellow-500 px-5 py-2 font-medium text-white transition duration-200 hover:bg-yellow-600 hover:shadow-lg hover:scale-105"
+                onClick={() => setIsAuthModalOpen(true)}
+              >
+                Sign In
+              </button>
+            )}
       </div>
     </header>
+    {/* Auth Modal */}
+    {isAuthModalOpen && <AuthModal onClose={() => setIsAuthModalOpen(false)} />}
+    </>
   );
 }
 
