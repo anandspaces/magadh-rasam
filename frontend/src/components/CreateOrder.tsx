@@ -73,37 +73,37 @@ function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
 
   
   // Handle item selection from search component
-  const handleItemSelect = (index: number, selectedItem: { name: string; price: number }) => {
-    setOrderItems((prevItems) => {
-      const updatedItems = [...prevItems];
-      updatedItems[index] = { ...updatedItems[index], name: selectedItem.name, price: selectedItem.price };
-      return updatedItems;
-    });
-  };
+  // const handleItemSelect = (index: number, selectedItem: { name: string; price: number }) => {
+  //   setOrderItems((prevItems) => {
+  //     const updatedItems = [...prevItems];
+  //     updatedItems[index] = { ...updatedItems[index], name: selectedItem.name, price: selectedItem.price };
+  //     return updatedItems;
+  //   });
+  // };
   
   // Handle changes in order items
-  const handleItemChange = (index: number, field: string, value: string) => {
-    setOrderItems((prevItems) => {
-      const updatedItems = [...prevItems];
-      switch (field) {
-        case "name":
-          updatedItems[index].name = value;
-          break;
-          case "quantity":
-            updatedItems[index].quantity = Math.max(1, parseInt(value) || 1);
-            break;
-          }
-          return updatedItems;
-        });
-      };
+  // const handleItemChange = (index: number, field: string, value: string) => {
+  //   setOrderItems((prevItems) => {
+  //     const updatedItems = [...prevItems];
+  //     switch (field) {
+  //       case "name":
+  //         updatedItems[index].name = value;
+  //         break;
+  //         case "quantity":
+  //           updatedItems[index].quantity = Math.max(1, parseInt(value) || 1);
+  //           break;
+  //         }
+  //         return updatedItems;
+  //       });
+  //     };
       
       // addOrderItem function
-      const addOrderItem = () => {
-        setOrderItems(prevItems => [
-          ...prevItems,
-          { name: "", quantity: 1, price: 0 }
-        ]);
-      };
+      // const addOrderItem = () => {
+      //   setOrderItems(prevItems => [
+      //     ...prevItems,
+      //     { name: "", quantity: 1, price: 0 }
+      //   ]);
+      // };
       
       // Remove an order item
       const removeOrderItem = (index: number) => {
