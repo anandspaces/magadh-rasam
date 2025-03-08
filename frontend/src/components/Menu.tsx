@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 import defaultImage from "../assets/default.jpg";
-import SearchComponent from "./Search";
+import Cart from "./Cart";
 
 export interface MenuItem {
   name: string;
@@ -21,11 +23,8 @@ const categoryNames: { [key: number]: string } = {
 function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedCategory, setSelectedCategory] = useState<number>(1); // Default to first category
-
-  const toggleCategory = (categoryId: number) => {
-    setSelectedCategory(categoryId);
-  };
+  const [selectedCategory, setSelectedCategory] = useState<number>(1);
+  const dispatch = useDispatch();
 
   const fetchMenu = async () => {
     try {
@@ -35,11 +34,9 @@ function Menu() {
       console.error("Backend fetch failed. Fetching local data.", error);
       try {
         const response = await fetch("/data/menu_data.json");
-        if (!response.ok) throw new Error("Failed to fetch the local JSON file");
+        if (!response.ok) throw new Error("Failed to fetch local JSON");
 
         const data = await response.json();
-
-        // Transform data to match expected format
         const formattedData = data.map((item: any) => ({
           name: item.name,
           description: item.description,
@@ -50,7 +47,7 @@ function Menu() {
 
         setMenuItems(formattedData);
       } catch (fallbackError) {
-        console.error("Error fetching the local JSON file.", fallbackError);
+        console.error("Error fetching local JSON file.", fallbackError);
       }
     } finally {
       setLoading(false);
@@ -65,23 +62,20 @@ function Menu() {
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
-      {/* Search Bar */}
-      <div className="mb-6">
-        <SearchComponent data={menuItems} />
-      </div>
+      {/* Cart Component */}
+      <Cart />
 
       {/* Category Selector */}
       <div className="flex justify-center space-x-4 mb-8">
         {Object.entries(categoryNames).map(([id, name]) => (
           <button
             key={id}
-            onClick={() => toggleCategory(Number(id))}
-            className={`px-5 py-2 rounded-full font-semibold transition-all duration-300 
-              ${
-                selectedCategory === Number(id)
-                  ? "bg-yellow-600 text-white scale-105 shadow-lg"
-                  : "bg-gray-200 text-gray-700 hover:bg-yellow-500 hover:text-white"
-              }`}
+            onClick={() => setSelectedCategory(Number(id))}
+            className={`px-5 py-2 rounded-full font-semibold transition-all duration-300 ${
+              selectedCategory === Number(id)
+                ? "bg-yellow-600 text-white scale-105 shadow-lg"
+                : "bg-gray-200 text-gray-700 hover:bg-yellow-500 hover:text-white"
+            }`}
           >
             {name}
           </button>
@@ -100,7 +94,7 @@ function Menu() {
           ))
         ) : filteredItems.length === 0 ? (
           <p className="text-center text-xl col-span-4 text-gray-500">
-            No menu items available in this category. Please select a different category.
+            No menu items available in this category.
           </p>
         ) : (
           filteredItems.map((item, index) => (
@@ -120,7 +114,10 @@ function Menu() {
               />
               <div className="flex justify-between items-center mt-4">
                 <p className="text-lg font-bold text-green-600">${item.price.toFixed(2)}</p>
-                <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition-all duration-300">
+                <button
+                  onClick={() => dispatch(addToCart({ name: item.name, price: item.price, quantity: 1 }))}
+                  className="bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition-all duration-300"
+                >
                   Buy
                 </button>
               </div>
