@@ -1,64 +1,75 @@
-import { useState } from "react";
+import { FaMapMarkerAlt, FaSpinner } from "react-icons/fa";
 
-const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+interface LocationFetcherProps {
+  onLocationFound: (address: string) => void;
+  onError: (error: string) => void;
+  onLoading: (loading: boolean) => void;
+  loading: boolean;
+}
 
-const LocationFetcher: React.FC = () => {
-  const [location, setLocation] = useState<{ city: string; state: string } | null>(null);
-  const [error, setError] = useState<string | null>(null);
+function LocationFetcher({
+  onLocationFound,
+  onError,
+  onLoading,
+  loading
+}:LocationFetcherProps) {
+  const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
-  const fetchLocation = () => {
+  const handleFetchLocation = () => {
+    onLoading(true);
+    onError("");
+    
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
           try {
+            const { latitude: lat, longitude: lon } = position.coords;
             const response = await fetch(
-              `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${API_KEY}`
+              `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${API_KEY}`
             );
+            
+            if (!response.ok) throw new Error("Location fetch failed");
+            
             const data = await response.json();
-            console.log("data",data)
+            
             if (data.length > 0) {
-              setLocation({
-                city: data[0].name,
-                state: data[0].state,
-              });
-              setError(null);
+              onLocationFound(`${data[0].name}, ${data[0].state}`);
             } else {
-              setError("Location not found.");
+              onError("Location not found");
             }
           } catch (err) {
-            setError("Failed to fetch location data.");
+            onError("Failed to fetch location data");
+          } finally {
+            onLoading(false);
           }
         },
         (err) => {
-          setError("GPS location access denied or unavailable.");
-          console.error("GPS Error:", err);
+          onError("Location access denied or unavailable");
+          onLoading(false);
         },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        { enableHighAccuracy: true, timeout: 10000 }
       );
     } else {
-      setError("Geolocation is not supported by your device.");
+      onError("Geolocation not supported");
+      onLoading(false);
     }
   };
 
   return (
-    <div className="p-4 border rounded shadow-md max-w-md mx-auto">
-      <h2 className="text-lg font-bold mb-2">Fetch Your Location</h2>
+    <div className="space-y-1">
       <button
-        onClick={fetchLocation}
-        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+        type="button"
+        onClick={handleFetchLocation}
+        disabled={loading}
+        className="flex items-center gap-2 text-sm text-yellow-600 hover:text-yellow-700 disabled:opacity-50"
       >
-        Get Location
+        {loading ? (
+          <FaSpinner className="animate-spin" />
+        ) : (
+          <FaMapMarkerAlt className="text-base" />
+        )}
+        {loading ? "Locating..." : "Use Current Location"}
       </button>
-
-      {location && (
-        <div className="mt-4 text-gray-700">
-          <p><strong>Location:</strong> {location.city} ({location.state})</p>
-        </div>
-      )}
-
-      {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
 };

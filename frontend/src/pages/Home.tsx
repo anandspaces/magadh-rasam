@@ -59,7 +59,7 @@ const Home = () => {
             <span className="text-amber-400 inline-flex items-center ml-2">
               Rasam
               <GiChiliPepper
-                className="w-14 h-14 ml-3 drop-shadow-[0px_0px_8px_rgb(255,69,0)]"
+                className="w-14 h-14 ml-3 animate-pulse drop-shadow-[0px_0px_8px_rgb(255,69,0)]"
                 style={{ fill: "url(#chiliGradient)" }}
               />
               <svg width="0" height="0">

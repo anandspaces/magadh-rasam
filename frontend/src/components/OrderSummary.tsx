@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { OrderState } from "../store/orderSlice";
 import { useNavigate } from "react-router-dom";
+import { FaCheckCircle, FaClock, FaHome } from "react-icons/fa";
 
 function OrderSummary(
   {
@@ -96,7 +97,7 @@ function OrderSummary(
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 sm:p-6">
       <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6 sm:p-8">
-
+      <FaCheckCircle className="text-6xl text-green-500 mx-auto mb-4" />
         {/* Redirect overlay */}
         {redirecting && (
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
@@ -114,6 +115,7 @@ function OrderSummary(
               style={progressStyle}
             />
           </div>
+          <FaClock className="text-yellow-500" />
           <div className="text-center mt-2 text-sm text-gray-600">
             Redirecting to homepage in {countdown} seconds
           </div>
@@ -200,7 +202,7 @@ function OrderSummary(
                   clipRule="evenodd"
                 />
               </svg>
-              Return to Home Now
+              <FaHome /> Return to Home Now
             </button>
           </div>
         </div>

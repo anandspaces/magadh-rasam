@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { OrderState } from "../store/orderSlice";
+import { FaCheckCircle, FaChevronLeft } from "react-icons/fa";
 
 function OrderConfirmation({ 
   onConfirm, 
@@ -14,7 +15,6 @@ function OrderConfirmation({
   order: OrderState; 
 }) {
   const [loading, setLoading] = useState(true);
-  const [usingLocalData, setUsingLocalData] = useState(false); // Track if using local data
 
   const reduxOrder = useSelector((state: RootState) => state.order);
 
@@ -32,7 +32,6 @@ function OrderConfirmation({
     } catch (error) {
       console.warn("Using local order data:", error);
       // setOrder(reduxOrder); // Fallback to Redux data
-      setUsingLocalData(true); // Indicate that local data is being used
     } finally {
       setLoading(false);
     }
@@ -71,15 +70,6 @@ function OrderConfirmation({
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 sm:p-6">
       <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6 sm:p-8">
-        {/* Offline Mode Warning */}
-        {usingLocalData && (
-          <div className="bg-yellow-100 text-yellow-800 p-3 rounded mb-4">
-            You are viewing locally saved data. Some features may be limited.
-          </div>
-        )}
-
-        
-
         {/* Order Details */}
         <div className="bg-gray-100 rounded-lg p-4 mb-6">
           <h2 className="text-lg font-semibold text-gray-700 mb-2">Order Details:</h2>
@@ -121,13 +111,13 @@ function OrderConfirmation({
             className="w-full sm:w-auto rounded bg-yellow-500 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-yellow-600"
             onClick={onBack}
           >
-            Edit order
+            <FaChevronLeft /> Edit order
           </button>
           <button
             className="w-full sm:w-auto rounded bg-gray-700 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-gray-800"
             onClick={handleConfirm}
           >
-            Confirm Order
+            Confirm Order <FaCheckCircle />
           </button>
         </div>
       </div>
