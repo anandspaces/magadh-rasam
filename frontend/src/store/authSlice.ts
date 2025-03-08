@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 interface AuthState {
   isAuthenticated: boolean;
 }
 
 const initialState: AuthState = {
-  isAuthenticated: !!localStorage.getItem("access_token"),
+  isAuthenticated: !!Cookies.get("access_token"),
 };
 
 const authSlice = createSlice({
@@ -13,11 +14,11 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action: PayloadAction<string>) => {
-      localStorage.setItem("access_token", action.payload);
+      Cookies.set("access_token", action.payload, { expires: 7, secure: true });
       state.isAuthenticated = true;
     },
     logout: (state) => {
-      localStorage.removeItem("access_token");
+      Cookies.remove("access_token");
       state.isAuthenticated = false;
     },
   },

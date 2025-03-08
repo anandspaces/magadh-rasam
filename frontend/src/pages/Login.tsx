@@ -22,9 +22,8 @@ const Login = () => {
         username: username,
         password: password,
       });
-      localStorage.setItem("accessToken", response.data.access);
-      localStorage.setItem("refreshToken", response.data.refresh);
-      navigate("/dashboard");
+      if(response.status === 200 || response.status === 201) navigate("/dashboard");
+      else alert("Incorrect Credentials!")
     } catch (err) {
       setError("Invalid username or password.");
     }
