@@ -44,6 +44,7 @@ function LocationFetcher({
           }
         },
         (err) => {
+          console.log("Location Fetch Error: ",err)
           onError("Location access denied or unavailable");
           onLoading(false);
         },

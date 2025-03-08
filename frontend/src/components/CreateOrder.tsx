@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrder } from "../store/orderSlice";
 import { RootState } from "../store/store";
-import { FaCheckCircle, FaPlus, FaSearch, FaShoppingCart, FaSpinner } from "react-icons/fa";
+import { FaCheckCircle, FaSearch, FaShoppingCart, FaSpinner } from "react-icons/fa";
 import LocationFetcher from "./LocationFetcher";
 
 function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
@@ -346,7 +346,7 @@ function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
               onClick={addOrderItem}
               className="mt-4 text-yellow-600 hover:underline"
             >
-              <FaPlus className="text-gray-500" /> Add Item
+              + Add Item
             </button>
           </div> */}
 
