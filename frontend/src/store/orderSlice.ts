@@ -42,53 +42,53 @@ const decryptData = (ciphertext: string): OrderState | null => {
   }
 };
 
-// LocalStorage Helper with Encryption
-const localStorageHelper = {
+// sessionStorage Helper with Encryption
+const sessionStorageHelper = {
   get: (): OrderState | undefined => {
     try {
-      const encryptedData = localStorage.getItem(STORAGE_KEY);
-      const expiry = localStorage.getItem(EXPIRY_KEY);
+      const encryptedData = sessionStorage.getItem(STORAGE_KEY);
+      const expiry = sessionStorage.getItem(EXPIRY_KEY);
       
       if (!encryptedData || !expiry) return undefined;
 
       const expiryTime = parseInt(expiry, 10);
       if (isNaN(expiryTime) || Date.now() > expiryTime) {
-        localStorageHelper.remove();
+        sessionStorageHelper.remove();
         return undefined;
       }
 
       return decryptData(encryptedData) || undefined;
     } catch (error) {
-      console.error("LocalStorage read error:", error);
+      console.error("sessionStorage read error:", error);
       return undefined;
     }
   },
 
   set: (value: OrderState): void => {
     try {
-      localStorage.setItem(STORAGE_KEY, encryptData(value));
-      localStorage.setItem(EXPIRY_KEY, (Date.now() + ORDER_EXPIRY_TIME).toString());
+      sessionStorage.setItem(STORAGE_KEY, encryptData(value));
+      sessionStorage.setItem(EXPIRY_KEY, (Date.now() + ORDER_EXPIRY_TIME).toString());
     } catch (error) {
-      console.error("LocalStorage write error:", error);
+      console.error("sessionStorage write error:", error);
     }
   },
 
   remove: (): void => {
-    localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem(EXPIRY_KEY);
+    sessionStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem(EXPIRY_KEY);
   }
 };
 
 // Clear expired data on load
 (() => {
-  const expiry = localStorage.getItem(EXPIRY_KEY);
+  const expiry = sessionStorage.getItem(EXPIRY_KEY);
   if (expiry && Date.now() > parseInt(expiry, 10)) {
-    localStorageHelper.remove();
+    sessionStorageHelper.remove();
   }
 })();
 
 // Initial State
-const initialState: OrderState = localStorageHelper.get() || {
+const initialState: OrderState = sessionStorageHelper.get() || {
   id: "",
   customerName: "",
   phone: "",
@@ -107,7 +107,7 @@ const orderSlice = createSlice({
   reducers: {
     setOrder: {
       reducer: (_, action: PayloadAction<OrderState>) => {
-        localStorageHelper.set(action.payload);
+        sessionStorageHelper.set(action.payload);
         return action.payload;
       },
       prepare: (order: Omit<OrderState, "id" | "createdAt" | "updatedAt">) => ({
@@ -122,12 +122,12 @@ const orderSlice = createSlice({
 
     updateOrder: (state, action: PayloadAction<Partial<OrderState>>) => {
       const updatedState = { ...state, ...action.payload, updatedAt: getCurrentTimestamp() };
-      localStorageHelper.set(updatedState);
+      sessionStorageHelper.set(updatedState);
       return updatedState;
     },
 
     clearOrder: () => {
-      localStorageHelper.remove();
+      sessionStorageHelper.remove();
       return { ...initialState, id: "" };
     }
   }
