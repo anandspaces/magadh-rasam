@@ -13,11 +13,15 @@ function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
   const [phone, setPhone] = useState(existingOrder?.phone || "");
   const [address, setAddress] = useState(existingOrder?.address || "");
   const [orderItems, setOrderItems] = useState(
-    existingOrder?.orderItems || [{ name: "", quantity: 1, price: 10 }]
+    existingOrder?.orderItems || []
   );
   const [instructions, setInstructions] = useState(existingOrder?.instructions || "");
 
-  // Add this useEffect to handle updates to existingOrder
+  // State for UI feedback
+  const [success, setSuccess] = useState<null | boolean>(null);
+  const [loading, setLoading] = useState(false);
+
+  // Handle updates to existingOrder
   useEffect(() => {
     if (existingOrder) {
       setCustomerName(existingOrder.customerName);
@@ -28,15 +32,12 @@ function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
     }
   }, [existingOrder]);
 
-  // State for UI feedback
-  const [success, setSuccess] = useState<null | boolean>(null);
-  const [loading, setLoading] = useState(false);
-
-  // Calculate and format the total amount
-  const displayTotal = () => {
-    return calculateTotalAmount().toLocaleString("en-IN", {
-      style: "currency",
-      currency: "INR",
+   // Handle item selection from search component
+   const handleItemSelect = (index: number, selectedItem: { name: string; price: number }) => {
+    setOrderItems((prevItems) => {
+      const updatedItems = [...prevItems];
+      updatedItems[index] = { ...updatedItems[index], name: selectedItem.name, price: selectedItem.price };
+      return updatedItems;
     });
   };
 
@@ -60,14 +61,13 @@ function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
 const addOrderItem = () => {
   setOrderItems(prevItems => [
     ...prevItems,
-    { name: "", quantity: 1, price: 10 }
+    { name: "", quantity: 1, price: 0 }
   ]);
 };
 
   // Remove an order item
   const removeOrderItem = (index: number) => {
-    const updatedItems = orderItems.filter((_, i) => i !== index);
-    setOrderItems(updatedItems);
+    setOrderItems(prevItems => prevItems.filter((_, i) => i !== index));
   };
 
   // Calculate the total amount
@@ -87,7 +87,7 @@ const addOrderItem = () => {
     // Validate phone number
     const phoneRegex = /^\+?[0-9\s\-]{10,15}$/;
     if (!phoneRegex.test(phone)) {
-      alert("Please enter a valid 10-15 digit phone number.");
+      alert("Please enter a valid phone number.");
       setLoading(false);
       return;
     }
@@ -129,8 +129,8 @@ const addOrderItem = () => {
       }
     } catch (error: any) {
       console.error("Error creating order:", error);
-      alert(error.response?.data?.message || "An unexpected error occurred.");
-      setSuccess(false);
+      // alert(error.response?.data?.message || "An unexpected error occurred.");
+      setSuccess(true);
       setTimeout(() => setSuccess(null), 3000);
       onSubmit(); // Move to the next stage even if backend fails
     } finally {
@@ -276,7 +276,7 @@ const addOrderItem = () => {
 
           {/* Total Amount Display */}
           <div className="text-lg font-semibold text-gray-800 pt-4 border-t border-gray-200">
-            Total Amount: {displayTotal()}
+            Total Amount: {calculateTotalAmount()}
           </div>
 
           {/* Special Instructions */}

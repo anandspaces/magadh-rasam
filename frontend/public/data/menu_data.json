@@ -15,21 +15,21 @@
   },
   {
     "name": "Thekua",
-    "description": "Thekua is a traditional Indian sweet snack made with whole wheat flour, jaggery, and ghee. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
+    "description": "Thekua is a traditional Indian sweet snack made with whole wheat flour, jaggery, and ghee.",
     "image_url": "thekua.jpg",
     "category_id": 1,
     "price": 5.99
   },
   {
     "name": "Khaja",
-    "description": "Khaja is a traditional Indian sweet snack made with all-purpose flour, sugar, and ghee. It is a popular snack in Bihar, Odisha, and Uttar Pradesh.",
+    "description": "Khaja is a traditional Indian sweet snack made with all-purpose flour, sugar, and ghee.",
     "image_url": "khaja.jpg",
     "category_id": 1,
     "price": 5.99
   },
   {
     "name": "Laiya Chana",
-    "description": "Laiya Chana is a traditional Indian snack made with black chickpeas, spices, herbs, and peanuts. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
+    "description": "Laiya Chana is a traditional Indian snack made with black chickpeas, spices, herbs, and peanuts.",
     "image_url": "laiya_chana.jpg",
     "category_id": 1,
     "price": 5.99
@@ -64,7 +64,7 @@
   },
   {
     "name": "Sweet Rice Flour Dumplings with Coconut Filling",
-    "description": "Made with rice flour, jaggery, and coconut. It is a popular snack in Bihar, Jharkhand, and West Bengal.",
+    "description": "Made with rice flour, jaggery, and coconut.",
     "image_url": "dumpling.jpg",
     "category_id": 1,
     "price": 5.99
@@ -78,14 +78,14 @@
   },
   {
     "name": "Chana Ghugni",
-    "description": "Made with yellow peas, spices, herbs, and peanuts. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
+    "description": "Made with yellow peas, spices, herbs, and peanuts.",
     "image_url": "chana_ghugni.jpg",
     "category_id": 2,
     "price": 6.99
   },
   {
     "name": "Crispy Grain Fritters with Spiced Dip",
-    "description": "Made with rice flour, spices, herbs, and lentils. It is a popular snack in Bihar, Jharkhand, and Uttar Pradesh.",
+    "description": "Made with rice flour, spices, herbs, and lentils.",
     "image_url": "dhuska.jpg",
     "category_id": 2,
     "price": 6.99
@@ -141,7 +141,7 @@
   },
   {
     "name": "Malpua",
-    "description": "Malpua is a traditional Indian sweet pancake made with all-purpose flour, sugar, and milk. It is a popular dessert in Bihar, Odisha, and Uttar Pradesh.",
+    "description": "Malpua is a traditional Indian sweet pancake made with all-purpose flour, sugar, and milk.",
     "image_url": "malpua.jpg",
     "category_id": 3,
     "price": 7.99
