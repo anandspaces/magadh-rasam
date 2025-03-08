@@ -1,18 +1,11 @@
 import { useState } from "react";
+import { MenuItem } from "./Menu";
 
-interface Item {
-  id: number;
-  name: string;
+interface SearchComponentProps {
+  data: MenuItem[];
 }
 
-const data: Item[] = [
-  { id: 1, name: "Apple" },
-  { id: 2, name: "Banana" },
-  { id: 3, name: "Orange" },
-  { id: 4, name: "Grapes" },
-];
-
-const SearchComponent: React.FC = () => {
+function SearchComponent({ data }: SearchComponentProps) {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   // Filter data only if searchTerm is not empty
@@ -24,7 +17,7 @@ const SearchComponent: React.FC = () => {
         );
 
   return (
-    <div className="p-4">
+    <div className="p-4 bg-white rounded-lg shadow-md">
       <input
         type="text"
         placeholder="Search..."
@@ -34,20 +27,21 @@ const SearchComponent: React.FC = () => {
       />
 
       {searchTerm.trim() !== "" && ( // Show list only when input is not empty
-        <ul className="mt-4">
+        <ul className="mt-4 border rounded-lg bg-white shadow-md">
           {filteredData.length > 0 ? (
             filteredData.map((item) => (
-              <li key={item.id} className="p-2 border-b">
-                {item.name}
+              <li key={item.name} className="p-2 border-b last:border-none flex justify-between">
+                <span className="font-semibold">{item.name}</span>
+                {/* <span className="text-green-600 font-semibold">${item.price.toFixed(2)}</span> */}
               </li>
             ))
           ) : (
-            <li className="text-gray-500">No results found</li>
+            <li className="p-2 text-gray-500">No results found</li>
           )}
         </ul>
       )}
     </div>
   );
-};
+}
 
 export default SearchComponent;
