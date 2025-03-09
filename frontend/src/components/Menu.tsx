@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../store/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorites, removeFromFavorites, selectFavorites } from "../store/favoritesSlice";
+// import { addToCart } from "../store/cartSlice";
 import defaultImage from "../assets/default.jpg";
 import SearchComponent from "./Search";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
@@ -26,8 +27,8 @@ export default function Menu() {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedCategory, setSelectedCategory] = useState<number>(1);
   const [highlightedItem, setHighlightedItem] = useState<string | null>(null);
-  const [favorite, setFavorite] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const favorites = useSelector(selectFavorites);
 
   // function to handle item selection
   const handleItemSelect = (item: MenuItem) => {
@@ -35,7 +36,7 @@ export default function Menu() {
     if (item.category !== selectedCategory) {
       setSelectedCategory(item.category);
     }
-    
+
     // Force re-render then scroll and highlight
     setTimeout(() => {
       setHighlightedItem(item.name);
@@ -54,8 +55,8 @@ export default function Menu() {
     }, 350); // Increased delay to account for category transition
   };
 
-   // Add this effect for persistent highlight
-   useEffect(() => {
+  // Add this effect for persistent highlight
+  useEffect(() => {
     if (highlightedItem) {
       const timer = setTimeout(() => setHighlightedItem(null), 2000);
       return () => clearTimeout(timer);
@@ -139,11 +140,10 @@ export default function Menu() {
             <div
               key={index}
               id={`item-${item.name}`}
-              className={`group transition duration-500 ease-in-out transform hover:scale-105 hover:shadow-2xl rounded-lg p-6 bg-white border ${
-    highlightedItem === item.name
-      ? 'bg-yellow-50 border-yellow-400 animate-pulse' // Highlight effect
-      : 'border-gray-200'
-  }`}
+              className={`group transition duration-500 ease-in-out transform hover:scale-105 hover:shadow-2xl rounded-lg p-6 bg-white border ${highlightedItem === item.name
+                  ? 'bg-yellow-50 border-yellow-400 animate-pulse' // Highlight effect
+                  : 'border-gray-200'
+                }`}
             >
               <div className="border-b border-gray-200 pb-2">
                 <p className="text-xl font-semibold text-gray-900 truncate group-hover:whitespace-normal group-hover:overflow-visible transition-all duration-300">
@@ -161,15 +161,31 @@ export default function Menu() {
               />
               <div className="flex justify-between items-center mt-4">
                 <p className="text-lg font-bold text-gray-800">${item.price.toFixed(2)}</p>
-                <button
-                  onClick={() => {
-                    dispatch(addToCart({ name: item.name, price: item.price, quantity: 1 }));
-                    setFavorite(!favorite);
-                  }}
-                  className=" hover:text-red-700 text-red-600 font-semibold px-5 py-2 transition-all duration-300"
-                >
-                  {favorite ? <IoMdHeart /> : <IoMdHeartEmpty /> }
-                </button>
+                <div className="flex gap-2">
+                  {/* <button
+                    onClick={() => dispatch(addToCart({ name: item.name, price: item.price, quantity: 1 }))}
+                    className="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg"
+                  >
+                    Add to Cart
+                  </button> */}
+                  <button
+                    onClick={() => {
+                      const isFavorite = favorites.some(fav => fav.name === item.name);
+                      if (isFavorite) {
+                        dispatch(removeFromFavorites(item.name));
+                      } else {
+                        dispatch(addToFavorites(item));
+                      }
+                    }}
+                    className="text-red-600 hover:text-red-700 transition-colors"
+                  >
+                    {favorites.some(fav => fav.name === item.name) ? (
+                      <IoMdHeart size={24} />
+                    ) : (
+                      <IoMdHeartEmpty size={24} />
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           ))
