@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import Cookies from "js-cookie";
+import { FiUser, FiMail, FiLock, FiX, FiLogIn, FiUserPlus } from "react-icons/fi";
 
 interface AuthModalProps {
   onClose: () => void;
@@ -100,7 +101,7 @@ function AuthModal({ onClose }: AuthModalProps) {
           });
   
           dispatch(login(fallbackToken));
-          alert("Login Successful");
+          alert("Login Successfully");
           setTimeout(() => onClose(), 500);
         } else {
           setError("Invalid credentials");
@@ -113,100 +114,124 @@ function AuthModal({ onClose }: AuthModalProps) {
   
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md z-50">
-      <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg relative">
-        <button
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
-          onClick={onClose}
-        >
-          ✕
-        </button>
-
-        <h1 className="text-2xl font-bold text-gray-800 text-center">
-          {isLogin ? "Sign In" : "Sign Up"}
-        </h1>
-
-        {error && (
-          <p className="text-red-600 text-sm text-center bg-red-100 py-2 px-4 rounded">
-            {error}
-          </p>
-        )}
-
-        <form className="space-y-4 mt-4" onSubmit={handleSubmit}>
-          <div>
-            <label
-              htmlFor="username"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Username
-            </label>
-            <input
-              id="username"
-              type="text"
-              placeholder="Enter your username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-yellow-500"
-              required
-            />
-          </div>
-
-          {!isLogin && (
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email Address
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-yellow-500"
-                required
-              />
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm z-50">
+      <div className="w-full max-w-4xl flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden shadow-2xl relative">
+        {/* Dynamic Content Section - Hidden on mobile */}
+        <div className="hidden md:block md:w-1/2 bg-gradient-to-br from-amber-500 to-orange-500 p-8 relative overflow-hidden">
+          <div className="relative h-full flex items-center justify-center">
+            {/* Login Content */}
+            <div className={`absolute transition-all duration-500 ${isLogin ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-full"}`}>
+              <div className="text-center text-white space-y-4 px-4">
+                <h2 className="text-4xl font-bold font-serif">Welcome Back</h2>
+                <p className="text-lg">Sign in to continue your culinary journey and access member-exclusive features</p>
+              </div>
             </div>
-          )}
-
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-yellow-500"
-              required
-            />
+  
+            {/* Register Content */}
+            <div className={`absolute transition-all duration-500 ${!isLogin ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"}`}>
+              <div className="text-center text-white space-y-4 px-4">
+                <h2 className="text-4xl font-bold font-serif">Join Us</h2>
+                <p className="text-lg">Create an account to unlock personalized experiences and special offers</p>
+              </div>
+            </div>
           </div>
-
+        </div>
+  
+        {/* Form Section - Full width on mobile */}
+        <div className="w-full md:w-1/2 p-4 md:p-8 relative">
           <button
-            type="submit"
-            className="w-full py-2 px-4 rounded-md bg-yellow-500 text-white font-medium hover:bg-yellow-600 transition duration-150 disabled:opacity-50"
-            disabled={loading}
+            className="absolute top-4 right-4 text-gray-600 hover:text-amber-600 transition-colors"
+            onClick={onClose}
           >
-            {loading ? "Processing..." : isLogin ? "Sign In" : "Sign Up"}
+            <FiX className="w-6 h-6" />
           </button>
-        </form>
+  
+          <div className="h-full flex flex-col justify-center md:py-0 py-4">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 text-center font-serif">
+              {isLogin ? "Sign In" : "Create Account"}
+            </h1>
 
-        <p className="text-sm text-center text-gray-600 mt-4">
-          {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-          <button
-            onClick={() => setIsLogin(!isLogin)}
-            className="text-yellow-600 hover:underline"
-          >
-            {isLogin ? "Sign Up" : "Sign In"}
-          </button>
-        </p>
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+              {/* Form inputs remain the same as previous version */}
+              <div className="space-y-4">
+                <div className="relative">
+                  <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <input
+                    id="username"
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all"
+                  />
+                </div>
+
+                {!isLogin && (
+                  <div className="relative">
+                    <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder="Email Address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all"
+                    />
+                  </div>
+                )}
+
+                <div className="relative">
+                  <FiLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <input
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all"
+                  />
+                </div>
+              </div>
+
+              {error && (
+                <div className="p-3 bg-red-50 text-red-700 rounded-lg flex items-center gap-2">
+                  <span>{error}</span>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                className="w-full py-3 px-6 bg-amber-600 text-white font-medium rounded-lg hover:bg-amber-700 transition-colors flex items-center justify-center gap-2"
+                disabled={loading}
+              >
+                {loading ? (
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                ) : isLogin ? (
+                  <>
+                    <FiLogIn />
+                    Sign In
+                  </>
+                ) : (
+                  <>
+                    <FiUserPlus />
+                    Create Account
+                  </>
+                )}
+              </button>
+            </form>
+
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setIsLogin(!isLogin)}
+                className="text-amber-600 hover:text-orange-700 font-medium transition-colors"
+              >
+                {isLogin 
+                  ? "New here? Create an account" 
+                  : "Already have an account? Sign in"}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

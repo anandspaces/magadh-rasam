@@ -85,7 +85,7 @@ const Home = () => {
               className="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
             >
               Explore Menu
-              <FaBookOpen className="w-5 h-5 animate-bounce" />
+              <FaBookOpen className="w-5 h-5" />
             </button>
           </div>
         </div>
