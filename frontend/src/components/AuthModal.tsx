@@ -14,7 +14,6 @@ function AuthModal({ onClose }: AuthModalProps) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -38,10 +37,9 @@ function AuthModal({ onClose }: AuthModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
   
     if (!password || (!isLogin && (!username || !email))) {
-      setError("All fields are required.");
+      showNotification("All fields are required.", true);
       setLoading(false);
       return;
     }
@@ -118,7 +116,6 @@ function AuthModal({ onClose }: AuthModalProps) {
           showNotification("Login Successfully", true);
           setTimeout(() => onClose(), 500);
         } else {
-          setError("Invalid credentials");
           showNotification("Invalid credentials", false);
         }
       }
@@ -232,12 +229,6 @@ function AuthModal({ onClose }: AuthModalProps) {
                   />
                 </div>
               </div>
-  
-              {error && (
-                <div className="p-3 bg-red-50 text-red-700 rounded-lg flex items-center gap-2">
-                  <span>{error}</span>
-                </div>
-              )}
   
               <button
                 type="submit"
