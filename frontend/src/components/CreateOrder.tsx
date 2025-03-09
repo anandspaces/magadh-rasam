@@ -187,7 +187,6 @@ function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
       }
     } catch (error: any) {
       console.error("Error creating order:", error);
-      // alert(error.response?.data?.message || "An unexpected error occurred.");
       onSubmit(); // Move to the next stage even if backend fails
     } finally {
       setLoading(false);

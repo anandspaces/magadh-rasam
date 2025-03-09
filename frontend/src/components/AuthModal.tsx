@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import Cookies from "js-cookie";
-import { FiUser, FiMail, FiLock, FiX, FiLogIn, FiUserPlus } from "react-icons/fi";
+import { FiUser, FiMail, FiLock, FiX, FiLogIn, FiUserPlus, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 
 interface AuthModalProps {
   onClose: () => void;
@@ -16,6 +16,9 @@ function AuthModal({ onClose }: AuthModalProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,6 +28,13 @@ function AuthModal({ onClose }: AuthModalProps) {
     }
   }, [dispatch]);
   
+  const showNotification = (message: string, success: boolean) => {
+    setAlertMessage(message);
+    setIsSuccess(success);
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 5000);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -66,7 +76,11 @@ function AuthModal({ onClose }: AuthModalProps) {
       Cookies.set("access_token", token, { expires: 7, secure: true });
       dispatch(login(token));
   
-      alert(isLogin ? "Login Successful" : "Registered Successfully");
+      // Modified alerts
+      showNotification(
+        isLogin ? "Login Successful" : "Registered Successfully", 
+        true
+      );
       setTimeout(() => onClose(), 500);
     } catch (err) {
       console.error("Backend error, falling back:", err);
@@ -85,7 +99,7 @@ function AuthModal({ onClose }: AuthModalProps) {
         });
   
         dispatch(login(fallbackToken));
-        alert("Registered Successfully");
+        showNotification("Registered Successfully", true);
         setTimeout(() => onClose(), 500);
       } else {
         // Fallback Login
@@ -101,10 +115,11 @@ function AuthModal({ onClose }: AuthModalProps) {
           });
   
           dispatch(login(fallbackToken));
-          alert("Login Successfully");
+          showNotification("Login Successfully", true);
           setTimeout(() => onClose(), 500);
         } else {
           setError("Invalid credentials");
+          showNotification("Invalid credentials", false);
         }
       }
     } finally {
@@ -115,6 +130,31 @@ function AuthModal({ onClose }: AuthModalProps) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm z-50">
+      {/* Notification container - Top Center */}
+      {showAlert && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 animate-fade-in">
+          <div className={`flex items-center p-4 rounded-lg shadow-lg border ${
+            isSuccess 
+              ? "bg-green-50 border-green-200 text-green-800" 
+              : "bg-red-50 border-red-200 text-red-800"
+          }`}>
+            {isSuccess ? (
+              <FiCheckCircle className="w-6 h-6 mr-3 flex-shrink-0" />
+            ) : (
+              <FiAlertCircle className="w-6 h-6 mr-3 flex-shrink-0" />
+            )}
+            <span className="mr-4">{alertMessage}</span>
+            <button 
+              onClick={() => setShowAlert(false)}
+              className="text-gray-400 hover:text-gray-500 ml-auto"
+            >
+              <FiX className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      )}
+  
+      {/* Modal Content */}
       <div className="w-full max-w-4xl flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden shadow-2xl relative">
         {/* Dynamic Content Section - Hidden on mobile */}
         <div className="hidden md:block md:w-1/2 bg-gradient-to-br from-amber-500 to-orange-500 p-8 relative overflow-hidden">
@@ -150,7 +190,7 @@ function AuthModal({ onClose }: AuthModalProps) {
             <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 text-center font-serif">
               {isLogin ? "Sign In" : "Create Account"}
             </h1>
-
+  
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               {/* Form inputs remain the same as previous version */}
               <div className="space-y-4">
@@ -165,7 +205,7 @@ function AuthModal({ onClose }: AuthModalProps) {
                     className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all"
                   />
                 </div>
-
+  
                 {!isLogin && (
                   <div className="relative">
                     <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -179,7 +219,7 @@ function AuthModal({ onClose }: AuthModalProps) {
                     />
                   </div>
                 )}
-
+  
                 <div className="relative">
                   <FiLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
@@ -192,13 +232,13 @@ function AuthModal({ onClose }: AuthModalProps) {
                   />
                 </div>
               </div>
-
+  
               {error && (
                 <div className="p-3 bg-red-50 text-red-700 rounded-lg flex items-center gap-2">
                   <span>{error}</span>
                 </div>
               )}
-
+  
               <button
                 type="submit"
                 className="w-full py-3 px-6 bg-amber-600 text-white font-medium rounded-lg hover:bg-amber-700 transition-colors flex items-center justify-center gap-2"
@@ -219,7 +259,7 @@ function AuthModal({ onClose }: AuthModalProps) {
                 )}
               </button>
             </form>
-
+  
             <div className="mt-6 text-center">
               <button
                 onClick={() => setIsLogin(!isLogin)}

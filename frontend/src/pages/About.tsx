@@ -2,6 +2,7 @@ import { FaUsers, FaHandshake, FaBullseye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import profileImg from "../assets/profile.jpg"
 
 function About() {
   const navigate = useNavigate();
@@ -51,8 +52,8 @@ function About() {
             <div className="bg-white p-6 rounded-lg shadow-md w-64">
               <img
                 className="w-24 h-24 mx-auto bg-gray-300 rounded-full"
-                src="./profile.jpg"
-                alt="profile pic"
+                src={profileImg}
+                alt="profile picture"
               />
               <h3 className="mt-4 text-xl font-semibold">Vaibhaw Anand</h3>
               <p className="text-gray-600">Founder</p>
