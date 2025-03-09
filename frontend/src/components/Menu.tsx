@@ -89,7 +89,7 @@ export default function Menu() {
 
   useEffect(() => {
     fetchMenu();
-  dispatch(initializeFavorites());
+    dispatch(initializeFavorites());
   }, [dispatch]);
 
   const filteredItems = menuItems.filter((item) => item.category === selectedCategory);
@@ -98,10 +98,8 @@ export default function Menu() {
     <div className="p-6 max-w-7xl mx-auto">
       {/* Search Component */}
       <div className="mb-2">
-
         <SearchComponent data={menuItems} onItemSelect={handleItemSelect} />
       </div>
-
       {/* Category Selector */}
       <div className="flex justify-start md:justify-center overflow-x-auto whitespace-nowrap space-x-4 mb-8 pl-2 pr-4 py-2 scrollbar-hide snap-x snap-mandatory scroll-px-4">
         {Object.entries(categoryNames).map(([id, name]) => (
@@ -118,8 +116,6 @@ export default function Menu() {
           </button>
         ))}
       </div>
-
-
       {/* Menu Items Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {loading ? (
@@ -139,56 +135,69 @@ export default function Menu() {
             <div
               key={index}
               id={`item-${item.name}`}
-              className={`group transition duration-500 ease-in-out transform hover:scale-105 hover:shadow-2xl rounded-lg p-6 bg-white border ${highlightedItem === item.name
-                  ? 'bg-yellow-50 border-yellow-400 animate-pulse' // Highlight effect
+              className={`group relative transition-all duration-300 ease-out hover:z-10 ${highlightedItem === item.name
+                  ? 'bg-yellow-50 border-yellow-400 animate-pulse'
                   : 'border-gray-200'
                 }`}
             >
-              <div className="border-b border-gray-200 pb-2">
-                <p className="text-xl font-semibold text-gray-900 truncate group-hover:whitespace-normal group-hover:overflow-visible transition-all duration-300">
-                  {item.name}
-                </p>
-              </div>
-              <p className="text-sm text-gray-600 mt-2 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
-                {item.description}
-              </p>
-              <img
-                src={item.image}
-                onError={(e) => (e.currentTarget.src = defaultImage)}
-                alt={item.name}
-                className="w-full h-48 object-cover rounded-lg mt-4 shadow-md transition-all duration-300"
-              />
-              <div className="flex justify-between items-center mt-4">
-                <p className="text-lg font-bold text-gray-800">${item.price.toFixed(2)}</p>
-                <div className="flex gap-2">
-                  {/* <button
+              <div className="h-full bg-white border rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                <div className="p-4">
+                  <div className="border-b border-gray-200 pb-2 relative">
+                    <p className="text-xl font-semibold text-gray-900 truncate peer">
+                      {item.name}
+                    </p>
+                    {/* Tooltip for full name */}
+                    {/* <div className="hidden group-hover:block absolute bg-gray-900 text-white px-3 py-1 rounded-md text-sm -mt-12 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      {item.name}
+                    </div> */}
+                  </div>
+                  {/* Description with gradient fade */}
+                  <div className="relative mt-2 h-[3.6rem] overflow-hidden">
+                    <p className="text-sm text-gray-600 line-clamp-3 transition-all duration-300 group-hover:line-clamp-none">
+                      {item.description}
+                    </p>
+                    <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-white via-white group-hover:from-transparent group-hover:via-transparent transition-all duration-300" />
+                  </div>
+                </div>
+                <div className="relative aspect-video overflow-hidden">
+                  <img
+                    src={item.image}
+                    onError={(e) => (e.currentTarget.src = defaultImage)}
+                    alt={item.name}
+                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-4 flex justify-between items-center">
+                  <p className="text-lg font-bold text-gray-800">₹{item.price.toFixed(2)}</p>
+                  <div className="flex gap-2">
+                    {/* <button
                     onClick={() => dispatch(addToCart({ name: item.name, price: item.price, quantity: 1 }))}
                     className="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg"
                   >
                     Add to Cart
                   </button> */}
-                  <button
-                    onClick={() => {
-                      const isFavorite = favorites.some(fav => fav.name === item.name);
-                      if (isFavorite) {
-                        dispatch(removeFromFavorites(item.name));
-                      } else {
-                        dispatch(addToFavorites(item));
-                      }
-                    }}
-                    className="text-red-600 hover:text-red-700 transition-colors"
-                  >
-                    {favorites.some(fav => fav.name === item.name) ? (
-                      <IoMdHeart size={24} />
-                    ) : (
-                      <IoMdHeartEmpty size={24} />
-                    )}
-                  </button>
+                    <button
+                      onClick={() => {
+                        const isFavorite = favorites.some(fav => fav.name === item.name);
+                        if (isFavorite) {
+                          dispatch(removeFromFavorites(item.name));
+                        } else {
+                          dispatch(addToFavorites(item));
+                        }
+                      }}
+                      className="text-red-600 hover:text-red-700 transition-colors p-1 hover:bg-red-50 rounded-full"                  >
+                      {favorites.some(fav => fav.name === item.name) ? (
+                        <IoMdHeart size={24} className="scale-100 group-hover:scale-110 transition-transform" />
+                      ) : (
+                        <IoMdHeartEmpty size={24} className="scale-100 group-hover:scale-110 transition-transform" />
+                      )}
+                    </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
-        )}
+              ))
+          )}
       </div>
     </div>
   );
