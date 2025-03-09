@@ -152,7 +152,7 @@ export default function Menu() {
                     </div> */}
                   </div>
                   {/* Description with gradient fade */}
-                  <div className="relative mt-2 h-[3.6rem] overflow-hidden">
+                  <div className="relative mt-2 h-[4.5rem] overflow-hidden">
                     <p className="text-sm text-gray-600 line-clamp-3 transition-all duration-300 group-hover:line-clamp-none">
                       {item.description}
                     </p>

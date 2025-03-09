@@ -8,7 +8,7 @@
   },
   {
     "name": "Embergrain Dumpling Feast",
-    "description": "Rustic, oven-baked wheat dumplings filled with seasoned gram flour, served alongside a smoky mash of roasted potatoes and eggplant.",
+    "description": "Rustic wheat dumplings filled with seasoned gram flour, served alongside a smoky mash of roasted potatoes and eggplant.",
     "image_url": "litti_chokha.jpg",
     "category_id": 1,
     "price": 5.99
@@ -141,28 +141,28 @@
   },
   {
     "name": "Amber Lace Pancakes",
-    "description": "Delicate Indian-style pancakes infused with saffron and sweetened with sugar, offering a golden, caramelized crunch.",
+    "description": "Delicate style pancakes infused with saffron and sweetened with sugar, offering a golden, caramelized crunch.",
     "image_url": "malpua.jpg",
     "category_id": 3,
     "price": 7.99
   },
   {
     "name": "Celestial Rose Orbs",
-    "description": "Soft, golden dumplings soaked in fragrant rose-scented syrup—a luxurious North Indian delicacy.",
+    "description": "Soft, golden dumplings soaked in fragrant rose-scented syrup—a luxurious delicacy.",
     "image_url": "gulab_jamun.jpg",
     "category_id": 3,
     "price": 7.99
   },
   {
     "name": "Ivory Pearl Delight",
-    "description": "Tender cottage cheese spheres bathed in a light floral syrup, a cherished Bengali and Odia treat.",
+    "description": "Tender cottage cheese spheres bathed in a light floral syrup, a cherished treat.",
     "image_url": "rasgulla.jpg",
     "category_id": 3,
     "price": 7.99
   },
   {
     "name": "Saffron Velvet Bliss",
-    "description": "Soft chenna dumplings immersed in a rich, saffron-infused milk sauce—a decadent North Indian specialty.",
+    "description": "Soft chenna dumplings immersed in a rich, saffron-infused milk sauce.",
     "image_url": "rasmalai.jpg",
     "category_id": 3,
     "price": 7.99
@@ -183,14 +183,14 @@
   },
   {
     "name": "Casablanca Cashew Silk",
-    "description": "Smooth and melt-in-the-mouth cashew fudge, a luxurious North Indian delicacy with a touch of silver leaf.",
+    "description": "Smooth and melt-in-the-mouth cashew fudge, a luxurious delicacy with a touch of silver leaf.",
     "image_url": "kaju_katli.jpg",
     "category_id": 3,
     "price": 7.99
   },
   {
     "name": "Coconut Snow Truffles",
-    "description": "Soft, bite-sized coconut treats blended with condensed milk and sugar, a South Indian festive delight.",
+    "description": "Soft, bite-sized coconut treats blended with condensed milk and sugar, a festive delight.",
     "image_url": "coconut_ladoo.jpg",
     "category_id": 3,
     "price": 7.99
@@ -218,7 +218,7 @@
   },
   {
     "name": "Saffron Glacé Bars",
-    "description": "A dense, creamy frozen dessert with saffron and pistachios—a rich and indulgent Indian treat.",
+    "description": "A dense, creamy frozen dessert with saffron and pistachios—a rich and indulgent treat.",
     "image_url": "kulfi.jpg",
     "category_id": 3,
     "price": 7.99
