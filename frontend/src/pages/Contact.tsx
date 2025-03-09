@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { FiCheckCircle, FiAlertCircle, FiX } from "react-icons/fi";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const [showAlert, setShowAlert] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,15 +18,15 @@ const Contact = () => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       setAlertMessage("Please fill all fields!");
+      setIsSuccess(false);
     } else {
       setAlertMessage("Message sent successfully!");
-      setFormData({ name: "", email: "", message: "" }); // Clear form after submission
+      setIsSuccess(true);
+      setFormData({ name: "", email: "", message: "" });
     }
 
-    // Hide alert after 3 seconds
-    setTimeout(() => {
-      setAlertMessage(null);
-    }, 3000);
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 3000);
   };
 
   return (
@@ -31,9 +34,23 @@ const Contact = () => {
       <Header />
 
       {/* Alert Message */}
-      {alertMessage && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white text-lg font-semibold py-2 px-6 rounded-lg shadow-md transition-opacity duration-300">
-          {alertMessage}
+      {showAlert && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 animate-fade-in z-50">
+          <div className={`flex items-center p-4 rounded-lg shadow-lg border ${
+            isSuccess
+              ? "bg-green-50 border-green-200 text-green-800"
+              : "bg-red-50 border-red-200 text-red-800"
+          }`}>
+            {isSuccess ? (
+              <FiCheckCircle className="w-6 h-6 mr-3 flex-shrink-0" />
+            ) : (
+              <FiAlertCircle className="w-6 h-6 mr-3 flex-shrink-0" />
+            )}
+            <span className="mr-4">{alertMessage}</span>
+            <button onClick={() => setShowAlert(false)} className="text-gray-400 hover:text-gray-500 ml-auto">
+              <FiX className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       )}
 
@@ -56,7 +73,6 @@ const Contact = () => {
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
               value={formData.name}
               onChange={handleChange}
-              required
             />
             <input
               type="email"
@@ -65,7 +81,6 @@ const Contact = () => {
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
               value={formData.email}
               onChange={handleChange}
-              required
             />
             <textarea
               name="message"
@@ -74,7 +89,6 @@ const Contact = () => {
               rows={5}
               value={formData.message}
               onChange={handleChange}
-              required
             ></textarea>
             <button
               type="submit"
