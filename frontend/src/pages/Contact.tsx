@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,12 +13,30 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted", formData);
+    if (!formData.name || !formData.email || !formData.message) {
+      setAlertMessage("Please fill all fields!");
+    } else {
+      setAlertMessage("Message sent successfully!");
+      setFormData({ name: "", email: "", message: "" }); // Clear form after submission
+    }
+
+    // Hide alert after 3 seconds
+    setTimeout(() => {
+      setAlertMessage(null);
+    }, 3000);
   };
 
   return (
     <>
       <Header />
+
+      {/* Alert Message */}
+      {alertMessage && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white text-lg font-semibold py-2 px-6 rounded-lg shadow-md transition-opacity duration-300">
+          {alertMessage}
+        </div>
+      )}
+
       <div className="min-h-screen bg-gray-50 flex flex-col items-center mt-6 py-16 px-6 md:px-12">
         {/* Hero Section */}
         <div className="text-center">
@@ -80,6 +99,7 @@ const Contact = () => {
           ))}
         </div>
       </div>
+      
       <Footer />
     </>
   );
