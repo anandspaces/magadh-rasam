@@ -1,11 +1,12 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToFavorites, removeFromFavorites, selectFavorites } from "../store/favoritesSlice";
-// import { addToCart } from "../store/cartSlice";
+import axios from "axios";
 import defaultImage from "../assets/default.jpg";
 import SearchComponent from "./Search";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+// import { addToCart } from "../store/cartSlice";
+import { addToFavorites, initializeFavorites, removeFromFavorites, selectFavorites } from "../store/favoritesSlice";
+import { AppDispatch } from "../store/store";
 
 export interface MenuItem {
   name: string;
@@ -27,17 +28,15 @@ export default function Menu() {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedCategory, setSelectedCategory] = useState<number>(1);
   const [highlightedItem, setHighlightedItem] = useState<string | null>(null);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const favorites = useSelector(selectFavorites);
 
   // function to handle item selection
   const handleItemSelect = (item: MenuItem) => {
-    // Only update category if needed
     if (item.category !== selectedCategory) {
       setSelectedCategory(item.category);
     }
 
-    // Force re-render then scroll and highlight
     setTimeout(() => {
       setHighlightedItem(item.name);
       const element = document.getElementById(`item-${item.name}`);
@@ -52,10 +51,9 @@ export default function Menu() {
           element.classList.remove('bg-yellow-50', 'border-yellow-400');
         }, 2000);
       }
-    }, 350); // Increased delay to account for category transition
+    }, 350);
   };
 
-  // Add this effect for persistent highlight
   useEffect(() => {
     if (highlightedItem) {
       const timer = setTimeout(() => setHighlightedItem(null), 2000);
@@ -91,7 +89,8 @@ export default function Menu() {
 
   useEffect(() => {
     fetchMenu();
-  }, []);
+  dispatch(initializeFavorites());
+  }, [dispatch]);
 
   const filteredItems = menuItems.filter((item) => item.category === selectedCategory);
 

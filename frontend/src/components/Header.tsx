@@ -18,7 +18,7 @@ export default function Header() {
   }
 
   const handleNavigation = (path: string) => {
-    if (path === "/order" && !isAuthenticated) {
+    if ((path === "/order" || path === '/wishlist') && !isAuthenticated) {
       setIsAuthModalOpen(true);
     } else {
       navigate(path);
@@ -44,6 +44,7 @@ export default function Header() {
               { name: "About Us", path: "/about" },
               { name: "Contact", path: "/contact" },
               { name: "Order", path: "/order" },
+              { name: "Wishlist", path:"/wishlist"}
             ].map((item) => (
               <button
                 key={item.name}
@@ -103,6 +104,7 @@ export default function Header() {
           { name: "About Us", path: "/about" },
           { name: "Contact", path: "/contact" },
           { name: "Order", path: "/order" },
+          { name: "Wishlist", path:"/wishlist"}
         ].map((item) => (
           <button
             key={item.name}
