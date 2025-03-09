@@ -6,7 +6,7 @@ import { RootState } from "../store/store";
 import AuthModal from "./AuthModal";
 import { logout } from "../store/authSlice";
 
-function Header() {
+export default function Header() {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -143,5 +143,3 @@ function Header() {
     </>
   );
 }
-
-export default Header;

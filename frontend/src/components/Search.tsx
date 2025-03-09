@@ -7,7 +7,7 @@ interface SearchComponentProps {
   onItemSelect: (item: MenuItem) => void;
 }
 
-function SearchComponent({ data, onItemSelect }: SearchComponentProps) {
+export default function SearchComponent({ data, onItemSelect }: SearchComponentProps) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [activeIndex, setActiveIndex] = useState<number>(-1);
 
@@ -83,5 +83,3 @@ function SearchComponent({ data, onItemSelect }: SearchComponentProps) {
     </div>
   );
 }
-
-export default SearchComponent;

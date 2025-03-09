@@ -7,7 +7,7 @@ interface LocationFetcherProps {
   loading: boolean;
 }
 
-function LocationFetcher({
+export default function LocationFetcher({
   onLocationFound,
   onError,
   onLoading,
@@ -74,5 +74,3 @@ function LocationFetcher({
     </div>
   );
 };
-
-export default LocationFetcher;

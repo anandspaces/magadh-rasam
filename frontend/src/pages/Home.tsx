@@ -14,7 +14,7 @@ const Home = () => {
   // Show menu when scrolling down
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.5) {
+      if (window.scrollY > window.innerHeight * 0.3) {
         setShowMenu(true);
       }
       setShowScrollButton(window.scrollY > 200);

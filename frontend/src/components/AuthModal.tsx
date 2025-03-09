@@ -9,7 +9,7 @@ interface AuthModalProps {
   onClose: () => void;
 }
 
-function AuthModal({ onClose }: AuthModalProps) {
+export default function AuthModal({ onClose }: AuthModalProps) {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -267,5 +267,3 @@ function AuthModal({ onClose }: AuthModalProps) {
     </div>
   );
 }
-
-export default AuthModal;

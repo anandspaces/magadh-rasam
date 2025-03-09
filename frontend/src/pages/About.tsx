@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import profileImg from "../assets/profile.jpg"
 
-function About() {
+const About = () => {
   const navigate = useNavigate();
 
   return (

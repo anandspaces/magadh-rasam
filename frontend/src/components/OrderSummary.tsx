@@ -6,7 +6,7 @@ import { OrderState } from "../store/orderSlice";
 import { useNavigate } from "react-router-dom";
 import { FaArrowRight, FaCheckCircle, FaClock, FaHome } from "react-icons/fa";
 
-function OrderSummary(
+export default function OrderSummary(
   {
     order
   }: {
@@ -188,5 +188,3 @@ function OrderSummary(
     </div>
   );
 }
-
-export default OrderSummary;

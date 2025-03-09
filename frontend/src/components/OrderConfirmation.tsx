@@ -5,7 +5,7 @@ import { RootState } from "../store/store";
 import { OrderState } from "../store/orderSlice";
 import { FaCheckCircle, FaChevronLeft } from "react-icons/fa";
 
-function OrderConfirmation({ 
+export default function OrderConfirmation({ 
   onConfirm, 
   onBack ,
   order
@@ -124,5 +124,3 @@ function OrderConfirmation({
     </div>
   );
 }
-
-export default OrderConfirmation;

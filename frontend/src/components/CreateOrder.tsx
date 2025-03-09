@@ -6,7 +6,7 @@ import { RootState } from "../store/store";
 import { FaCheckCircle, FaSearch, FaShoppingCart, FaSpinner } from "react-icons/fa";
 import LocationFetcher from "./LocationFetcher";
 
-function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
+export default function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
   const dispatch = useDispatch();
   const existingOrder = useSelector((state: RootState) => state.order);
 
@@ -480,5 +480,3 @@ function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
     </div>
   );
 }
-
-export default CreateOrder;

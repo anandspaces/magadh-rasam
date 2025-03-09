@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { addToCart } from "../store/cartSlice";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 import defaultImage from "../assets/default.jpg";
 import SearchComponent from "./Search";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 export interface MenuItem {
   name: string;
@@ -20,12 +21,13 @@ const categoryNames = {
   4: "Beverages",
 };
 
-function Menu() {
+export default function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedCategory, setSelectedCategory] = useState<number>(1);
   const [highlightedItem, setHighlightedItem] = useState<string | null>(null);
-  // const dispatch = useDispatch();
+  const [favorite, setFavorite] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   // function to handle item selection
   const handleItemSelect = (item: MenuItem) => {
@@ -158,13 +160,16 @@ function Menu() {
                 className="w-full h-48 object-cover rounded-lg mt-4 shadow-md transition-all duration-300"
               />
               <div className="flex justify-between items-center mt-4">
-                <p className="text-lg font-bold text-green-600">${item.price.toFixed(2)}</p>
-                {/* <button
-                  onClick={() => dispatch(addToCart({ name: item.name, price: item.price, quantity: 1 }))}
-                  className="bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition-all duration-300"
+                <p className="text-lg font-bold text-gray-800">${item.price.toFixed(2)}</p>
+                <button
+                  onClick={() => {
+                    dispatch(addToCart({ name: item.name, price: item.price, quantity: 1 }));
+                    setFavorite(!favorite);
+                  }}
+                  className=" hover:text-red-700 text-red-600 font-semibold px-5 py-2 transition-all duration-300"
                 >
-                  Buy
-                </button> */}
+                  {favorite ? <IoMdHeart /> : <IoMdHeartEmpty /> }
+                </button>
               </div>
             </div>
           ))
@@ -173,5 +178,3 @@ function Menu() {
     </div>
   );
 }
-
-export default Menu;
