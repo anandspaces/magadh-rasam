@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { OrderState } from "../store/orderSlice";
 import { useNavigate } from "react-router-dom";
-import { FaCheckCircle, FaClock, FaHome } from "react-icons/fa";
+import { FaArrowRight, FaCheckCircle, FaClock, FaHome } from "react-icons/fa";
 
 function OrderSummary(
   {
@@ -14,8 +14,6 @@ function OrderSummary(
   }
 ) {
   const [loading, setLoading] = useState(true);
-  // const [usingLocalData, setUsingLocalData] = useState(false); // Track if using local data
-
   const [countdown, setCountdown] = useState(30);
   const [redirecting, setRedirecting] = useState(false);
 
@@ -120,14 +118,6 @@ function OrderSummary(
           </div>
         </div>
 
-
-        {/* Offline Mode Warning */}
-        {/* {usingLocalData && (
-          <div className="bg-yellow-100 text-yellow-800 p-3 rounded mb-4">
-            You are viewing locally saved data. Some features may be limited.
-          </div>
-        )} */}
-
         <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
           🎉 Order Confirmed!
         </h1>
@@ -189,18 +179,7 @@ function OrderSummary(
               onClick={handleImmediateRedirect}
               className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 transition-colors duration-200"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-2"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              <FaArrowRight className="h-5 w-5 mr-2" />
               <FaHome /> Return to Home Now
             </button>
           </div>
