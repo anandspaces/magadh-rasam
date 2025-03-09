@@ -75,7 +75,7 @@ export default function Menu() {
         setMenuItems(
           data.map((item: any) => ({
             ...item,
-            image: item.image || defaultImage,
+            image: item.image_url || defaultImage,
             category: item.category_id,
           }))
         );
@@ -156,7 +156,7 @@ export default function Menu() {
                     <p className="text-sm text-gray-600 line-clamp-3 transition-all duration-300 group-hover:line-clamp-none">
                       {item.description}
                     </p>
-                    <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-white via-white group-hover:from-transparent group-hover:via-transparent transition-all duration-300" />
+                    {/* <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-white via-white group-hover:from-transparent group-hover:via-transparent transition-all duration-300" /> */}
                   </div>
                 </div>
                 <div className="relative aspect-video overflow-hidden">
