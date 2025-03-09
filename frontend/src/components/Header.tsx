@@ -17,6 +17,15 @@ function Header() {
     dispatch(logout());
   }
 
+  const handleNavigation = (path: string) => {
+    if (path === "/order" && !isAuthenticated) {
+      setIsAuthModalOpen(true);
+    } else {
+      navigate(path);
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <>
     <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
@@ -39,26 +48,12 @@ function Header() {
               <button
                 key={item.name}
                 className="text-gray-700 font-medium hover:text-yellow-600 transition duration-200"
-                onClick={() => navigate(item.path)}
+                onClick={() => handleNavigation(item.path)}
               >
                 {item.name}
               </button>
             ))}
           </nav>
-
-          {/* Cart in Desktop View */}
-          {/* <div className="hidden md:block">
-            <Cart />
-          </div> */}
-
-
-        {/* Sign In Button */}
-        {/* <button
-          className="hidden md:block rounded-xl bg-yellow-500 px-5 py-2 font-medium text-white transition duration-200 ease-in-out hover:bg-yellow-600 hover:shadow-lg hover:scale-105"
-          onClick={() => navigate("/login")}
-        >
-          Sign In
-        </button> */}
 
         {/* Desktop Auth Button */}
         <div className="hidden md:block">
@@ -113,7 +108,7 @@ function Header() {
             key={item.name}
             className="text-white text-lg font-medium hover:text-yellow-400 transition"
             onClick={() => {
-              navigate(item.path);
+              handleNavigation(item.path);
               setIsMobileMenuOpen(false);
             }}
           >
@@ -121,20 +116,6 @@ function Header() {
           </button>
         ))}
         </nav>
-
-        {/* Cart in Mobile View */}
-          {/* <Cart /> */}
-
-        {/* Sign In Button */}
-        {/* <button
-          className="w-40 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 rounded-xl transition"
-          onClick={() => {
-            navigate("/login");
-            setIsMobileMenuOpen(false);
-          }}
-        >
-          Sign In
-        </button> */}
 
         {/* Auth Button for Mobile */}
         {isAuthenticated ? (
@@ -147,7 +128,10 @@ function Header() {
             ) : (
               <button
                 className="rounded-lg bg-yellow-500 px-6 py-2 font-medium text-white transition duration-200 hover:bg-yellow-600 hover:shadow-lg"
-                onClick={() => setIsAuthModalOpen(true)}
+                onClick={() => {
+                  setIsAuthModalOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
               >
                 Sign In
               </button>

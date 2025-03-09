@@ -4,9 +4,10 @@ import { FaSearch } from "react-icons/fa";
 
 interface SearchComponentProps {
   data: MenuItem[];
+  onItemSelect: (item: MenuItem) => void;
 }
 
-function SearchComponent({ data }: SearchComponentProps) {
+function SearchComponent({ data, onItemSelect }: SearchComponentProps) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [activeIndex, setActiveIndex] = useState<number>(-1);
 
@@ -37,6 +38,12 @@ function SearchComponent({ data }: SearchComponentProps) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [filteredData, activeIndex]);
 
+  const handleItemClick = (item: MenuItem) => {
+    setSearchTerm(item.name);
+    setActiveIndex(-1);
+    onItemSelect(item);
+  };
+
   return (
     <div className="relative w-full max-w-lg mx-auto">
       {/* Search Input */}
@@ -62,7 +69,7 @@ function SearchComponent({ data }: SearchComponentProps) {
                   activeIndex === index ? "bg-yellow-500 text-white" : "bg-white"
                 }`}
                 onMouseEnter={() => setActiveIndex(index)}
-                onClick={() => setSearchTerm(item.name)}
+                onClick={() => handleItemClick(item)}
               >
                 <span className="font-semibold">{item.name}</span>
                 <span className="text-green-600 font-semibold">${item.price.toFixed(2)}</span>

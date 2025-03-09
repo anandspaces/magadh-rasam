@@ -14,7 +14,7 @@ function OrderSummary(
   }
 ) {
   const [loading, setLoading] = useState(true);
-  const [usingLocalData, setUsingLocalData] = useState(false); // Track if using local data
+  // const [usingLocalData, setUsingLocalData] = useState(false); // Track if using local data
 
   const [countdown, setCountdown] = useState(30);
   const [redirecting, setRedirecting] = useState(false);
@@ -31,7 +31,6 @@ function OrderSummary(
     } catch (error) {
       console.warn("Using local order data:", error);
       // setOrder(reduxOrder); // Fallback to Redux data
-      setUsingLocalData(true); // Indicate that local data is being used
     } finally {
       setLoading(false);
     }
@@ -123,11 +122,11 @@ function OrderSummary(
 
 
         {/* Offline Mode Warning */}
-        {usingLocalData && (
+        {/* {usingLocalData && (
           <div className="bg-yellow-100 text-yellow-800 p-3 rounded mb-4">
             You are viewing locally saved data. Some features may be limited.
           </div>
-        )}
+        )} */}
 
         <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
           🎉 Order Confirmed!
