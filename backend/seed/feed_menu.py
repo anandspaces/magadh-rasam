@@ -20,7 +20,8 @@ for item in data:
                 name=item["name"],
                 description=item["description"],
                 image=item["image_url"],
-                category=category
+                category=category,
+                price=item["price"]
             )
         )
     except Category.DoesNotExist:
