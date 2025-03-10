@@ -61,7 +61,7 @@ export default function FavoritesList() {
                     </div>
                     <div className="p-4 flex justify-between items-center bg-gray-50 border-t border-gray-100">
                       <p className="text-lg font-bold text-gray-800">
-                        ${item.price.toFixed(2)}
+                      ₹{(Number(item.price)).toFixed(2)}
                       </p>
                       <button
                         onClick={() => dispatch(removeFromFavorites(item.name))}

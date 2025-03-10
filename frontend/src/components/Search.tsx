@@ -72,7 +72,7 @@ export default function SearchComponent({ data, onItemSelect }: SearchComponentP
                 onClick={() => handleItemClick(item)}
               >
                 <span className="font-semibold">{item.name}</span>
-                <span className="text-green-600 font-semibold">${item.price.toFixed(2)}</span>
+                <span className="text-green-600 font-semibold">₹{(Number(item.price)).toFixed(2)}</span>
               </li>
             ))
           ) : (

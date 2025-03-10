@@ -168,7 +168,7 @@ export default function Menu() {
                   />
                 </div>
                 <div className="p-4 flex justify-between items-center">
-                  <p className="text-lg font-bold text-gray-800">₹{item.price.toFixed(2)}</p>
+                  <p className="text-lg font-bold text-gray-800">₹{(Number(item.price)).toFixed(2)}</p>
                   <div className="flex gap-2">
                     {/* <button
                     onClick={() => dispatch(addToCart({ name: item.name, price: item.price, quantity: 1 }))}
