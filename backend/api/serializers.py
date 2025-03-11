@@ -48,29 +48,34 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = ['id', 'customer', 'items', 'status', 'total_price', 'created_at', 'updated_at']
         read_only_fields = ['total_price', 'created_at', 'updated_at']
 
+    def validate(self, data):
+        """Ensure all ordered menu items are available before saving."""
+        items_data = data.get('items', [])
+        unavailable_items = [item['menu'].name for item in items_data if not item['menu'].is_available]
+
+        if unavailable_items:
+            raise serializers.ValidationError(f"The following items are not available: {', '.join(unavailable_items)}")
+
+        return data
+
     def create(self, validated_data):
+        """Create an order only after validation."""
         items_data = validated_data.pop('items')
         order = Order.objects.create(**validated_data)
 
-        order_items = []
-        for item_data in items_data:
-            menu = item_data['menu']
-            if not menu.is_available:
-                raise serializers.ValidationError(f"{menu.name} is not available.")
-
-            order_items.append(
-                OrderItem(
-                    order=order,
-                    menu=menu,
-                    quantity=item_data['quantity'],
-                    price=menu.price  # Auto-assign price from menu
-                )
+        order_items = [
+            OrderItem(
+                order=order,
+                menu=item_data['menu'],
+                quantity=item_data['quantity'],
+                price=item_data['menu'].price  # Auto-assign price from menu
             )
+            for item_data in items_data
+        ]
         
         OrderItem.objects.bulk_create(order_items)
-        order.update_total_price()  # Update total price after items are added
+        order.update_total_price()  # Ensure total price is updated
         return order
-
 
 class FeedbackSerializer(serializers.ModelSerializer):
     customer = CustomerSerializer(read_only=True) 
