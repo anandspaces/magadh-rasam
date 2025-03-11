@@ -103,7 +103,11 @@ A full-stack restaurant management application built using **React** (with **Vit
 - `DB_PORT`: Database port
 
 ### Frontend
-- `REACT_APP_API_URL`: URL to the backend API (e.g., `http://localhost:8000`)
+- `VITE_ENCRYPTION_KEY`: Generate this key using:
+ ```bash
+ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+ ```
+- `VITE_OPENWEATHER_API_KEY`: Open Weather API Key
 
 ### Root
 - `MYSQL_PORT`: Database Port
