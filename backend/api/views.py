@@ -2,6 +2,8 @@ from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
@@ -10,6 +12,11 @@ from .serializers import (
     CustomerSerializer, CategorySerializer, FeedbackSerializer, OrderSerializer, MenuSerializer, OrderItemSerializer, RegisterSerializer
 )
 
+# Pagination Class
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = "page_size"
+    max_page_size = 100
 
 class CustomerListCreateView(generics.ListCreateAPIView):
     queryset = Customer.objects.all()
@@ -39,6 +46,10 @@ class MenuListView(generics.ListCreateAPIView):
 class MenuDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['category']
+    search_fields = ['name', 'description']
+    pagination_class = StandardResultsSetPagination
 
 
 class OrderListCreateView(generics.ListCreateAPIView):
