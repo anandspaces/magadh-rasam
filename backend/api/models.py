@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-# Customer model for storing customer information
+
 class Customer(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -11,44 +11,26 @@ class Customer(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-# Category model for classifying menu items
+
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
 
-# Menu model for storing menu details
+
 class Menu(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
     category = models.ForeignKey(Category, related_name='menu', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='', null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    is_available = models.BooleanField(default=True)
     # image_url = models.URLField(blank=True, null=True)
     def __str__(self):
         return self.name
     
-# MenuItem model for storing menu item details
-class MenuItem(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    category = models.ForeignKey(Category, related_name='menu_items', on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-    is_available = models.BooleanField(default=True)
 
-    def __str__(self):
-        return self.name
-
-# Table model for reserving or assigning tables to customers
-class Table(models.Model):
-    table_number = models.PositiveIntegerField(unique=True)
-    seating_capacity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
-
-    def __str__(self):
-        return f"Table {self.table_number} - {self.seating_capacity} seats"
-
-# Order model for handling customer orders and items in the same model
 class Order(models.Model):
     STATUS_CHOICES = [
         ('PENDING', 'Pending'),
@@ -58,30 +40,33 @@ class Order(models.Model):
     ]
 
     customer = models.ForeignKey(Customer, related_name='orders', on_delete=models.CASCADE)
-    table = models.ForeignKey(Table, related_name='orders', null=True, blank=True, on_delete=models.SET_NULL)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # Fields related to individual items in the order
-    menu_item = models.ForeignKey(MenuItem, related_name='order_items', on_delete=models.CASCADE, null=True)
-    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)], null=True)
-    total_price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
+    def update_total_price(self):
+        self.total_price = sum(item.price * item.quantity for item in self.items.all())
+        self.save()
 
     def __str__(self):
         return f"Order #{self.id} for {self.customer}"
 
-# Reservation model for booking tables
-class Reservation(models.Model):
-    customer = models.ForeignKey(Customer, related_name='reservations', on_delete=models.CASCADE)
-    table = models.ForeignKey(Table, related_name='reservations', on_delete=models.CASCADE)
-    reservation_time = models.DateTimeField()
-    num_of_guests = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE) 
+    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+    price = models.DecimalField(max_digits=6, decimal_places=2, editable=False)
+
+    def save(self, *args, **kwargs):
+        self.price = self.menu.price
+        super().save(*args, **kwargs)
+        self.order.update_total_price()
 
     def __str__(self):
-        return f"Reservation by {self.customer} at {self.reservation_time}"
+        return f"{self.quantity}x {self.menu.name} (₹{self.price})"
 
-# Feedback model for collecting customer feedback
+
 class Feedback(models.Model):
     customer = models.ForeignKey(Customer, related_name='feedback', on_delete=models.CASCADE)
     rating = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
