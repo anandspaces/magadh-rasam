@@ -1,3 +1,5 @@
+# Models Tests
+
 # from django.test import TestCase
 # from .models import Customer, Category, Menu, Order, OrderItem, Feedback
 
@@ -74,125 +76,125 @@
 #         self.assertEqual(self.feedback.rating, 4)
 #         self.assertEqual(self.feedback.comment, "Great food!")
 
-from django.test import TestCase
-from rest_framework.exceptions import ValidationError
-from django.contrib.auth.models import User
-from .models import Customer, Category, Menu, Order, OrderItem, Feedback
-from decimal import Decimal
-from .serializers import (
-    CustomerSerializer, CategorySerializer, MenuSerializer,
-    OrderSerializer, OrderItemSerializer, FeedbackSerializer, RegisterSerializer
-)
+# Serializers Tests
 
-class SerializerTestCase(TestCase):
-    def setUp(self):
-        self.customer = Customer.objects.create(
-            first_name="John", last_name="Doe", email="john@example.com", phone_number="1234567890"
-        )
-        self.category = Category.objects.create(name="Beverages")
-        self.menu = Menu.objects.create(
-            name="Cappuccino", description="Delicious coffee", category=self.category, price=5.99, is_available=True
-        )
-        self.order = Order.objects.create(customer=self.customer, status="PENDING")
-        self.order_item = OrderItem.objects.create(order=self.order, menu=self.menu, quantity=2, price=5.99)
-        self.feedback = Feedback.objects.create(customer=self.customer, rating=5, comment="Great service!")
+# from django.test import TestCase
+# from rest_framework.exceptions import ValidationError
+# from django.contrib.auth.models import User
+# from .models import Customer, Category, Menu, Order, OrderItem, Feedback
+# from decimal import Decimal
+# from .serializers import (
+#     CustomerSerializer, CategorySerializer, MenuSerializer,
+#     OrderSerializer, OrderItemSerializer, FeedbackSerializer, RegisterSerializer
+# )
 
-    def test_customer_serializer(self):
-        data = CustomerSerializer(self.customer).data
-        self.assertEqual(data['first_name'], "John")
-        self.assertEqual(data['email'], "john@example.com")
+# class SerializerTestCase(TestCase):
+#     def setUp(self):
+#         self.customer = Customer.objects.create(
+#             first_name="John", last_name="Doe", email="john@example.com", phone_number="1234567890"
+#         )
+#         self.category = Category.objects.create(name="Beverages")
+#         self.menu = Menu.objects.create(
+#             name="Cappuccino", description="Delicious coffee", category=self.category, price=5.99, is_available=True
+#         )
+#         self.order = Order.objects.create(customer=self.customer, status="PENDING")
+#         self.order_item = OrderItem.objects.create(order=self.order, menu=self.menu, quantity=2, price=5.99)
+#         self.feedback = Feedback.objects.create(customer=self.customer, rating=5, comment="Great service!")
 
-    def test_category_serializer(self):
-        data = CategorySerializer(self.category).data
-        self.assertEqual(data['name'], "Beverages")
+#     def test_customer_serializer(self):
+#         data = CustomerSerializer(self.customer).data
+#         self.assertEqual(data['first_name'], "John")
+#         self.assertEqual(data['email'], "john@example.com")
 
-    def test_menu_serializer(self):
-        data = MenuSerializer(self.menu).data
-        self.assertEqual(data['name'], "Cappuccino")
-        self.assertEqual(data['price'], "5.99")
+#     def test_category_serializer(self):
+#         data = CategorySerializer(self.category).data
+#         self.assertEqual(data['name'], "Beverages")
 
-    def test_order_item_serializer(self):
-        data = OrderItemSerializer(self.order_item).data
-        self.assertEqual(data['quantity'], 2)
-        self.assertEqual(float(data['price']), 5.99)
+#     def test_menu_serializer(self):
+#         data = MenuSerializer(self.menu).data
+#         self.assertEqual(data['name'], "Cappuccino")
+#         self.assertEqual(data['price'], "5.99")
 
-    def test_order_serializer(self):
-        data = OrderSerializer(self.order).data
-        self.assertEqual(data['status'], "PENDING")
-        self.assertEqual(len(data['items']), 1)
+#     def test_order_item_serializer(self):
+#         data = OrderItemSerializer(self.order_item).data
+#         self.assertEqual(data['quantity'], 2)
+#         self.assertEqual(float(data['price']), 5.99)
 
-    def test_feedback_serializer(self):
-        data = FeedbackSerializer(self.feedback).data
-        self.assertEqual(data['rating'], 5)
-        self.assertEqual(data['comment'], "Great service!")
+#     def test_order_serializer(self):
+#         data = OrderSerializer(self.order).data
+#         self.assertEqual(data['status'], "PENDING")
+#         self.assertEqual(len(data['items']), 1)
 
-    def test_register_serializer(self):
-        user_data = {"username": "testuser", "email": "test@example.com", "password": "securepass"}
-        serializer = RegisterSerializer(data=user_data)
-        self.assertTrue(serializer.is_valid())
-        user = serializer.save()
-        self.assertEqual(user.username, "testuser")
+#     def test_feedback_serializer(self):
+#         data = FeedbackSerializer(self.feedback).data
+#         self.assertEqual(data['rating'], 5)
+#         self.assertEqual(data['comment'], "Great service!")
 
-    def test_invalid_rating_feedback(self):
-        invalid_data = {"customer": self.customer.id, "rating": 6, "comment": "Bad rating"}
-        serializer = FeedbackSerializer(data=invalid_data)
-        with self.assertRaises(ValidationError):
-            serializer.is_valid(raise_exception=True)
+#     def test_register_serializer(self):
+#         user_data = {"username": "testuser", "email": "test@example.com", "password": "securepass"}
+#         serializer = RegisterSerializer(data=user_data)
+#         self.assertTrue(serializer.is_valid())
+#         user = serializer.save()
+#         self.assertEqual(user.username, "testuser")
 
-    # Test status transitions
-    def test_invalid_status_transition(self):
-      order = Order.objects.create(customer=self.customer, status='COMPLETED')
-      serializer = OrderSerializer(instance=order, data={'status': 'PENDING'})
-      self.assertFalse(serializer.is_valid())
+#     def test_invalid_rating_feedback(self):
+#         invalid_data = {"customer": self.customer.id, "rating": 6, "comment": "Bad rating"}
+#         serializer = FeedbackSerializer(data=invalid_data)
+#         with self.assertRaises(ValidationError):
+#             serializer.is_valid(raise_exception=True)
 
-    # Test negative prices
-    def test_negative_menu_price(self):
-      data = {'name': 'Test', 'price': -5.99}
-      serializer = MenuSerializer(data=data)
-      self.assertFalse(serializer.is_valid())
+#     # Test status transitions
+#     def test_invalid_status_transition(self):
+#       order = Order.objects.create(customer=self.customer, status='COMPLETED')
+#       serializer = OrderSerializer(instance=order, data={'status': 'PENDING'})
+#       self.assertFalse(serializer.is_valid())
 
-    def test_order_creation(self):
-        order = Order.objects.create(
-            customer=self.customer, 
-            status="PENDING"
-        )
-        self.assertEqual(order.customer.email, "john@example.com")
+#     # Test negative prices
+#     def test_negative_menu_price(self):
+#       data = {'name': 'Test', 'price': -5.99}
+#       serializer = MenuSerializer(data=data)
+#       self.assertFalse(serializer.is_valid())
+
+#     def test_order_creation(self):
+#         order = Order.objects.create(
+#             customer=self.customer, 
+#             status="PENDING"
+#         )
+#         self.assertEqual(order.customer.email, "john@example.com")
     
-    # Test ordering unavailable items
-    def test_order_unavailable_item(self):
-      self.menu.is_available = False
-      self.menu.save()
+#     # Test ordering unavailable items
+#     def test_order_unavailable_item(self):
+#       self.menu.is_available = False
+#       self.menu.save()
       
-      data = {
-          "customer": self.customer.id,  # Ensure customer is included
-          "items": [{
-              "menu": self.menu.id,
-              "quantity": 1
-          }]
-      }
+#       data = {
+#           "customer": self.customer.id,  # Ensure customer is included
+#           "items": [{
+#               "menu": self.menu.id,
+#               "quantity": 1
+#           }]
+#       }
       
-      serializer = OrderSerializer(data=data)
-      self.assertFalse(serializer.is_valid())
-      self.assertIn("non_field_errors", serializer.errors)
+#       serializer = OrderSerializer(data=data)
+#       self.assertFalse(serializer.is_valid())
+#       self.assertIn("non_field_errors", serializer.errors)
 
 
-    # Test duplicate customer data
-    def test_duplicate_customer_email(self):
-        data = {'email': 'john@example.com', 'phone_number': '1111111111'}
-        serializer = CustomerSerializer(data=data)
-        self.assertFalse(serializer.is_valid())
+#     # Test duplicate customer data
+#     def test_duplicate_customer_email(self):
+#         data = {'email': 'john@example.com', 'phone_number': '1111111111'}
+#         serializer = CustomerSerializer(data=data)
+#         self.assertFalse(serializer.is_valid())
     
-    # Test total price calculation
-    def test_order_total_calculation(self):
-        order = Order.objects.create(customer=self.customer)
-        OrderItem.objects.create(order=order, menu=self.menu, quantity=2, price=self.menu.price)
+#     # Test total price calculation
+#     def test_order_total_calculation(self):
+#         order = Order.objects.create(customer=self.customer)
+#         OrderItem.objects.create(order=order, menu=self.menu, quantity=2, price=self.menu.price)
 
-        expected_total = Decimal(str(self.menu.price)) * 2  # Ensure correct Decimal type
-        self.assertEqual(order.total_price, expected_total)
+#         expected_total = Decimal(str(self.menu.price)) * 2  # Ensure correct Decimal type
+#         self.assertEqual(order.total_price, expected_total)
 
-
-
-
+# API Tests
 
 # from django.test import TestCase
 # from django.contrib.auth.models import User
@@ -311,71 +313,73 @@ class SerializerTestCase(TestCase):
 #       response = self.client.get("/orders/")
 #       self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)  # If authentication is required
 
-# from django.test import SimpleTestCase
-# from django.urls import reverse, resolve
-# from api.views import (
-#     CustomerListCreateView, CustomerDetailView,
-#     CategoryListCreateView, CategoryDetailView,
-#     MenuListView, MenuDetailView,
-#     OrderItemListCreateView, OrderItemDetailView,
-#     OrderListCreateView, OrderDetailView,
-#     FeedbackListCreateView, FeedbackDetailView,
-#     LoginView, RegisterView
-# )
+# URLs Tests
 
-# class URLTests(SimpleTestCase):
-#     def test_register_url_resolves(self):
-#         url = reverse('register')
-#         self.assertEqual(resolve(url).func.view_class, RegisterView)
+from django.test import SimpleTestCase
+from django.urls import reverse, resolve
+from api.views import (
+    CustomerListCreateView, CustomerDetailView,
+    CategoryListCreateView, CategoryDetailView,
+    MenuListView, MenuDetailView,
+    OrderItemListCreateView, OrderItemDetailView,
+    OrderListCreateView, OrderDetailView,
+    FeedbackListCreateView, FeedbackDetailView,
+    LoginView, RegisterView
+)
 
-#     def test_login_url_resolves(self):
-#         url = reverse('login')
-#         self.assertEqual(resolve(url).func.view_class, LoginView)
+class URLTests(SimpleTestCase):
+    def test_register_url_resolves(self):
+        url = reverse('register')
+        self.assertEqual(resolve(url).func.view_class, RegisterView)
 
-#     def test_customer_list_url_resolves(self):
-#         url = reverse('customer-list')
-#         self.assertEqual(resolve(url).func.view_class, CustomerListCreateView)
+    def test_login_url_resolves(self):
+        url = reverse('login')
+        self.assertEqual(resolve(url).func.view_class, LoginView)
 
-#     def test_customer_detail_url_resolves(self):
-#         url = reverse('customer-detail', args=[1])
-#         self.assertEqual(resolve(url).func.view_class, CustomerDetailView)
+    def test_customer_list_url_resolves(self):
+        url = reverse('customer-list')
+        self.assertEqual(resolve(url).func.view_class, CustomerListCreateView)
 
-#     def test_category_list_url_resolves(self):
-#         url = reverse('category-list')
-#         self.assertEqual(resolve(url).func.view_class, CategoryListCreateView)
+    def test_customer_detail_url_resolves(self):
+        url = reverse('customer-detail', args=[1])
+        self.assertEqual(resolve(url).func.view_class, CustomerDetailView)
 
-#     def test_category_detail_url_resolves(self):
-#         url = reverse('category-detail', args=[1])
-#         self.assertEqual(resolve(url).func.view_class, CategoryDetailView)
+    def test_category_list_url_resolves(self):
+        url = reverse('category-list')
+        self.assertEqual(resolve(url).func.view_class, CategoryListCreateView)
 
-#     def test_menu_list_url_resolves(self):
-#         url = reverse('menu-list')
-#         self.assertEqual(resolve(url).func.view_class, MenuListView)
+    def test_category_detail_url_resolves(self):
+        url = reverse('category-detail', args=[1])
+        self.assertEqual(resolve(url).func.view_class, CategoryDetailView)
 
-#     def test_menu_detail_url_resolves(self):
-#         url = reverse('menu-detail', args=[1])
-#         self.assertEqual(resolve(url).func.view_class, MenuDetailView)
+    def test_menu_list_url_resolves(self):
+        url = reverse('menu-list')
+        self.assertEqual(resolve(url).func.view_class, MenuListView)
 
-#     def test_order_list_url_resolves(self):
-#         url = reverse('order-list')
-#         self.assertEqual(resolve(url).func.view_class, OrderListCreateView)
+    def test_menu_detail_url_resolves(self):
+        url = reverse('menu-detail', args=[1])
+        self.assertEqual(resolve(url).func.view_class, MenuDetailView)
 
-#     def test_order_detail_url_resolves(self):
-#         url = reverse('order-detail', args=[1])
-#         self.assertEqual(resolve(url).func.view_class, OrderDetailView)
+    def test_order_list_url_resolves(self):
+        url = reverse('order-list')
+        self.assertEqual(resolve(url).func.view_class, OrderListCreateView)
 
-#     def test_order_item_list_url_resolves(self):
-#         url = reverse('order-item-list')
-#         self.assertEqual(resolve(url).func.view_class, OrderItemListCreateView)
+    def test_order_detail_url_resolves(self):
+        url = reverse('order-detail', args=[1])
+        self.assertEqual(resolve(url).func.view_class, OrderDetailView)
 
-#     def test_order_item_detail_url_resolves(self):
-#         url = reverse('order-item-detail', args=[1])
-#         self.assertEqual(resolve(url).func.view_class, OrderItemDetailView)
+    def test_order_item_list_url_resolves(self):
+        url = reverse('order-item-list')
+        self.assertEqual(resolve(url).func.view_class, OrderItemListCreateView)
 
-#     def test_feedback_list_url_resolves(self):
-#         url = reverse('feedback-list')
-#         self.assertEqual(resolve(url).func.view_class, FeedbackListCreateView)
+    def test_order_item_detail_url_resolves(self):
+        url = reverse('order-item-detail', args=[1])
+        self.assertEqual(resolve(url).func.view_class, OrderItemDetailView)
 
-#     def test_feedback_detail_url_resolves(self):
-#         url = reverse('feedback-detail', args=[1])
-#         self.assertEqual(resolve(url).func.view_class, FeedbackDetailView)
+    def test_feedback_list_url_resolves(self):
+        url = reverse('feedback-list')
+        self.assertEqual(resolve(url).func.view_class, FeedbackListCreateView)
+
+    def test_feedback_detail_url_resolves(self):
+        url = reverse('feedback-detail', args=[1])
+        self.assertEqual(resolve(url).func.view_class, FeedbackDetailView)
