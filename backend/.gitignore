@@ -30,6 +30,7 @@ static/
 # OS files
 .DS_Store
 Thumbs.db
+.ps1/
 
 # dummy data
 seed/*.json
