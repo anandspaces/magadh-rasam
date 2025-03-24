@@ -28,7 +28,7 @@ A full-stack restaurant management application built using **React** (with **Vit
 ## Project Structure
 
 ```
-/restaurant-app
+/magadh-rasam
 ├── backend
 │   ├── ...                 # Django project directory
 │   ├── Dockerfile          # Dockerfile for backend container
@@ -48,15 +48,24 @@ A full-stack restaurant management application built using **React** (with **Vit
 1. Clone the repository:
    ```bash
    git clone https://github.com/anandspaces/magadh-rasam.git
-   cd restaurant-app/backend
+   cd magadh-rasam
    ```
 
 ### Backend Installation
 
-2. Install the required Python dependencies:
+2. Install the required Python dependencies
    ```bash
+   cd backend
+   
+   # Linux
    python3 -m venv venv
    source venv/bin/activate
+   
+   # Windows
+   python -m venv venv
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional
+   venv/Scripts/Activate.ps1
+
    pip install -r requirements.txt
    ```
 
