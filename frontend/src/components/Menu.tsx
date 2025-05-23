@@ -7,6 +7,7 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 // import { addToCart } from "../store/cartSlice";
 import { addToFavorites, initializeFavorites, removeFromFavorites, selectFavorites } from "../store/favoritesSlice";
 import { AppDispatch } from "../store/store";
+import API_URL from "../api/api";
 
 export interface MenuItem {
   name: string;
@@ -63,7 +64,7 @@ export default function Menu() {
 
   const fetchMenu = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/menu/");
+      const response = await axios.get(`${API_URL}/menu/`);
       setMenuItems(response.data);
     } catch (error) {
       console.error("Backend fetch failed. Fetching local data.", error);

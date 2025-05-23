@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import Cookies from "js-cookie";
 import { FiUser, FiMail, FiLock, FiX, FiLogIn, FiUserPlus, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
+import API_URL from "../api/api";
 
 interface AuthModalProps {
   onClose: () => void;
@@ -49,14 +50,14 @@ export default function AuthModal({ onClose }: AuthModalProps) {
   
       if (isLogin) {
         // Attempt Backend Login
-        const response = await axios.post("http://localhost:8000/api/login/", {
+        const response = await axios.post(`${API_URL}/api/login/`, {
           username,
           password,
         });
         token = response.data.token;
       } else {
         // Attempt Backend Registration
-        await axios.post("http://localhost:8000/api/register/", {
+        await axios.post(`${API_URL}/api/register/`, {
           username,
           email,
           password,

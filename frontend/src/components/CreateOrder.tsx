@@ -5,6 +5,7 @@ import { setOrder } from "../store/orderSlice";
 import { RootState } from "../store/store";
 import { FaCheckCircle, FaSearch, FaShoppingCart, FaSpinner } from "react-icons/fa";
 import LocationFetcher from "./LocationFetcher";
+import API_URL from "../api/api";
 
 export default function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
   useEffect(() => {
     const loadMenu = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/menu/");
+        const response = await axios.get(`${API_URL}/menu/`);
         setMenuItems(response.data);
       } catch (error) {
         console.error("Using local menu data", error);
