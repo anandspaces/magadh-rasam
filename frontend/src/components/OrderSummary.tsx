@@ -28,7 +28,7 @@ export default function OrderSummary(
       // setOrder(response.data); // Use backend data
       console.log(response)
     } catch (error) {
-      console.warn("Using local order data:", error);
+      console.warn("Using local order data:", error, "API URL: ", API_URL);
       // setOrder(reduxOrder); // Fallback to Redux data
     } finally {
       setLoading(false);

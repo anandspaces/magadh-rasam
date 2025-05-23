@@ -30,7 +30,7 @@ export default function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
         const response = await axios.get(`${API_URL}/menu/`);
         setMenuItems(response.data);
       } catch (error) {
-        console.error("Using local menu data", error);
+        console.error("Using local menu data", error, "API URL: ", API_URL);
         try {
           const localResponse = await fetch("/data/menu_data.json");
           const data = await localResponse.json();

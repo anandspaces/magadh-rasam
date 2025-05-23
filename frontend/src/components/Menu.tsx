@@ -67,7 +67,7 @@ export default function Menu() {
       const response = await axios.get(`${API_URL}/menu/`);
       setMenuItems(response.data);
     } catch (error) {
-      console.error("Backend fetch failed. Fetching local data.", error);
+      console.error("Backend fetch failed. Fetching local data.", error, "API URL: ", API_URL);
       try {
         const response = await fetch("/data/menu_data.json");
         if (!response.ok) throw new Error("Failed to fetch local JSON");

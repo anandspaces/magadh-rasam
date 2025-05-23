@@ -82,7 +82,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
       );
       setTimeout(() => onClose(), 500);
     } catch (err) {
-      console.error("Backend error, falling back:", err);
+      console.error("Backend error, falling back:", err, "API URL: ", API_URL);
   
       if (!isLogin) {
         // Local Fallback Registration
