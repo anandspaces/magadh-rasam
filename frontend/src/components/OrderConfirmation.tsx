@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { OrderState } from "../store/orderSlice";
 import { FaCheckCircle, FaChevronLeft } from "react-icons/fa";
+import API_URL from "../api/api";
 
 export default function OrderConfirmation({ 
   onConfirm, 
@@ -26,7 +27,7 @@ export default function OrderConfirmation({
   // Fetch order details from the backend or fallback to Redux
   const fetchOrderDetails = async () => {
     try {
-      const response = await axios.get("/api/orders/confirmation/");
+      const response = await axios.get(`${API_URL}/orders/confirmation/`);
       // setOrder(response.data); // Use backend data
       console.log(response)
     } catch (error) {

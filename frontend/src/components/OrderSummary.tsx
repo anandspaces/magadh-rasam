@@ -5,6 +5,7 @@ import { RootState } from "../store/store";
 import { OrderState } from "../store/orderSlice";
 import { useNavigate } from "react-router-dom";
 import { FaArrowRight, FaCheckCircle, FaClock, FaHome } from "react-icons/fa";
+import API_URL from "../api/api";
 
 export default function OrderSummary(
   {
@@ -23,7 +24,7 @@ export default function OrderSummary(
   // Fetch order summary from the backend or fallback to Redux
   const fetchOrderSummary = async () => {
     try {
-      const response = await axios.get("/api/orders/summary/");
+      const response = await axios.get(`${API_URL}/orders/summary/`);
       // setOrder(response.data); // Use backend data
       console.log(response)
     } catch (error) {

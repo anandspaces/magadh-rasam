@@ -50,14 +50,14 @@ export default function AuthModal({ onClose }: AuthModalProps) {
   
       if (isLogin) {
         // Attempt Backend Login
-        const response = await axios.post(`${API_URL}/api/login/`, {
+        const response = await axios.post(`${API_URL}/login/`, {
           username,
           password,
         });
         token = response.data.token;
       } else {
         // Attempt Backend Registration
-        await axios.post(`${API_URL}/api/register/`, {
+        await axios.post(`${API_URL}/register/`, {
           username,
           email,
           password,

@@ -27,7 +27,7 @@ export default function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
   useEffect(() => {
     const loadMenu = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/menu/`);
+        const response = await axios.get(`${API_URL}/menu/`);
         setMenuItems(response.data);
       } catch (error) {
         console.error("Using local menu data", error);
@@ -181,7 +181,7 @@ export default function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
 
     try {
       // Try saving to backend
-      const res = await axios.post("/api/orders/", orderData);
+      const res = await axios.post(`${API_URL}/orders/`, orderData);
       if (res.status === 200 || res.status === 201) {
         resetForm();
         onSubmit(); // Move to the next stage
