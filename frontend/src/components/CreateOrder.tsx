@@ -27,7 +27,7 @@ export default function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
   useEffect(() => {
     const loadMenu = async () => {
       try {
-        const response = await axios.get(`${API_URL}/menu/`);
+        const response = await axios.get(`${API_URL}/api/menu/`);
         setMenuItems(response.data);
       } catch (error) {
         console.error("Using local menu data", error);
