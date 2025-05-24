@@ -103,8 +103,8 @@ const Contact = () => {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {[
             { icon: FaMapMarkerAlt, text: "123 Culinary Lane, Foodie City, BR 824143" },
-            { icon: FaPhone, text: "+91 XXXXXXXXXX" },
-            { icon: FaEnvelope, text: "contact@magadhrasam.com" }
+            { icon: FaPhone, text: "+919602743680" },
+            { icon: FaEnvelope, text: "anandvaibhaw000@gmail.com" }
           ].map((item, index) => (
             <div key={index} className="flex items-center justify-center space-x-3 text-gray-700">
               <item.icon className="text-yellow-500 text-3xl" />

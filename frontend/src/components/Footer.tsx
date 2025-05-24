@@ -45,8 +45,8 @@ export default function Footer() {
             <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
             <p>123 Culinary Lane</p>
             <p>Foodie City, BR 824143</p>
-            <p>Email: contact@magadhrasam.com</p>
-            <p>Phone: +91 XXXXXXXXXX</p>
+            <p>Email: anandvaibhaw000@gmail.com</p>
+            <p>Phone: +919602743680</p>
           </div>
 
           {/* Social Media Icons */}
