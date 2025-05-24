@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import Cookies from "js-cookie";
-import { FiUser, FiMail, FiLock, FiX, FiLogIn, FiUserPlus, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
+import { FiMail, FiLock, FiX, FiLogIn, FiUserPlus, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import API_URL from "../api/api";
 
 interface AuthModalProps {
@@ -12,7 +12,6 @@ interface AuthModalProps {
 
 export default function AuthModal({ onClose }: AuthModalProps) {
   const [isLogin, setIsLogin] = useState(true);
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +26,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
       dispatch(login(storedToken));
     }
   }, [dispatch]);
-  
+
   const showNotification = (message: string, success: boolean) => {
     setAlertMessage(message);
     setIsSuccess(success);
@@ -38,81 +37,78 @@ export default function AuthModal({ onClose }: AuthModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-  
-    if (!password || (!isLogin && (!username || !email))) {
+
+    if (!password || !email) {
       showNotification("All fields are required.", true);
       setLoading(false);
       return;
     }
-  
+
     try {
       let token;
-  
+
       if (isLogin) {
         // Attempt Backend Login
         const response = await axios.post(`${API_URL}/login/`, {
-          username,
+          email,
           password,
         });
         token = response.data.token;
       } else {
         // Attempt Backend Registration
         await axios.post(`${API_URL}/register/`, {
-          username,
           email,
           password,
         });
-  
+
         // Save Credentials Locally as a Fallback
-        localStorage.setItem("fallback_username", username);
         localStorage.setItem("fallback_email", email);
         localStorage.setItem("fallback_password", password);
-  
+
         token = `fallback-${new Date().getTime()}`; // Generate fallback token
       }
-  
+
       // Store token in cookies
       Cookies.set("access_token", token, { expires: 7, secure: true });
       dispatch(login(token));
-  
+
       // Modified alerts
       showNotification(
-        isLogin ? "Login Successful" : "Registered Successfully", 
+        isLogin ? "Login Successful" : "Registered Successfully",
         true
       );
       setTimeout(() => onClose(), 500);
     } catch (err) {
       console.error("Backend error, falling back:", err, "API URL: ", API_URL);
-  
+
       if (!isLogin) {
         // Local Fallback Registration
-        localStorage.setItem("fallback_username", username);
         localStorage.setItem("fallback_email", email);
         localStorage.setItem("fallback_password", password);
-  
+
         const fallbackToken = `fallback-${new Date().getTime()}`;
         Cookies.set("fallback_auth", fallbackToken, {
           expires: 1,
           secure: true,
           sameSite: "Strict",
         });
-  
+
         dispatch(login(fallbackToken));
         showNotification("Registered Successfully", true);
         setTimeout(() => onClose(), 500);
       } else {
         // Fallback Login
-        const storedUsername = localStorage.getItem("fallback_username");
+        const storedEmail = localStorage.getItem("fallback_username");
         const storedPassword = localStorage.getItem("fallback_password");
-  
-        if (storedUsername === username && storedPassword === password) {
+
+        if (storedEmail === email && storedPassword === password) {
           const fallbackToken = `fallback-${new Date().getTime()}`;
           Cookies.set("fallback_auth", fallbackToken, {
             expires: 1,
             secure: true,
             sameSite: "Strict",
           });
-  
+
           dispatch(login(fallbackToken));
           showNotification("Login Successfully", true);
           setTimeout(() => onClose(), 500);
@@ -124,25 +120,24 @@ export default function AuthModal({ onClose }: AuthModalProps) {
       setLoading(false);
     }
   };
-  
+
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm z-50">
       {/* Notification container - Top Center */}
       {showAlert && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 animate-fade-in">
-          <div className={`flex items-center p-4 rounded-lg shadow-lg border ${
-            isSuccess 
-              ? "bg-green-50 border-green-200 text-green-800" 
+          <div className={`flex items-center p-4 rounded-lg shadow-lg border ${isSuccess
+              ? "bg-green-50 border-green-200 text-green-800"
               : "bg-red-50 border-red-200 text-red-800"
-          }`}>
+            }`}>
             {isSuccess ? (
               <FiCheckCircle className="w-6 h-6 mr-3 flex-shrink-0" />
             ) : (
               <FiAlertCircle className="w-6 h-6 mr-3 flex-shrink-0" />
             )}
             <span className="mr-4">{alertMessage}</span>
-            <button 
+            <button
               onClick={() => setShowAlert(false)}
               className="text-gray-400 hover:text-gray-500 ml-auto"
             >
@@ -151,7 +146,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
           </div>
         </div>
       )}
-  
+
       {/* Modal Content */}
       <div className="w-full max-w-4xl flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden shadow-2xl relative">
         {/* Dynamic Content Section - Hidden on mobile */}
@@ -164,7 +159,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
                 <p className="text-lg">Sign in to continue your culinary journey and access member-exclusive features</p>
               </div>
             </div>
-  
+
             {/* Register Content */}
             <div className={`absolute transition-all duration-500 ${!isLogin ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"}`}>
               <div className="text-center text-white space-y-4 px-4">
@@ -174,7 +169,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
             </div>
           </div>
         </div>
-  
+
         {/* Form Section - Full width on mobile */}
         <div className="w-full md:w-1/2 p-4 md:p-8 relative">
           <button
@@ -183,16 +178,16 @@ export default function AuthModal({ onClose }: AuthModalProps) {
           >
             <FiX className="w-6 h-6" />
           </button>
-  
+
           <div className="h-full flex flex-col justify-center md:py-0 py-4">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 text-center font-serif">
               {isLogin ? "Sign In" : "Create Account"}
             </h1>
-  
+
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               {/* Form inputs remain the same as previous version */}
               <div className="space-y-4">
-                <div className="relative">
+                {/* <div className="relative">
                   <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
                     id="username"
@@ -202,22 +197,22 @@ export default function AuthModal({ onClose }: AuthModalProps) {
                     onChange={(e) => setUsername(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all"
                   />
+                </div> */}
+
+
+                <div className="relative">
+                  <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="Email Address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all"
+                  />
                 </div>
-  
-                {!isLogin && (
-                  <div className="relative">
-                    <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                    <input
-                      id="email"
-                      type="email"
-                      placeholder="Email Address"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all"
-                    />
-                  </div>
-                )}
-  
+
+
                 <div className="relative">
                   <FiLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
@@ -230,7 +225,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
                   />
                 </div>
               </div>
-  
+
               <button
                 type="submit"
                 className="w-full py-3 px-6 bg-amber-600 text-white font-medium rounded-lg hover:bg-amber-700 transition-colors flex items-center justify-center gap-2"
@@ -251,14 +246,14 @@ export default function AuthModal({ onClose }: AuthModalProps) {
                 )}
               </button>
             </form>
-  
+
             <div className="mt-6 text-center">
               <button
                 onClick={() => setIsLogin(!isLogin)}
                 className="text-amber-600 hover:text-orange-700 font-medium transition-colors"
               >
-                {isLogin 
-                  ? "New here? Create an account" 
+                {isLogin
+                  ? "New here? Create an account"
                   : "Already have an account? Sign in"}
               </button>
             </div>
