@@ -109,16 +109,16 @@ export default function OrderConfirmation({
         {/* Actions */}
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
           <button
-            className="w-full sm:w-auto rounded bg-yellow-500 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-yellow-600"
+            className="w-full sm:w-auto rounded flex bg-yellow-500 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-yellow-600"
             onClick={onBack}
           >
-            <FaChevronLeft /> Edit order
+            <FaChevronLeft className="w-4 h-4 my-1 mx-1" /> Edit order
           </button>
           <button
-            className="w-full sm:w-auto rounded bg-gray-700 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-gray-800"
+            className="w-full sm:w-auto rounded flex bg-gray-700 px-4 py-2 font-medium text-white transition duration-150 ease-in-out hover:bg-gray-800"
             onClick={handleConfirm}
           >
-            Confirm Order <FaCheckCircle />
+            Confirm Order <FaCheckCircle className="w-4 h-4 my-1 mx-1" />
           </button>
         </div>
       </div>

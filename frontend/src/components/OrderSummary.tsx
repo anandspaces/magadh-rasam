@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { OrderState } from "../store/orderSlice";
 import { useNavigate } from "react-router-dom";
-import { FaArrowRight, FaCheckCircle, FaClock, FaHome } from "react-icons/fa";
+import { FaCheckCircle, FaClock, FaHome } from "react-icons/fa";
 import API_URL from "../api/api";
 
 export default function OrderSummary(
@@ -107,13 +107,13 @@ export default function OrderSummary(
 
         {/* Progress indicator */}
         <div className="mb-6">
-          <div className="h-2 bg-gray-200 rounded-full">
+          <div className="h-2 flex bg-gray-200 rounded-full">
             <div
               className="h-full bg-yellow-500 rounded-full transition-all duration-1000"
               style={progressStyle}
             />
-          </div>
           <FaClock className="text-yellow-500" />
+          </div>
           <div className="text-center mt-2 text-sm text-gray-600">
             Redirecting to homepage in {countdown} seconds
           </div>
@@ -180,8 +180,8 @@ export default function OrderSummary(
               onClick={handleImmediateRedirect}
               className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 transition-colors duration-200"
             >
-              <FaArrowRight className="h-5 w-5 mr-2" />
-              <FaHome /> Return to Home Now
+              {/* <FaArrowRight className="h-5 w-5 mr-2" /> */}
+              <FaHome className="h-5 w-5 mr-2" /> Return to Home Now
             </button>
           </div>
         </div>
