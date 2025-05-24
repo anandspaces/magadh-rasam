@@ -1,0 +1,366 @@
+[
+  {
+    "name": "Golden Flake Medley",
+    "description": "Fluffy rice flakes sautéed with fragrant spices, toasted peanuts, and fresh herbs—a light yet flavorful morning delight.",
+    "image_url": "poha.jpg",
+    "category_id": 1,
+    "price": 5.99
+  },
+  {
+    "name": "Embergrain Dumpling",
+    "description": "Rustic wheat dumplings filled with seasoned gram flour, served alongside a smoky mash of roasted potatoes and eggplant.",
+    "image_url": "litti_chokha.jpg",
+    "category_id": 1,
+    "price": 5.99
+  },
+  {
+    "name": "Amberwood Jaggery Bites",
+    "description": "Crisp wheat cookies infused with golden jaggery and aromatic cardamom, striking the perfect balance of crunch and sweetness.",
+    "image_url": "thekua.jpg",
+    "category_id": 1,
+    "price": 5.99
+  },
+  {
+    "name": "Golden Veil Pastry",
+    "description": "Delicate layers of crisp, golden-fried pastry draped in a shimmering sugar glaze—an irresistible confectionary delight.",
+    "image_url": "khaja.jpg",
+    "category_id": 1,
+    "price": 5.99
+  },
+  {
+    "name": "Spiced Terra Crunch",
+    "description": "A robust medley of roasted black chickpeas, fiery spices, and crisp peanuts, finished with a whisper of tangy herbs.",
+    "image_url": "laiya_chana.jpg",
+    "category_id": 1,
+    "price": 5.99
+  },
+  {
+    "name": "Velvet Sun Dhokla",
+    "description": "Airy, steamed chickpea cakes infused with a subtle tang, crowned with mustard seeds and fragrant coriander.",
+    "image_url": "dhokla.jpg",
+    "category_id": 1,
+    "price": 5.99
+  },
+  {
+    "name": "Alpine Moon Dumplings",
+    "description": "Delicate steamed parcels filled with spiced vegetables, wrapped in a tender dough and served with a fiery dipping sauce.",
+    "image_url": "momos.jpg",
+    "category_id": 1,
+    "price": 5.99
+  },
+  {
+    "name": "Crimson Lentil Crisp",
+    "description": "Golden, deep-fried pastry pockets brimming with spiced lentil filling—a savory indulgence with every bite.",
+    "image_url": "dal_kachori.jpg",
+    "category_id": 1,
+    "price": 5.99
+  },
+  {
+    "name": "Verdant Spice Pockets",
+    "description": "Crisp, golden triangular pastries enveloping a fragrant filling of spiced potatoes and peas—a timeless favorite.",
+    "image_url": "samosa.jpg",
+    "category_id": 1,
+    "price": 5.99
+  },
+  {
+    "name": "Ivory Petal Dumplings",
+    "description": "Soft rice flour dumplings bursting with a sweet coconut and jaggery core—a cherished festival delicacy.",
+    "image_url": "dumpling.jpg",
+    "category_id": 1,
+    "price": 5.99
+  },
+  {
+    "name": "Soleil Emberbread",
+    "description": "A rustic whole wheat flatbread brimming with roasted gram flour, earthy spices, and fresh herbs.",
+    "image_url": "sattu_paratha.jpg",
+    "category_id": 2,
+    "price": 6.99
+  },
+  {
+    "name": "Golden Peasant Stew",
+    "description": "Slow-simmered yellow peas infused with bold spices, tangy herbs, and a touch of crunch.",
+    "image_url": "chana_ghugni.jpg",
+    "category_id": 2,
+    "price": 6.99
+  },
+  {
+    "name": "Aurora Grain Fritters",
+    "description": "Delicately crisped rice and lentil fritters, deep-fried to golden perfection and paired with a zesty chutney.",
+    "image_url": "dhuska.jpg",
+    "category_id": 2,
+    "price": 6.99
+  },
+  {
+    "name": "Velvet Hearth Dumplings",
+    "description": "Oven-kissed wheat dumplings served with a velvety, spiced lentil stew and a drizzle of golden ghee.",
+    "image_url": "dal_bati.jpg",
+    "category_id": 2,
+    "price": 6.99
+  },
+  {
+    "name": "Midnight Harvest Platter",
+    "description": "Pillowy, deep-fried bread paired with an intoxicatingly spiced chickpea stew—rich and irresistible.",
+    "image_url": "chole_bhature.jpg",
+    "category_id": 2,
+    "price": 6.99
+  },
+  {
+    "name": "Gilded Dawn Puri",
+    "description": "Crisp, golden-fried puris paired with a robust and fragrant chickpea curry, a regal morning delight.",
+    "image_url": "chhola_puri.jpg",
+    "category_id": 2,
+    "price": 6.99
+  },
+  {
+    "name": "Amber Silk Broth",
+    "description": "A luxurious yogurt-infused curry tempered with golden spices and gram flour dumplings, silky and tangy.",
+    "image_url": "kadhi.jpg",
+    "category_id": 2,
+    "price": 6.99
+  },
+  {
+    "name": "Celeste Hearthbread",
+    "description": "Soft whole wheat flatbread wrapped around a luscious, spice-kissed mashed potato filling.",
+    "image_url": "aloo_paratha.jpg",
+    "category_id": 2,
+    "price": 6.99
+  },
+  {
+    "name": "Imperial Garden Pilaf",
+    "description": "Aromatic basmati rice crowned with saffron, slow-cooked vegetables, and a symphony of rare spices.",
+    "image_url": "biryani.jpg",
+    "category_id": 2,
+    "price": 6.99
+  },
+  {
+    "name": "Mystic Ember Pulao",
+    "description": "Fluffy basmati rice infused with fragrant whole spices and colorful vegetables, a whisper of tradition.",
+    "image_url": "pulao.jpg",
+    "category_id": 2,
+    "price": 6.99
+  },
+  {
+    "name": "Amber Lace Pancakes",
+    "description": "Delicate style pancakes infused with saffron and sweetened with sugar, offering a golden, caramelized crunch.",
+    "image_url": "malpua.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Celestial Rose Orbs",
+    "description": "Soft, golden dumplings soaked in fragrant rose-scented syrup—a luxurious delicacy.",
+    "image_url": "gulab_jamun.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Ivory Pearl Delight",
+    "description": "Tender cottage cheese spheres bathed in a light floral syrup, a cherished treat.",
+    "image_url": "rasgulla.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Saffron Velvet Bliss",
+    "description": "Soft chenna dumplings immersed in a rich, saffron-infused milk sauce.",
+    "image_url": "rasmalai.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Golden Nectar Pudding",
+    "description": "Slow-cooked rice pudding infused with cardamom and saffron, a comforting and timeless classic.",
+    "image_url": "kheer.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Amber Swirl Crisps",
+    "description": "Crispy, golden spirals soaked in saffron syrup, offering a perfect balance of crunch and sweetness.",
+    "image_url": "jalebi.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Casablanca Cashew Silk",
+    "description": "Smooth and melt-in-the-mouth cashew fudge, a luxurious delicacy with a touch of silver leaf.",
+    "image_url": "kaju_katli.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Coconut Snow Truffles",
+    "description": "Soft, bite-sized coconut treats blended with condensed milk and sugar, a festive delight.",
+    "image_url": "coconut_ladoo.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Golden Gram Pearls",
+    "description": "Rich, aromatic gram flour balls coated with cardamom-spiced sugar—a nutty, melt-in-the-mouth delicacy.",
+    "image_url": "besan_ladoo.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Imperial Cream Pudding",
+    "description": "A silky rice and milk pudding infused with rose water and garnished with nuts, a royal indulgence.",
+    "image_url": "rice_pudding.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Golden Mango Frost",
+    "description": "Luscious mango-infused ice cream blended with creamy milk for a tropical, fruity indulgence.",
+    "image_url": "mango_ice_cream.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Saffron Glace Bars",
+    "description": "A dense, creamy frozen dessert with saffron and pistachios—a rich and indulgent treat.",
+    "image_url": "kulfi.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Crimson Cream Infusion",
+    "description": "Thick, sweetened milk infused with saffron and cardamom, reduced to a rich, velvety texture.",
+    "image_url": "rabri.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Caramel Carrot Reverie",
+    "description": "Slow-cooked grated carrots blended with milk and ghee, delivering a rich and nutty delight.",
+    "image_url": "gajar_halwa.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Saffron Moon Bites",
+    "description": "Velvety saffron-infused milk fudge with a smooth, melt-in-the-mouth texture—a festive favorite.",
+    "image_url": "kesar_peda.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Cashew Silk Rolls",
+    "description": "Elegant cashew nut rolls infused with rich ghee, an opulent treat for every special occasion.",
+    "image_url": "kaju_roll.jpg",
+    "category_id": 3,
+    "price": 7.99
+  },
+  {
+    "name": "Rosetta Dream Float",
+    "description": "A mesmerizing blend of vermicelli, rose syrup, basil seeds, and chilled milk—a royal summer delight.",
+    "image_url": "falooda.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Saffron Almond Elixir",
+    "description": "A luxurious blend of milk, almonds, and delicate saffron, inspired by Mediterranean indulgence.",
+    "image_url": "kesar_badam_milk.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Creme de Lait",
+    "description": "A smooth and refreshing yogurt-based delight, infused with a touch of aromatic spices.",
+    "image_url": "lassi.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Chai Royale",
+    "description": "A rich infusion of black tea, warm spices, and velvety milk, reminiscent of an old-world European café.",
+    "image_url": "masala_chai.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Mango Soleil",
+    "description": "A tropical fusion of yogurt and ripe mango, crafted for a silky, golden taste of summer.",
+    "image_url": "mango_lassi.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Citron Vert Mintee",
+    "description": "A crisp and invigorating mix of fresh mint, zesty lemon, and pure spring water.",
+    "image_url": "mint_lemonade.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Douceur Laitiere",
+    "description": "A classic sweet yogurt blend, lightly whipped to perfection for a smooth, delicate finish.",
+    "image_url": "sweet_lassi.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Mango Velvet",
+    "description": "A creamy, tropical mango shake with a touch of golden sweetness and silky milk.",
+    "image_url": "mango_shake.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Banana Bellezza",
+    "description": "A rich and creamy banana shake, blending natural sweetness with a velvety texture.",
+    "image_url": "banana_shake.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Cafe Glace",
+    "description": "A smooth and bold iced coffee, crafted with rich espresso and frothy milk.",
+    "image_url": "cold_coffee.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Mango Serenata",
+    "description": "A luscious mango smoothie blended with creamy yogurt for a perfect tropical escape.",
+    "image_url": "mango_smoothie.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Fraise Delice",
+    "description": "A smooth and fruity strawberry delight, blended with silky yogurt for a refreshing treat.",
+    "image_url": "strawberry_smoothie.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Ananas Riviera",
+    "description": "A vibrant pineapple smoothie with a creamy touch, reminiscent of Mediterranean summers.",
+    "image_url": "pineapple_smoothie.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Myrtille Royale",
+    "description": "A rich and velvety blueberry smoothie, bursting with berry freshness and creamy yogurt.",
+    "image_url": "blueberry_smoothie.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Avocat Luxe",
+    "description": "A silky avocado smoothie with a hint of sweetness, offering a smooth and elegant taste.",
+    "image_url": "avocado_smoothie.jpg",
+    "category_id": 4,
+    "price": 4.99
+  },
+  {
+    "name": "Papaye Exotique",
+    "description": "A tropical papaya smoothie blended with creamy yogurt for a refreshing island touch.",
+    "image_url": "papaya_smoothie.jpg",
+    "category_id": 4,
+    "price": 4.99
+  }
+]
