@@ -31,3 +31,5 @@ static/
 .DS_Store
 Thumbs.db
 .ps1/
+
+logs/
