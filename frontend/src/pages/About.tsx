@@ -13,7 +13,7 @@ const About = () => {
       <div className="min-h-screen bg-gray-100 text-gray-900 mt-6">
         {/* Hero Section */}
         <div className="relative bg-yellow-500 text-white py-20 text-center px-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold">About Magadh Rasam</h1>
+          <h1 className="text-4xl md:text-4xl font-extrabold">About Magadh Rasam</h1>
           <p className="mt-4 text-lg max-w-2xl mx-auto">
             Bringing you the authentic taste of Magadh with love and tradition.
           </p>
