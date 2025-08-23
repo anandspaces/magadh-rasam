@@ -13,10 +13,10 @@ export default function SearchComponent({ data, onItemSelect }: SearchComponentP
 
   // Filter menu items based on search term
   const filteredData =
-    searchTerm.trim() === ""
+    searchTerm.trim() === "" || !Array.isArray(data)
       ? []
       : data.filter((item) =>
-          item.name.toLowerCase().includes(searchTerm.toLowerCase())
+          item?.name?.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
   // Handle keyboard navigation

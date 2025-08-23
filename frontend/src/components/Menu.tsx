@@ -93,7 +93,7 @@ export default function Menu() {
     dispatch(initializeFavorites());
   }, [dispatch]);
 
-  const filteredItems = menuItems.filter((item) => item.category === selectedCategory);
+  const filteredItems = Array.isArray(menuItems) ? menuItems.filter((item) => item?.category === selectedCategory) : [];
 
   return (
     <div className="p-6 max-w-7xl mx-auto">

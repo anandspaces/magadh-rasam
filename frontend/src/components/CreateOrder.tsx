@@ -44,9 +44,9 @@ export default function CreateOrder({ onSubmit }: { onSubmit: () => void }) {
   }, []);
 
   // Filter menu items based on search
-  const filteredMenuItems = menuItems.filter(item =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredMenuItems = Array.isArray(menuItems) ? menuItems.filter(item =>
+    item?.name?.toLowerCase().includes(searchQuery.toLowerCase())
+  ) : [];
 
   // Add item from search
   const addItemFromSearch = (item: any) => {
